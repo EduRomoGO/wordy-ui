@@ -11,8 +11,8 @@ const Word = ({short, word, phonemics}) => {
 
     const getWord = () => short
         ? <span onMouseOver={handleOnMouseOver}>
-                <span>{word}</span>
-                <span>{phonemics}</span>
+                <span> {word}</span>
+                <span> ({phonemics})</span>
             </span>
         : <div onMouseOver={handleOnMouseOver}>
             <div>{word}</div>

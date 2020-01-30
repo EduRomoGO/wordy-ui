@@ -48,7 +48,7 @@ function App() {
   return (
     <div className="App">
       <input value={search} onChange={handleChange} />
-      <Words words={getDescriptors()} />
+      <Words words={getDescriptors()} isFilterActive={search.length > 0} />
     </div>
   );
 }

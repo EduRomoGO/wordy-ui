@@ -1,6 +1,7 @@
 .words-short {
     display: block;
     padding: 30px;
+    line-height: 36px
 }
 
 .words-normal {

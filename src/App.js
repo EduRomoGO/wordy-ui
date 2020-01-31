@@ -4,6 +4,8 @@ import Words from './components/Words/Words.js';
 import db from './utils/db/db.json';
 
 // [ ] Ver como hacer para que se cacheen los audios, ya que seria una web bastante pesada
+// [ ] Limitar el numero de items que se pintan en pantalla a 200 o algo asi, o que se vayan pintando poco a poco
+// [ ] Mejorar el aspecto y la usabilidad del texto buscado
 
 function App() {
   const [search, setSearch] = useState('');
@@ -11,7 +13,10 @@ function App() {
   const handleChange = e => setSearch(e.target.value);
 
   const getDescriptors = () => {
-    const allDescriptors = db.wordDescriptors.map(item => ({ word: item.word, phonemics: item.phonemics }));
+    const allDescriptors = db.wordDescriptors
+      // .map(item => ({ word: item.word, phonemics: item.phonemics }));
+      .map(item => ({ word: item.word, phonemics: item.phonemics }))
+      .slice(0, 40);
 
     let descriptors = [allDescriptors];
 

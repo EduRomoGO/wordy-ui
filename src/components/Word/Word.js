@@ -5,17 +5,15 @@ const Word = ({short, word, phonemics}) => {
     const audio = useRef(null);
 
     const handleOnMouseOver = () => {
-        if (short) {
-            audio.current.play();
-        }
+        audio.current.play();
     };
 
     const getWord = () => short
         ? <span onMouseOver={handleOnMouseOver}>
-                <span> {word}</span>
-                <span> ({phonemics})</span>
+                <span className='word-name'> {word}</span>
+                <span className='word-phonemics'> ({phonemics})</span>
             </span>
-        : <div onMouseOver={handleOnMouseOver}>
+        : <div>
             <div>{word}</div>
             <div>{phonemics}</div>
         </div>;
@@ -24,7 +22,7 @@ const Word = ({short, word, phonemics}) => {
 
     return <div className={getClassName()}>
         {getWord()}
-        <audio hidden={short} ref={audio} id="myAudio" controls>
+        <audio hidden={short} ref={audio} controls>
             <source  src={`./audioFiles/${word}.mp3`} type="audio/mpeg"></source>
             Your browser does not support the audio element.
         </audio>

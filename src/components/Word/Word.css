@@ -1,3 +1,28 @@
 .short {
     display: inline;
 }
+
+.word-phonemics {
+    font-size: 0.7rem;
+}
+
+.word-name {
+    font-weight: bold;
+}
+
+audio {
+    height: 20px;
+    width: 113px;
+}
+
+.normal {
+    width: 30%;
+    height: 72px;
+    border: 1px solid lightgrey;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
+}

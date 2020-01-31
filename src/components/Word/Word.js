@@ -2,12 +2,13 @@ import React, { useRef } from 'react';
 import './Word.css';
 
 const Word = ({short, word, phonemics}) => {
+    const audio = useRef(null);
+
     const handleOnMouseOver = () => {
         if (short) {
             audio.current.play();
         }
     };
-    const audio = useRef(null);
 
     const getWord = () => short
         ? <span onMouseOver={handleOnMouseOver}>

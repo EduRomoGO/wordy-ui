@@ -444,11 +444,12 @@
       ],
       "protocol": "https",
       "extension": "mp3",
-      "url": "https://www.wordreference.com/audio/en/uk/general/en089180.mp3"
+      "url": "https://www.wordreference.com/audio/en/uk/general/en089180.mp3",
+      "phonemics": "before a consonant: /ˈðə/, before a vowel: /ˈðiː/"
     },
     {
       "word": "of",
-      "phonemics": " ",
+      "phonemics": "strong: /ˈɒv/,  weak: /əv/",
       "definitions": [
         {
           "class": "prep.",
@@ -678,7 +679,7 @@
     },
     {
       "word": "and",
-      "phonemics": " ",
+      "phonemics": " strong: /ˈænd/,  weak: /ənd/",
       "definitions": [
         {
           "class": "conj.",
@@ -870,7 +871,7 @@
     },
     {
       "word": "to",
-      "phonemics": " ",
+      "phonemics": "weak: /ˈtu/ /tə/,  strong: /ˈtuː/",
       "definitions": [
         {
           "class": "prep.",
@@ -1174,7 +1175,7 @@
     },
     {
       "word": "a",
-      "phonemics": "'A', 'a':  ",
+      "phonemics": "'A', 'a':  strong: /eɪ/,  weak: /ə/",
       "definitions": [
         {
           "class": "n.",
@@ -1384,7 +1385,7 @@
     },
     {
       "word": "for",
-      "phonemics": " ",
+      "phonemics": "weak: /ˈfər/,  strong: /fɔːr/",
       "definitions": [
         {
           "class": "prep.",
@@ -3865,7 +3866,7 @@
     },
     {
       "word": "you",
-      "phonemics": " ",
+      "phonemics": "strong: /ˈjuː/,  weak: /ju/ /jə/",
       "definitions": [
         {
           "class": "pron., poss.",
@@ -4631,7 +4632,7 @@
     },
     {
       "word": "that",
-      "phonemics": " ",
+      "phonemics": "strong: /ˈðæt/,  weak: /ðət/",
       "definitions": [
         {
           "class": "pron. and adj., pl.",
@@ -5745,7 +5746,7 @@
     },
     {
       "word": "or",
-      "phonemics": " ",
+      "phonemics": "strong: /ˈɔːr/,  weak: /ər/",
       "definitions": [
         {
           "class": "conj.",
@@ -5888,7 +5889,7 @@
     },
     {
       "word": "be",
-      "phonemics": " ",
+      "phonemics": "strong: /ˈbiː/,  weak: /bi/",
       "definitions": [
         {
           "class": "v.",
@@ -6094,7 +6095,7 @@
     },
     {
       "word": "are",
-      "phonemics": " ",
+      "phonemics": "strong: /ˈɑːr/,  weak: /ər/",
       "definitions": [
         {
           "class": "v.",
@@ -6329,7 +6330,7 @@
     },
     {
       "word": "from",
-      "phonemics": " ",
+      "phonemics": "strong: /ˈfrɒm/,  weak: /frəm/",
       "definitions": [
         {
           "class": "prep.",
@@ -6428,7 +6429,7 @@
     },
     {
       "word": "at",
-      "phonemics": " ",
+      "phonemics": "strong: /ˈæt/,  weak: /ət/",
       "definitions": [
         {
           "class": "prep.",
@@ -6601,7 +6602,7 @@
     },
     {
       "word": "your",
-      "phonemics": " ",
+      "phonemics": "strong: /ˈjɔːr/ /ˈjʊər/,  weak: /jər/",
       "definitions": [
         {
           "class": "pron.",
@@ -7072,7 +7073,7 @@
     },
     {
       "word": "have",
-      "phonemics": " ",
+      "phonemics": "full: /ˈhæv/,  weak: /həv/,  elided: /ˈhæd/",
       "definitions": [
         {
           "class": "v. and auxiliary v., pres. sing. 1st and 2nd pers.",
@@ -8757,7 +8758,7 @@
     },
     {
       "word": "we",
-      "phonemics": " ",
+      "phonemics": "strong: /ˈwiː/,  weak: /wi/",
       "definitions": [
         {
           "class": "pron.pl., poss.",
@@ -9937,7 +9938,8 @@
       ],
       "protocol": "https",
       "extension": "mp3",
-      "url": "https://www.wordreference.com/audio/en/uk/general/en094693.mp3"
+      "url": "https://www.wordreference.com/audio/en/uk/general/en094693.mp3",
+      "phonemics": "strong: /ˈʌs/,"
     },
     {
       "word": "about",
@@ -10590,7 +10592,7 @@
     },
     {
       "word": "has",
-      "phonemics": " ",
+      "phonemics": "full: /ˈhæz/,  weak: /həz/,  elided: /əz/",
       "definitions": [
         {
           "class": "v.",
@@ -11292,7 +11294,7 @@
     },
     {
       "word": "search",
-      "phonemics": "/ˈs3ː",
+      "phonemics": "/ˈs3ːrtʃ/",
       "definitions": [
         {
           "class": "v.",
@@ -11923,7 +11925,7 @@
     },
     {
       "word": "but",
-      "phonemics": " ",
+      "phonemics": "strong: /ˈbʌt/,  weak: /bət/",
       "definitions": [
         {
           "class": "conj.",
@@ -12139,7 +12141,7 @@
     },
     {
       "word": "our",
-      "phonemics": "/ˈaʊə",
+      "phonemics": "/ˈaʊər/",
       "definitions": [
         {
           "class": "pron.",
@@ -12479,7 +12481,7 @@
     },
     {
       "word": "other",
-      "phonemics": "/ˈʌðə",
+      "phonemics": "/ˈʌðər/",
       "definitions": [
         {
           "class": "adj.",
@@ -12681,7 +12683,7 @@
     },
     {
       "word": "do",
-      "phonemics": " ",
+      "phonemics": "strong: /duː/ /dəʊ/,  weak: /dʊ/ /də/",
       "definitions": [
         {
           "class": "v. and auxiliary v., pres. sing. 1st and 2nd pers.",
@@ -13507,7 +13509,7 @@
     },
     {
       "word": "information",
-      "phonemics": "/ˌɪnfə",
+      "phonemics": "/ˌɪnfərˈmeɪʃən/",
       "definitions": [
         {
           "class": "n.",
@@ -14447,7 +14449,7 @@
     },
     {
       "word": "he",
-      "phonemics": " ",
+      "phonemics": "full: /ˈhiː/,  weak: /hi/,  elided: /iː/",
       "definitions": [
         {
           "class": "pron.,",
@@ -15678,7 +15680,7 @@
     },
     {
       "word": "what",
-      "phonemics": "/ˈ",
+      "phonemics": "/ˈhwɒt/",
       "definitions": [
         {
           "class": "pron.",
@@ -16053,7 +16055,7 @@
     },
     {
       "word": "which",
-      "phonemics": "/ˈ",
+      "phonemics": "/ˈhwɪtʃ/",
       "definitions": [
         {
           "class": "pron.",
@@ -16184,7 +16186,7 @@
     },
     {
       "word": "their",
-      "phonemics": "/ˈðɛə",
+      "phonemics": "/ˈðɛər/",
       "definitions": [
         {
           "class": "pron.",
@@ -17158,7 +17160,7 @@
     },
     {
       "word": "use",
-      "phonemics": " ",
+      "phonemics": "noun: /ˈjuːs/,  verb: /ˈjuːz/",
       "definitions": [
         {
           "class": "v.,",
@@ -17606,7 +17608,7 @@
     },
     {
       "word": "there",
-      "phonemics": "/ˈðɛə",
+      "phonemics": "/ˈðɛər/, /ðər/",
       "definitions": [
         {
           "class": "adv.",
@@ -18774,7 +18776,7 @@
     },
     {
       "word": "when",
-      "phonemics": "/ˈ",
+      "phonemics": "/ˈhwɛn/",
       "definitions": [
         {
           "class": "adv.",
@@ -19063,7 +19065,7 @@
     },
     {
       "word": "here",
-      "phonemics": "/ˈhɪə",
+      "phonemics": "/ˈhɪər/",
       "definitions": [
         {
           "class": "adv.",
@@ -19344,7 +19346,7 @@
     },
     {
       "word": "business",
-      "phonemics": "/ˈbɪzn",
+      "phonemics": "/ˈbɪznɪs/",
       "definitions": [
         {
           "class": "n.",
@@ -19561,7 +19563,7 @@
     },
     {
       "word": "who",
-      "phonemics": "'WHO': /ˌdʌb",
+      "phonemics": "'WHO': /ˌdʌbəljuːeɪtʃˈəʊ/; 'who': /ˈhuː/",
       "definitions": [
         {
           "class": "pron.,",
@@ -21300,14 +21302,6 @@
       "url": "https://www.wordreference.com/audio/en/uk/general/en038153.mp3"
     },
     {
-      "word": "pm",
-      "phonemics": "",
-      "definitions": [],
-      "protocol": "https",
-      "extension": "mp3",
-      "url": "https://www.wordreference.com/audio/en/uk/general/"
-    },
-    {
       "word": "view",
       "phonemics": "/ˈvjuː/",
       "definitions": [
@@ -22489,7 +22483,7 @@
     },
     {
       "word": "first",
-      "phonemics": "/ˈf3ː",
+      "phonemics": "/ˈf3ːrst/",
       "definitions": [
         {
           "class": "adj.",
@@ -22959,7 +22953,7 @@
     },
     {
       "word": "would",
-      "phonemics": " ",
+      "phonemics": "strong: /ˈwʊd/,  weak: /wəd/",
       "definitions": [
         {
           "class": "auxiliary (modal) verb",
@@ -23680,7 +23674,7 @@
     },
     {
       "word": "were",
-      "phonemics": " ",
+      "phonemics": "strong: /ˈw3ːr/,  weak: /wər/",
       "definitions": [
         {
           "class": "v.",
@@ -24010,7 +24004,7 @@
     },
     {
       "word": "some",
-      "phonemics": " ",
+      "phonemics": "strong: /ˈsʌm/,  weak: /səm/",
       "definitions": [
         {
           "class": "adj.",
@@ -25185,7 +25179,7 @@
     },
     {
       "word": "than",
-      "phonemics": " ",
+      "phonemics": "strong: /ˈðæn/,  weak: /ðən/",
       "definitions": [
         {
           "class": "conj.",
@@ -25543,30 +25537,6 @@
       "protocol": "https",
       "extension": "mp3",
       "url": "https://www.wordreference.com/audio/en/uk/general/en1054092.mp3"
-    },
-    {
-      "word": "edu",
-      "phonemics": "",
-      "definitions": [],
-      "protocol": "https",
-      "extension": "mp3",
-      "url": "https://www.wordreference.com/audio/en/uk/general/"
-    },
-    {
-      "word": "romo",
-      "phonemics": "",
-      "definitions": [],
-      "protocol": "https",
-      "extension": "mp3",
-      "url": "https://www.wordreference.com/audio/en/uk/general/"
-    },
-    {
-      "word": "gmez",
-      "phonemics": "",
-      "definitions": [],
-      "protocol": "https",
-      "extension": "mp3",
-      "url": "https://www.wordreference.com/audio/en/uk/general/"
     },
     {
       "word": "full",
@@ -26052,7 +26022,7 @@
     },
     {
       "word": "developer",
-      "phonemics": "/d",
+      "phonemics": "/dɪˈvɛləpər/",
       "definitions": [
         {
           "class": "n.",
@@ -26112,7 +26082,7 @@
     },
     {
       "word": "location",
-      "phonemics": "/ləʊˈkeɪʃ",
+      "phonemics": "/ləʊˈkeɪʃən/",
       "definitions": [
         {
           "class": "n.",
@@ -26391,14 +26361,6 @@
       "protocol": "https",
       "extension": "mp3",
       "url": "https://www.wordreference.com/audio/en/uk/general/en052108.mp3"
-    },
-    {
-      "word": "eduromogooutlookes",
-      "phonemics": "",
-      "definitions": [],
-      "protocol": "https",
-      "extension": "mp3",
-      "url": "https://www.wordreference.com/audio/en/uk/general/"
     },
     {
       "word": "summary",
@@ -26853,7 +26815,7 @@
     },
     {
       "word": "learned",
-      "phonemics": "/ˈl3ː",
+      "phonemics": "/ˈl3ːrnɪd/",
       "definitions": [
         {
           "class": "adj.",
@@ -27258,7 +27220,7 @@
     },
     {
       "word": "them",
-      "phonemics": " ",
+      "phonemics": "strong: /ˈðɛm/,  weak: /ðəm/",
       "definitions": [
         {
           "class": "pron.",
@@ -27333,7 +27295,7 @@
     },
     {
       "word": "become",
-      "phonemics": "/b",
+      "phonemics": "/bɪˈkʌm/",
       "definitions": [
         {
           "class": "v.,",
@@ -27417,14 +27379,6 @@
       "protocol": "https",
       "extension": "mp3",
       "url": "https://www.wordreference.com/audio/en/uk/general/en007240.mp3"
-    },
-    {
-      "word": "frontend",
-      "phonemics": "",
-      "definitions": [],
-      "protocol": "https",
-      "extension": "mp3",
-      "url": "https://www.wordreference.com/audio/en/uk/general/"
     },
     {
       "word": "specialist",
@@ -27749,7 +27703,7 @@
     },
     {
       "word": "acquired",
-      "phonemics": "/əˈkwaɪə",
+      "phonemics": "/əˈkwaɪərd/",
       "definitions": [
         {
           "class": "v.",
@@ -29702,7 +29656,7 @@
     },
     {
       "word": "into",
-      "phonemics": " ",
+      "phonemics": "strong: /ˈɪntuː/,  weak: /ˈɪntə/",
       "definitions": [
         {
           "class": "prep.",
@@ -29864,7 +29818,7 @@
     },
     {
       "word": "project",
-      "phonemics": " ",
+      "phonemics": "noun: /ˈprɒdʒɛkt/,  verb: /prəˈdʒɛkt/",
       "definitions": [
         {
           "class": "n.",
@@ -30428,7 +30382,7 @@
     },
     {
       "word": "customer",
-      "phonemics": "/ˈkʌstəmə",
+      "phonemics": "/ˈkʌstəmər/",
       "definitions": [
         {
           "class": "n.",
@@ -30469,7 +30423,7 @@
     },
     {
       "word": "satisfaction",
-      "phonemics": "/ˌsætɪsˈfækʃ",
+      "phonemics": "/ˌsætɪsˈfækʃən/",
       "definitions": [
         {
           "class": "n.",
@@ -30700,7 +30654,7 @@
     },
     {
       "word": "hire",
-      "phonemics": "/ˈhaɪə",
+      "phonemics": "/ˈhaɪər/",
       "definitions": [
         {
           "class": "v.,",
@@ -33505,7 +33459,7 @@
     },
     {
       "word": "clear",
-      "phonemics": "/ˈklɪə",
+      "phonemics": "/ˈklɪər/",
       "definitions": [
         {
           "class": "adj. and adv.,",
@@ -35369,7 +35323,7 @@
     },
     {
       "word": "learner",
-      "phonemics": "/ˈl3ː",
+      "phonemics": "/ˈl3ːrnər/",
       "definitions": [
         {
           "class": "n.",
@@ -35477,14 +35431,6 @@
       "protocol": "https",
       "extension": "mp3",
       "url": "https://www.wordreference.com/audio/en/uk/general/en050339.mp3"
-    },
-    {
-      "word": "comunicate",
-      "phonemics": "",
-      "definitions": [],
-      "protocol": "https",
-      "extension": "mp3",
-      "url": "https://www.wordreference.com/audio/en/uk/general/"
     },
     {
       "word": "effectively",
@@ -35877,7 +35823,7 @@
     },
     {
       "word": "hard",
-      "phonemics": "/ˈhɑː",
+      "phonemics": "/ˈhɑːrd/",
       "definitions": [
         {
           "class": "adj.",
@@ -36385,7 +36331,7 @@
     },
     {
       "word": "worker",
-      "phonemics": "/ˈw3ː",
+      "phonemics": "/ˈw3ːrkər/",
       "definitions": [
         {
           "class": "n.",
@@ -36778,7 +36724,7 @@
     },
     {
       "word": "versatile",
-      "phonemics": "/ˈv3ː",
+      "phonemics": "/ˈv3ːrsətaɪl/",
       "definitions": [
         {
           "class": "adj.",
@@ -36837,7 +36783,7 @@
     },
     {
       "word": "regarding",
-      "phonemics": "/rɪˈgɑː",
+      "phonemics": "/rɪˈgɑːrdɪŋ/",
       "definitions": [
         {
           "class": "prep.",
@@ -37383,7 +37329,7 @@
     },
     {
       "word": "decent",
-      "phonemics": "/ˈdiːs",
+      "phonemics": "/ˈdiːsənt/",
       "definitions": [
         {
           "class": "adj.",
@@ -37583,14 +37529,6 @@
       "protocol": "https",
       "extension": "mp3",
       "url": "https://www.wordreference.com/audio/en/uk/general/en005977.mp3"
-    },
-    {
-      "word": "backend",
-      "phonemics": "",
-      "definitions": [],
-      "protocol": "https",
-      "extension": "mp3",
-      "url": "https://www.wordreference.com/audio/en/uk/general/"
     },
     {
       "word": "side",
@@ -37911,14 +37849,6 @@
       "protocol": "https",
       "extension": "mp3",
       "url": "https://www.wordreference.com/audio/en/uk/general/en078741.mp3"
-    },
-    {
-      "word": "nodeexpressmongo",
-      "phonemics": "",
-      "definitions": [],
-      "protocol": "https",
-      "extension": "mp3",
-      "url": "https://www.wordreference.com/audio/en/uk/general/"
     },
     {
       "word": "junior",
@@ -38650,14 +38580,6 @@
       "url": "https://www.wordreference.com/audio/en/uk/general/en054084.mp3"
     },
     {
-      "word": "ing",
-      "phonemics": "",
-      "definitions": [],
-      "protocol": "https",
-      "extension": "mp3",
-      "url": "https://www.wordreference.com/audio/en/uk/general/"
-    },
-    {
       "word": "february",
       "phonemics": "/ˈfɛbrʊəri/, /ˈfɛbjʊəri/",
       "definitions": [
@@ -38713,7 +38635,7 @@
     },
     {
       "word": "application",
-      "phonemics": "/ˌæpl",
+      "phonemics": "/ˌæplɪˈkeɪʃən/",
       "definitions": [
         {
           "class": "n.",
@@ -38840,7 +38762,7 @@
     },
     {
       "word": "modern",
-      "phonemics": "/ˈmɒdə",
+      "phonemics": "/ˈmɒdərn/",
       "definitions": [
         {
           "class": "adj.",
@@ -38921,24 +38843,8 @@
       "url": "https://www.wordreference.com/audio/en/uk/general/en056095.mp3"
     },
     {
-      "word": "fullstack",
-      "phonemics": "",
-      "definitions": [],
-      "protocol": "https",
-      "extension": "mp3",
-      "url": "https://www.wordreference.com/audio/en/uk/general/"
-    },
-    {
-      "word": "docomo",
-      "phonemics": "",
-      "definitions": [],
-      "protocol": "https",
-      "extension": "mp3",
-      "url": "https://www.wordreference.com/audio/en/uk/general/"
-    },
-    {
       "word": "digital",
-      "phonemics": "/ˈdɪdʒ",
+      "phonemics": "/ˈdɪdʒɪtəl/",
       "definitions": [
         {
           "class": "adj.",
@@ -39028,7 +38934,7 @@
     },
     {
       "word": "october",
-      "phonemics": "/ɒkˈtəʊbə",
+      "phonemics": "/ɒkˈtəʊbər/",
       "definitions": [
         {
           "class": "n.",
@@ -39059,7 +38965,7 @@
     },
     {
       "word": "marketing",
-      "phonemics": "/ˈmɑː",
+      "phonemics": "/ˈmɑːrkɪtɪŋ/",
       "definitions": [
         {
           "class": "n.",
@@ -39805,7 +39711,7 @@
     },
     {
       "word": "dashboard",
-      "phonemics": "/ˈdæʃbɔː",
+      "phonemics": "/ˈdæʃbɔːrd/",
       "definitions": [
         {
           "class": "n.",
@@ -40159,7 +40065,7 @@
     },
     {
       "word": "designer",
-      "phonemics": "/d",
+      "phonemics": "/dɪˈzaɪnər/",
       "definitions": [
         {
           "class": "n.",
@@ -40213,16 +40119,8 @@
       "url": "https://www.wordreference.com/audio/en/uk/general/en024138.mp3"
     },
     {
-      "word": "aparky",
-      "phonemics": "",
-      "definitions": [],
-      "protocol": "https",
-      "extension": "mp3",
-      "url": "https://www.wordreference.com/audio/en/uk/general/"
-    },
-    {
       "word": "september",
-      "phonemics": "/sɛpˈtɛmbə",
+      "phonemics": "/sɛpˈtɛmbər/",
       "definitions": [
         {
           "class": "n.",
@@ -40491,7 +40389,7 @@
     },
     {
       "word": "parking",
-      "phonemics": "/ˈpɑː",
+      "phonemics": "/ˈpɑːrkɪŋ/",
       "definitions": [
         {
           "class": "n.",
@@ -40999,7 +40897,7 @@
     },
     {
       "word": "software",
-      "phonemics": "/ˈsɒf",
+      "phonemics": "/ˈsɒftwɛər/",
       "definitions": [
         {
           "class": "n.",
@@ -41037,14 +40935,6 @@
       "protocol": "https",
       "extension": "mp3",
       "url": "https://www.wordreference.com/audio/en/uk/general/en081237.mp3"
-    },
-    {
-      "word": "everis",
-      "phonemics": "",
-      "definitions": [],
-      "protocol": "https",
-      "extension": "mp3",
-      "url": "https://www.wordreference.com/audio/en/uk/general/"
     },
     {
       "word": "care",
@@ -41247,14 +41137,6 @@
       "url": "https://www.wordreference.com/audio/en/uk/general/en012914.mp3"
     },
     {
-      "word": "telefonica",
-      "phonemics": "",
-      "definitions": [],
-      "protocol": "https",
-      "extension": "mp3",
-      "url": "https://www.wordreference.com/audio/en/uk/general/"
-    },
-    {
       "word": "control",
       "phonemics": "/kənˈtrəʊl/",
       "definitions": [
@@ -41421,14 +41303,6 @@
       "protocol": "https",
       "extension": "mp3",
       "url": "https://www.wordreference.com/audio/en/uk/general/en019165.mp3"
-    },
-    {
-      "word": "enagas",
-      "phonemics": "",
-      "definitions": [],
-      "protocol": "https",
-      "extension": "mp3",
-      "url": "https://www.wordreference.com/audio/en/uk/general/"
     },
     {
       "word": "gas",
@@ -42338,14 +42212,6 @@
       "url": "https://www.wordreference.com/audio/en/uk/general/en058031.mp3"
     },
     {
-      "word": "\t",
-      "phonemics": "",
-      "definitions": [],
-      "protocol": "https",
-      "extension": "mp3",
-      "url": "https://www.wordreference.com/audio/en/uk/general/"
-    },
-    {
       "word": "industry",
       "phonemics": "/ˈɪndəstri/",
       "definitions": [
@@ -42451,38 +42317,6 @@
       "url": "https://www.wordreference.com/audio/en/uk/general/en099096.mp3"
     },
     {
-      "word": "\t\t",
-      "phonemics": "",
-      "definitions": [],
-      "protocol": "https",
-      "extension": "mp3",
-      "url": "https://www.wordreference.com/audio/en/uk/general/"
-    },
-    {
-      "word": "javascript",
-      "phonemics": "",
-      "definitions": [],
-      "protocol": "https",
-      "extension": "mp3",
-      "url": "https://www.wordreference.com/audio/en/uk/general/"
-    },
-    {
-      "word": "html",
-      "phonemics": "",
-      "definitions": [],
-      "protocol": "https",
-      "extension": "mp3",
-      "url": "https://www.wordreference.com/audio/en/uk/general/"
-    },
-    {
-      "word": "css",
-      "phonemics": "",
-      "definitions": [],
-      "protocol": "https",
-      "extension": "mp3",
-      "url": "https://www.wordreference.com/audio/en/uk/general/"
-    },
-    {
       "word": "agile",
       "phonemics": "/ˈædʒaɪl/",
       "definitions": [
@@ -42530,14 +42364,6 @@
       "protocol": "https",
       "extension": "mp3",
       "url": "https://www.wordreference.com/audio/en/uk/general/en1002656.mp3"
-    },
-    {
-      "word": "git",
-      "phonemics": "",
-      "definitions": [],
-      "protocol": "https",
-      "extension": "mp3",
-      "url": "https://www.wordreference.com/audio/en/uk/general/"
     },
     {
       "word": "react",
@@ -42616,14 +42442,6 @@
       "protocol": "https",
       "extension": "mp3",
       "url": "https://www.wordreference.com/audio/en/uk/general/en069808.mp3"
-    },
-    {
-      "word": "tdd",
-      "phonemics": "",
-      "definitions": [],
-      "protocol": "https",
-      "extension": "mp3",
-      "url": "https://www.wordreference.com/audio/en/uk/general/"
     },
     {
       "word": "node",
@@ -43336,16 +43154,8 @@
       "url": "https://www.wordreference.com/audio/en/uk/general/en072605.mp3"
     },
     {
-      "word": "mongodb",
-      "phonemics": "",
-      "definitions": [],
-      "protocol": "https",
-      "extension": "mp3",
-      "url": "https://www.wordreference.com/audio/en/uk/general/"
-    },
-    {
       "word": "development",
-      "phonemics": "/d",
+      "phonemics": "/dɪˈvɛləpmənt/",
       "definitions": [
         {
           "class": "n.",
@@ -43833,7 +43643,7 @@
     },
     {
       "word": "functional",
-      "phonemics": "/ˈfʌŋkʃ",
+      "phonemics": "/ˈfʌŋkʃənəl/",
       "definitions": [
         {
           "class": "adj.",
@@ -43918,22 +43728,6 @@
       "protocol": "https",
       "extension": "mp3",
       "url": "https://www.wordreference.com/audio/en/uk/general/en037216.mp3"
-    },
-    {
-      "word": "nginx",
-      "phonemics": "",
-      "definitions": [],
-      "protocol": "https",
-      "extension": "mp3",
-      "url": "https://www.wordreference.com/audio/en/uk/general/"
-    },
-    {
-      "word": "jenkins",
-      "phonemics": "",
-      "definitions": [],
-      "protocol": "https",
-      "extension": "mp3",
-      "url": "https://www.wordreference.com/audio/en/uk/general/"
     },
     {
       "word": "spanish",
@@ -44539,7 +44333,7 @@
     },
     {
       "word": "professional",
-      "phonemics": "/prəˈfɛʃ",
+      "phonemics": "/prəˈfɛʃənəl/",
       "definitions": [
         {
           "class": "adj.",
@@ -46259,7 +46053,7 @@
     },
     {
       "word": "people",
-      "phonemics": "/ˈpiːp",
+      "phonemics": "/ˈpiːpəl/",
       "definitions": [
         {
           "class": "n., pl.",
@@ -47313,7 +47107,7 @@
     },
     {
       "word": "over",
-      "phonemics": "/ˈəʊvə",
+      "phonemics": "/ˈəʊvər/",
       "definitions": [
         {
           "class": "prep.",
@@ -48196,7 +47990,7 @@
     },
     {
       "word": "year",
-      "phonemics": "/ˈjɪə",
+      "phonemics": "/ˈjɪər/",
       "definitions": [
         {
           "class": "n.",
@@ -48619,7 +48413,7 @@
     },
     {
       "word": "world",
-      "phonemics": "/ˈw3ː",
+      "phonemics": "/ˈw3ːrld/",
       "definitions": [
         {
           "class": "n.",
@@ -50603,7 +50397,7 @@
     },
     {
       "word": "work",
-      "phonemics": "/ˈw3ː",
+      "phonemics": "/ˈw3ːrk/",
       "definitions": [
         {
           "class": "n., adj., v.,",
@@ -53393,7 +53187,7 @@
     },
     {
       "word": "should",
-      "phonemics": " ",
+      "phonemics": "strong: /ˈʃʊd/,  weak: /ʃəd/",
       "definitions": [
         {
           "class": "auxiliary (modal) v., pres.",
@@ -53980,7 +53774,7 @@
     },
     {
       "word": "her",
-      "phonemics": " ",
+      "phonemics": "strong: /ˈh3ːr/,  elided: /ər/,  weak: /hər/",
       "definitions": [
         {
           "class": "pron.",
@@ -54329,7 +54123,7 @@
     },
     {
       "word": "number",
-      "phonemics": "/ˈnʌmbə",
+      "phonemics": "/ˈnʌmbər/",
       "definitions": [
         {
           "class": "n.",
@@ -55082,7 +54876,7 @@
     },
     {
       "word": "available",
-      "phonemics": "/əˈveɪləb",
+      "phonemics": "/əˈveɪləbəl/",
       "definitions": [
         {
           "class": "adj.",
@@ -55217,7 +55011,7 @@
     },
     {
       "word": "support",
-      "phonemics": "/səˈpɔː",
+      "phonemics": "/səˈpɔːrt/",
       "definitions": [
         {
           "class": "v.",
@@ -55480,7 +55274,7 @@
     },
     {
       "word": "after",
-      "phonemics": "/ˈɑːftə",
+      "phonemics": "/ˈɑːftər/",
       "definitions": [
         {
           "class": "prep.",
@@ -58703,7 +58497,7 @@
     },
     {
       "word": "where",
-      "phonemics": "/ˈ",
+      "phonemics": "/ˈhwɛər/",
       "definitions": [
         {
           "class": "adv.",
@@ -60131,7 +59925,7 @@
     },
     {
       "word": "she",
-      "phonemics": " ",
+      "phonemics": "strong: /ˈʃiː/,  weak: /ʃi/",
       "definitions": [
         {
           "class": "pron., sing.",
@@ -60467,7 +60261,7 @@
     },
     {
       "word": "order",
-      "phonemics": "/ˈɔː",
+      "phonemics": "/ˈɔːrdər/",
       "definitions": [
         {
           "class": "n.",
@@ -61570,7 +61364,7 @@
     },
     {
       "word": "r",
-      "phonemics": "'R', 'r': /ˈɑː",
+      "phonemics": "'R', 'r': /ˈɑːr/",
       "definitions": [
         {
           "class": "n., pl.",
@@ -63062,7 +62856,7 @@
     },
     {
       "word": "user",
-      "phonemics": "/ˈjuːzə",
+      "phonemics": "/ˈjuːzər/",
       "definitions": [
         {
           "class": "n.",
@@ -63715,7 +63509,7 @@
     },
     {
       "word": "does",
-      "phonemics": " ",
+      "phonemics": "weak: /dəz/,  strong: /dʌz/",
       "definitions": [
         {
           "class": "v.",
@@ -64362,7 +64156,7 @@
     },
     {
       "word": "under",
-      "phonemics": "/ˈʌndə",
+      "phonemics": "/ˈʌndər/",
       "definitions": [
         {
           "class": "prep.",
@@ -64688,7 +64482,7 @@
     },
     {
       "word": "general",
-      "phonemics": "/ˈdʒɛn",
+      "phonemics": "/ˈdʒɛnərəl/",
       "definitions": [
         {
           "class": "adj.",
@@ -64835,7 +64629,7 @@
     },
     {
       "word": "research",
-      "phonemics": "/rɪˈs3ː",
+      "phonemics": "/rɪˈs3ːrtʃ/",
       "definitions": [
         {
           "class": "n.",
@@ -64913,7 +64707,7 @@
     },
     {
       "word": "university",
-      "phonemics": "/ˌjuːniˈv3ː",
+      "phonemics": "/ˌjuːniˈv3ːrsəti/",
       "definitions": [
         {
           "class": "n.",
@@ -66498,7 +66292,7 @@
     },
     {
       "word": "part",
-      "phonemics": "/ˈpɑː",
+      "phonemics": "/ˈpɑːrt/",
       "definitions": [
         {
           "class": "n.",
@@ -66915,7 +66709,7 @@
     },
     {
       "word": "could",
-      "phonemics": " ",
+      "phonemics": "strong: /ˈkʊd/,  weak: /kəd/",
       "definitions": [
         {
           "class": "auxiliary (modal) verb.",
@@ -68130,7 +67924,7 @@
     },
     {
       "word": "international",
-      "phonemics": "'international', 'International': /ˌɪntəˈnæʃ",
+      "phonemics": "'international', 'International': /ˌɪntəˈnæʃənəl/",
       "definitions": [
         {
           "class": "adj.",
@@ -68227,7 +68021,7 @@
     },
     {
       "word": "center",
-      "phonemics": "/ˈsɛntə",
+      "phonemics": "/ˈsɛntər/",
       "definitions": [
         {
           "class": "n.",
@@ -68500,16 +68294,8 @@
       "url": "https://www.wordreference.com/audio/en/uk/general/en013714.mp3"
     },
     {
-      "word": "ebay",
-      "phonemics": "",
-      "definitions": [],
-      "protocol": "https",
-      "extension": "mp3",
-      "url": "https://www.wordreference.com/audio/en/uk/general/"
-    },
-    {
       "word": "must",
-      "phonemics": " ",
+      "phonemics": "strong: /ˈmʌst/,  weak: /məst/",
       "definitions": [
         {
           "class": "auxiliary v., pres. sing. and pl. 1st, 2nd, and 3rd pers.",
@@ -68726,7 +68512,7 @@
     },
     {
       "word": "store",
-      "phonemics": "/ˈstɔː",
+      "phonemics": "/ˈstɔːr/",
       "definitions": [
         {
           "class": "n., v.,",
@@ -68918,7 +68704,7 @@
     },
     {
       "word": "travel",
-      "phonemics": "/ˈtræv",
+      "phonemics": "/ˈtrævəl/",
       "definitions": [
         {
           "class": "v.,",
@@ -70014,7 +69800,7 @@
     },
     {
       "word": "report",
-      "phonemics": "/rɪˈpɔː",
+      "phonemics": "/rɪˈpɔːrt/",
       "definitions": [
         {
           "class": "n.",
@@ -71693,7 +71479,7 @@
     },
     {
       "word": "before",
-      "phonemics": "/b",
+      "phonemics": "/bɪˈfɔːr/",
       "definitions": [
         {
           "class": "prep.",
@@ -73548,7 +73334,7 @@
     },
     {
       "word": "because",
-      "phonemics": " ",
+      "phonemics": "strong: /bɪˈkəz/,  weak: /bɪˈkɒz/",
       "definitions": [
         {
           "class": "conj.",
@@ -73596,7 +73382,7 @@
     },
     {
       "word": "local",
-      "phonemics": "/ˈləʊk",
+      "phonemics": "/ˈləʊkəl/",
       "definitions": [
         {
           "class": "adj.",
@@ -73916,7 +73702,7 @@
     },
     {
       "word": "education",
-      "phonemics": "/ˌɛdʒ",
+      "phonemics": "/ˌɛdʒʊˈkeɪʃən/",
       "definitions": [
         {
           "class": "n.",
@@ -73975,7 +73761,7 @@
     },
     {
       "word": "national",
-      "phonemics": "/ˈnæʃ",
+      "phonemics": "/ˈnæʃənəl/",
       "definitions": [
         {
           "class": "adj.",
@@ -74078,7 +73864,7 @@
     },
     {
       "word": "car",
-      "phonemics": "/ˈkɑː",
+      "phonemics": "/ˈkɑːr/",
       "definitions": [
         {
           "class": "n.",
@@ -74151,7 +73937,7 @@
     },
     {
       "word": "design",
-      "phonemics": "/d",
+      "phonemics": "/dɪˈzaɪn/",
       "definitions": [
         {
           "class": "v.",
@@ -75866,7 +75652,7 @@
     },
     {
       "word": "community",
-      "phonemics": "/kəˈmjuːn",
+      "phonemics": "/kəˈmjuːnɪti/",
       "definitions": [
         {
           "class": "n.",
@@ -76432,14 +76218,6 @@
       "url": "https://www.wordreference.com/audio/en/uk/general/en063587.mp3"
     },
     {
-      "word": "dvd",
-      "phonemics": "",
-      "definitions": [],
-      "protocol": "https",
-      "extension": "mp3",
-      "url": "https://www.wordreference.com/audio/en/uk/general/"
-    },
-    {
       "word": "shipping",
       "phonemics": "/ˈʃɪpɪŋ/",
       "definitions": [
@@ -76638,7 +76416,7 @@
     },
     {
       "word": "reserved",
-      "phonemics": "/rɪˈz3ː",
+      "phonemics": "/rɪˈz3ːrvd/",
       "definitions": [
         {
           "class": "adj.",
@@ -76775,7 +76553,7 @@
     },
     {
       "word": "subject",
-      "phonemics": " ",
+      "phonemics": "noun: /ˈsʌbdʒɪkt/,  verb: /səbˈdʒɛkt/",
       "definitions": [
         {
           "class": "n.",
@@ -77018,7 +76796,7 @@
     },
     {
       "word": "between",
-      "phonemics": "/b",
+      "phonemics": "/bɪˈtwiːn/",
       "definitions": [
         {
           "class": "prep.",
@@ -78767,7 +78545,7 @@
     },
     {
       "word": "w",
-      "phonemics": "'W', 'w': /ˈdʌb",
+      "phonemics": "'W', 'w': /ˈdʌbəljuː/",
       "definitions": [
         {
           "class": "n.",
@@ -79552,7 +79330,7 @@
     },
     {
       "word": "even",
-      "phonemics": "/ˈiːv",
+      "phonemics": "/ˈiːvən/",
       "definitions": [
         {
           "class": "adj.",
@@ -80770,7 +80548,7 @@
     },
     {
       "word": "special",
-      "phonemics": "/ˈspɛʃ",
+      "phonemics": "/ˈspɛʃəl/",
       "definitions": [
         {
           "class": "adj.",
@@ -80906,14 +80684,6 @@
       "protocol": "https",
       "extension": "mp3",
       "url": "https://www.wordreference.com/audio/en/uk/general/en082107.mp3"
-    },
-    {
-      "word": "website",
-      "phonemics": "",
-      "definitions": [],
-      "protocol": "https",
-      "extension": "mp3",
-      "url": "https://www.wordreference.com/audio/en/uk/general/"
     },
     {
       "word": "index",
@@ -82234,7 +82004,7 @@
     },
     {
       "word": "open",
-      "phonemics": "/ˈəʊp",
+      "phonemics": "/ˈəʊpən/",
       "definitions": [
         {
           "class": "adj.",
@@ -83789,16 +83559,8 @@
       "url": "https://www.wordreference.com/audio/en/uk/general/en075028.mp3"
     },
     {
-      "word": "uk",
-      "phonemics": "",
-      "definitions": [],
-      "protocol": "https",
-      "extension": "mp3",
-      "url": "https://www.wordreference.com/audio/en/uk/general/"
-    },
-    {
       "word": "version",
-      "phonemics": "/ˈv3ː",
+      "phonemics": "/ˈv3ːrʃən/, /ˈv3ːrʒən/",
       "definitions": [
         {
           "class": "n.",
@@ -83861,7 +83623,7 @@
     },
     {
       "word": "section",
-      "phonemics": "/ˈsɛkʃ",
+      "phonemics": "/ˈsɛkʃən/",
       "definitions": [
         {
           "class": "n.",
@@ -85438,7 +85200,8 @@
       ],
       "protocol": "https",
       "extension": "mp3",
-      "url": "https://www.wordreference.com/audio/en/uk/general/en044232.mp3"
+      "url": "https://www.wordreference.com/audio/en/uk/general/en044232.mp3",
+      "phonemics": "noun: /ˈhaʊs/,"
     },
     {
       "word": "related",
@@ -85554,7 +85317,7 @@
     },
     {
       "word": "security",
-      "phonemics": "/s",
+      "phonemics": "/sɪˈkjʊərɪti/",
       "definitions": [
         {
           "class": "n., pl.",
@@ -85765,14 +85528,6 @@
       "url": "https://www.wordreference.com/audio/en/uk/general/en009773.mp3"
     },
     {
-      "word": "g",
-      "phonemics": "",
-      "definitions": [],
-      "protocol": "https",
-      "extension": "mp3",
-      "url": "https://www.wordreference.com/audio/en/uk/general/"
-    },
-    {
       "word": "county",
       "phonemics": "/ˈkaʊnti/",
       "definitions": [
@@ -85846,7 +85601,7 @@
     },
     {
       "word": "american",
-      "phonemics": "/əˈmɛr",
+      "phonemics": "/əˈmɛrɪkən/",
       "definitions": [
         {
           "class": "adj.",
@@ -86266,7 +86021,7 @@
     },
     {
       "word": "power",
-      "phonemics": "/ˈpaʊə",
+      "phonemics": "/ˈpaʊər/",
       "definitions": [
         {
           "class": "n.",
@@ -86584,7 +86339,7 @@
     },
     {
       "word": "while",
-      "phonemics": "/ˈ",
+      "phonemics": "/ˈhwaɪl/",
       "definitions": [
         {
           "class": "n., conj., v.,",
@@ -86724,7 +86479,7 @@
     },
     {
       "word": "network",
-      "phonemics": "/ˈnɛtw3ː",
+      "phonemics": "/ˈnɛtw3ːrk/",
       "definitions": [
         {
           "class": "n.",
@@ -87524,7 +87279,7 @@
     },
     {
       "word": "computer",
-      "phonemics": "/kəmˈpjuːtə",
+      "phonemics": "/kəmˈpjuːtər/",
       "definitions": [
         {
           "class": "n.",
@@ -87627,7 +87382,7 @@
     },
     {
       "word": "total",
-      "phonemics": "/ˈtəʊt",
+      "phonemics": "/ˈtəʊtəl/",
       "definitions": [
         {
           "class": "adj., n., v.,",
@@ -88753,7 +88508,7 @@
     },
     {
       "word": "following",
-      "phonemics": "/ˈfɒl",
+      "phonemics": "/ˈfɒləʊɪŋ/",
       "definitions": [
         {
           "class": "n.",
@@ -89167,7 +88922,7 @@
     },
     {
       "word": "him",
-      "phonemics": " ",
+      "phonemics": "full: /ˈhɪm/,  elided: /ˈɪm/",
       "definitions": [
         {
           "class": "pron.",
@@ -89381,7 +89136,7 @@
     },
     {
       "word": "per",
-      "phonemics": "/ˈp3ː",
+      "phonemics": "/ˈp3ːr/",
       "definitions": [
         {
           "class": "prep.",
@@ -90655,7 +90410,7 @@
     },
     {
       "word": "water",
-      "phonemics": "/ˈwɔːtə",
+      "phonemics": "/ˈwɔːtər/",
       "definitions": [
         {
           "class": "n.",
@@ -90993,7 +90748,7 @@
     },
     {
       "word": "history",
-      "phonemics": "/ˈhɪst",
+      "phonemics": "/ˈhɪstəri/",
       "definitions": [
         {
           "class": "n., pl.",
@@ -91276,7 +91031,7 @@
     },
     {
       "word": "art",
-      "phonemics": "/ˈɑː",
+      "phonemics": "/ˈɑːrt/",
       "definitions": [
         {
           "class": "n.",
@@ -91667,7 +91422,7 @@
     },
     {
       "word": "personal",
-      "phonemics": "/ˈp3ː",
+      "phonemics": "/ˈp3ːrsənəl/",
       "definitions": [
         {
           "class": "adj.",
@@ -92333,72 +92088,8 @@
       "url": "https://www.wordreference.com/audio/en/uk/general/en078143.mp3"
     },
     {
-      "word": "directory",
-      "definitions": [
-        {
-          "class": "n.",
-          "defs": [
-            {
-              "def": "a book containing an alphabetical index of the names and addresses of persons in an area or organization:",
-              "examples": [
-                "the telephone directory."
-              ]
-            },
-            {
-              "def": "a board or tablet on a wall of a building listing the location of the occupants.",
-              "examples": []
-            },
-            {
-              "def": "\n",
-              "examples": [
-                "You can create a new directory by typing \"md.''",
-                "Bad news: your file is not listed in the directory."
-              ]
-            }
-          ]
-        },
-        {
-          "class": "n., pl.",
-          "defs": [
-            {
-              "def": "a book containing an alphabetical index of the names and addresses of persons in a city, district, organization, etc., or of a particular category of people.",
-              "examples": []
-            },
-            {
-              "def": "a board or tablet on a wall of a building listing the room and floor numbers of the occupants.",
-              "examples": []
-            },
-            {
-              "def": "a book of directions.",
-              "examples": []
-            },
-            {
-              "def": "\n",
-              "examples": []
-            },
-            {
-              "def": " ",
-              "examples": []
-            }
-          ]
-        },
-        {
-          "class": "adj.",
-          "defs": [
-            {
-              "def": "serving to direct;",
-              "examples": []
-            }
-          ]
-        }
-      ],
-      "protocol": "https",
-      "extension": "mp3",
-      "url": "https://www.wordreference.com/audio/en/uk/general/en1024921.mp3"
-    },
-    {
       "word": "board",
-      "phonemics": "/ˈbɔː",
+      "phonemics": "/ˈbɔːrd/",
       "definitions": [
         {
           "class": "n.",
@@ -92675,7 +92366,7 @@
     },
     {
       "word": "change",
-      "phonemics": "/ˈtʃeɪn",
+      "phonemics": "/ˈtʃeɪndʒ/",
       "definitions": [
         {
           "class": "v.,",
@@ -94219,7 +93910,7 @@
     },
     {
       "word": "government",
-      "phonemics": "/ˈgʌvə",
+      "phonemics": "/ˈgʌvərnmənt/, /ˈgʌvərmənt/",
       "definitions": [
         {
           "class": "n.",
@@ -94344,16 +94035,8 @@
       "url": "https://www.wordreference.com/audio/en/uk/general/en027981.mp3"
     },
     {
-      "word": "usa",
-      "phonemics": "",
-      "definitions": [],
-      "protocol": "https",
-      "extension": "mp3",
-      "url": "https://www.wordreference.com/audio/en/uk/general/"
-    },
-    {
       "word": "return",
-      "phonemics": "/rɪˈt3ː",
+      "phonemics": "/rɪˈt3ːrn/",
       "definitions": [
         {
           "class": "v.",
@@ -95205,7 +94888,7 @@
     },
     {
       "word": "level",
-      "phonemics": "/ˈlɛv",
+      "phonemics": "/ˈlɛvəl/",
       "definitions": [
         {
           "class": "adj., n., v.,",
@@ -95746,7 +95429,7 @@
     },
     {
       "word": "form",
-      "phonemics": "/ˈfɔː",
+      "phonemics": "/ˈfɔːrm/",
       "definitions": [
         {
           "class": "n.",
@@ -97073,7 +96756,8 @@
       ],
       "protocol": "https",
       "extension": "mp3",
-      "url": "https://www.wordreference.com/audio/en/uk/general/en053184.mp3"
+      "url": "https://www.wordreference.com/audio/en/uk/general/en053184.mp3",
+      "phonemics": "English: /meɪn/,"
     },
     {
       "word": "call",
@@ -97889,7 +97573,7 @@
     },
     {
       "word": "department",
-      "phonemics": "/d",
+      "phonemics": "/dɪˈpɑːrtmənt/",
       "definitions": [
         {
           "class": "n.",
@@ -97974,7 +97658,7 @@
     },
     {
       "word": "title",
-      "phonemics": "/ˈtaɪt",
+      "phonemics": "/ˈtaɪtəl/",
       "definitions": [
         {
           "class": "n., adj., v.,",
@@ -98141,7 +97825,7 @@
     },
     {
       "word": "description",
-      "phonemics": "/d",
+      "phonemics": "/dɪˈskrɪpʃən/",
       "definitions": [
         {
           "class": "n.",
@@ -98193,14 +97877,6 @@
       "protocol": "https",
       "extension": "mp3",
       "url": "https://www.wordreference.com/audio/en/uk/general/en024079.mp3"
-    },
-    {
-      "word": "non",
-      "phonemics": "",
-      "definitions": [],
-      "protocol": "https",
-      "extension": "mp3",
-      "url": "https://www.wordreference.com/audio/en/uk/general/"
     },
     {
       "word": "k",
@@ -98396,7 +98072,7 @@
     },
     {
       "word": "another",
-      "phonemics": "/əˈnʌðə",
+      "phonemics": "/əˈnʌðər/",
       "definitions": [
         {
           "class": "adj.",
@@ -98498,7 +98174,7 @@
     },
     {
       "word": "why",
-      "phonemics": "/ˈ",
+      "phonemics": "/ˈhwaɪ/",
       "definitions": [
         {
           "class": "adv., conj., n., pl.",
@@ -98625,7 +98301,7 @@
     },
     {
       "word": "shall",
-      "phonemics": " ",
+      "phonemics": "strong: /ˈʃæl/,  weak: /ʃəl/",
       "definitions": [
         {
           "class": "auxiliary (modal) v., pres.",
@@ -98677,7 +98353,7 @@
     },
     {
       "word": "property",
-      "phonemics": "/ˈprɒpə",
+      "phonemics": "/ˈprɒpərti/",
       "definitions": [
         {
           "class": "n., pl.",
@@ -99037,14 +98713,6 @@
       "protocol": "https",
       "extension": "mp3",
       "url": "https://www.wordreference.com/audio/en/uk/general/en015431.mp3"
-    },
-    {
-      "word": "cd",
-      "phonemics": "",
-      "definitions": [],
-      "protocol": "https",
-      "extension": "mp3",
-      "url": "https://www.wordreference.com/audio/en/uk/general/"
     },
     {
       "word": "still",
@@ -100173,7 +99841,7 @@
     },
     {
       "word": "content",
-      "phonemics": " ",
+      "phonemics": "adjective: /kənˈtɛnt/,  noun: /ˈkɒntɛnt/",
       "definitions": [
         {
           "class": "n.",
@@ -100510,7 +100178,7 @@
     },
     {
       "word": "little",
-      "phonemics": "/ˈlɪt",
+      "phonemics": "/ˈlɪtəl/",
       "definitions": [
         {
           "class": "adj.,",
@@ -101882,7 +101550,7 @@
     },
     {
       "word": "december",
-      "phonemics": "/d",
+      "phonemics": "/dɪˈsɛmbər/",
       "definitions": [
         {
           "class": "n.",
@@ -101912,7 +101580,7 @@
     },
     {
       "word": "compare",
-      "phonemics": "/kəmˈpɛə",
+      "phonemics": "/kəmˈpɛər/",
       "definitions": [
         {
           "class": "v.,",
@@ -102350,7 +102018,7 @@
     },
     {
       "word": "article",
-      "phonemics": "/ˈɑː",
+      "phonemics": "/ˈɑːrtɪkəl/",
       "definitions": [
         {
           "class": "n.",
@@ -102784,7 +102452,7 @@
     },
     {
       "word": "card",
-      "phonemics": "/ˈkɑː",
+      "phonemics": "/ˈkɑːrd/",
       "definitions": [
         {
           "class": "n.",
@@ -103222,7 +102890,7 @@
     },
     {
       "word": "source",
-      "phonemics": "/ˈsɔː",
+      "phonemics": "/ˈsɔːrs/",
       "definitions": [
         {
           "class": "n.",
@@ -103317,7 +102985,7 @@
     },
     {
       "word": "author",
-      "phonemics": "/ˈɔːθə",
+      "phonemics": "/ˈɔːθər/",
       "definitions": [
         {
           "class": "n.",
@@ -104026,7 +103694,7 @@
     },
     {
       "word": "learn",
-      "phonemics": "/ˈl3ː",
+      "phonemics": "/ˈl3ːrn/",
       "definitions": [
         {
           "class": "v.,",
@@ -104916,7 +104584,7 @@
     },
     {
       "word": "course",
-      "phonemics": "/ˈkɔː",
+      "phonemics": "/ˈkɔːrs/",
       "definitions": [
         {
           "class": "n., v.,",
@@ -105477,7 +105145,7 @@
     },
     {
       "word": "process",
-      "phonemics": " ",
+      "phonemics": "noun: /ˈprəʊsɛs/,  verb: /prəˈsɛs/",
       "definitions": [
         {
           "class": "n., pl.",
@@ -109707,7 +109375,7 @@
     },
     {
       "word": "select",
-      "phonemics": "/s",
+      "phonemics": "/sɪˈlɛkt/",
       "definitions": [
         {
           "class": "v.",
@@ -109788,14 +109456,6 @@
       "protocol": "https",
       "extension": "mp3",
       "url": "https://www.wordreference.com/audio/en/uk/general/en076689.mp3"
-    },
-    {
-      "word": "windows",
-      "phonemics": "",
-      "definitions": [],
-      "protocol": "https",
-      "extension": "mp3",
-      "url": "https://www.wordreference.com/audio/en/uk/general/"
     },
     {
       "word": "gay",
@@ -110162,7 +109822,7 @@
     },
     {
       "word": "category",
-      "phonemics": "/ˈkæt",
+      "phonemics": "/ˈkætɪgri/",
       "definitions": [
         {
           "class": "n.",
@@ -110489,7 +110149,7 @@
     },
     {
       "word": "live",
-      "phonemics": " ",
+      "phonemics": "verb: /ˈlɪv/,  adjective: /ˈlaɪv/",
       "definitions": [
         {
           "class": "v.,",
@@ -110916,7 +110576,7 @@
     },
     {
       "word": "large",
-      "phonemics": "/ˈlɑː",
+      "phonemics": "/ˈlɑːrdʒ/",
       "definitions": [
         {
           "class": "adj.,",
@@ -111208,7 +110868,7 @@
     },
     {
       "word": "table",
-      "phonemics": "/ˈteɪb",
+      "phonemics": "/ˈteɪbəl/",
       "definitions": [
         {
           "class": "n., v.,",
@@ -111436,7 +111096,7 @@
     },
     {
       "word": "register",
-      "phonemics": "/ˈrɛdʒɪstə",
+      "phonemics": "/ˈrɛdʒɪstər/",
       "definitions": [
         {
           "class": "n.",
@@ -111660,7 +111320,7 @@
     },
     {
       "word": "however",
-      "phonemics": "/haʊˈɛvə",
+      "phonemics": "/haʊˈɛvər/",
       "definitions": [
         {
           "class": "adv.",
@@ -111774,7 +111434,7 @@
     },
     {
       "word": "november",
-      "phonemics": "/nəʊˈvɛmbə",
+      "phonemics": "/nəʊˈvɛmbər/",
       "definitions": [
         {
           "class": "n.",
@@ -111805,7 +111465,7 @@
     },
     {
       "word": "market",
-      "phonemics": "/ˈmɑː",
+      "phonemics": "/ˈmɑːrkɪt/",
       "definitions": [
         {
           "class": "n.",
@@ -112008,7 +111668,7 @@
     },
     {
       "word": "library",
-      "phonemics": "/ˈlaɪbr",
+      "phonemics": "/ˈlaɪbrəri/",
       "definitions": [
         {
           "class": "n.",
@@ -112157,7 +111817,7 @@
     },
     {
       "word": "action",
-      "phonemics": "/ˈækʃ",
+      "phonemics": "/ˈækʃən/",
       "definitions": [
         {
           "class": "n.",
@@ -112726,7 +112386,7 @@
     },
     {
       "word": "model",
-      "phonemics": "/ˈmɒd",
+      "phonemics": "/ˈmɒdəl/",
       "definitions": [
         {
           "class": "n., adj., v.,",
@@ -112954,7 +112614,7 @@
     },
     {
       "word": "air",
-      "phonemics": "/ˈɛə",
+      "phonemics": "/ˈɛər/",
       "definitions": [
         {
           "class": "n.",
@@ -113835,7 +113495,7 @@
     },
     {
       "word": "required",
-      "phonemics": "/rɪˈkwaɪə",
+      "phonemics": "/rɪˈkwaɪərd/",
       "definitions": [
         {
           "class": "v.,",
@@ -115103,7 +114763,7 @@
     },
     {
       "word": "better",
-      "phonemics": "/ˈbɛtə",
+      "phonemics": "/ˈbɛtər/",
       "definitions": [
         {
           "class": "adj.",
@@ -118009,7 +117669,7 @@
     },
     {
       "word": "horse",
-      "phonemics": "/ˈhɔː",
+      "phonemics": "/ˈhɔːrs/",
       "definitions": [
         {
           "class": "n., pl.",
@@ -118267,7 +117927,7 @@
     },
     {
       "word": "header",
-      "phonemics": "/ˈhɛdə",
+      "phonemics": "/ˈhɛdər/",
       "definitions": [
         {
           "class": "n.",
@@ -118312,7 +117972,8 @@
             }
           ]
         }
-      ]
+      ],
+      "url": "https://www.wordreference.com/audio/en/uk/general/en042172.mp3"
     }
   ]
 }

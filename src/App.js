@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import './App.css';
 import Words from './components/Words/Words.js';
+import NavMenu from './components/NavMenu/NavMenu.js';
+import Phonemes from './components/Phonemes/Phonemes.js';
 import db from './utils/db/db.json';
 
 // [ ] Ver como hacer para que se cacheen los audios, ya que seria una web bastante pesada
@@ -9,6 +11,7 @@ import db from './utils/db/db.json';
 
 function App() {
   const [search, setSearch] = useState('');
+  const [menuItemSelected, setMenuItemSelected] = useState('text');
 
   const handleChange = e => setSearch(e.target.value);
 
@@ -42,9 +45,22 @@ function App() {
 
   return (
     <div className="App">
-      <input value={search} onChange={handleChange} />
-      {getFilteredWords()}
-      <Words words={getDescriptors()[0]} hidden={isFilterActive()} />
+      <NavMenu 
+        listOfItems={['phonemes', 'text']}
+        action={(item) => setMenuItemSelected(item)}
+        state={menuItemSelected}
+      />
+      { menuItemSelected === 'text' ? 
+        (
+          <>
+            <input value={search} onChange={handleChange} />
+            {getFilteredWords()}
+            <Words words={getDescriptors()[0]} hidden={isFilterActive()} />
+          </>
+        )
+        : 
+        ( <Phonemes/> )
+      }
     </div>
   );
 }

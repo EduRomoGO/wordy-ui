@@ -1,0 +1,24 @@
+nav {
+  border-bottom: 1px solid #ABABAB;
+}
+
+.list {
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+  padding: 0;
+  width: 180px;
+  margin: 25px auto;
+  text-transform: uppercase;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.link {
+  color: #ABABAB;
+  text-decoration: none;
+}
+
+.active {
+  color: #000;
+}

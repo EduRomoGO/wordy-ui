@@ -1,0 +1,57 @@
+.group {
+  display: flex;
+  justify-content: center;
+  padding-top: 36px;
+}
+
+.subgroup {
+  width: 290px;
+  padding-left: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.phonemSection {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  text-transform: capitalize;
+  font-weight: 600;
+}
+
+.phonemList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.phonemList.consonants {
+  width: 290px;
+}
+
+.phonemList.vowels {
+  padding-bottom: 36px;
+}
+
+.pair {
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  width: 36px;
+  height: 44px;
+  position: relative;
+  background-color: white;
+}
+
+.pair:hover {
+  border: 1px solid #ABABAB;
+  transform: scale(2);
+  z-index: 2;
+}
+
+.phonem {
+  padding-bottom: 8px;
+}

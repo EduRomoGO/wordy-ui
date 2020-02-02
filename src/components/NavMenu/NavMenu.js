@@ -8,7 +8,7 @@ const NavMenu = ({
 }) => (
   <nav>
     <ul 
-      className="list"
+      className="navList"
     >
       {listOfItems.map((item) => (
         <li

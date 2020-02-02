@@ -2,7 +2,7 @@ nav {
   border-bottom: 1px solid #ABABAB;
 }
 
-.list {
+.navList {
   display: flex;
   justify-content: space-between;
   list-style: none;

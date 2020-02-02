@@ -10,13 +10,15 @@ import db from './utils/db/db.json';
 function App() {
   const [search, setSearch] = useState('');
 
-  const handleChange = e => setSearch(e.target.value);
+  const handleChange = e => setSearch(e.target.value.toLowerCase());
+
+  const handleClearClick = () => setSearch('');
 
   const getDescriptors = () => {
     const allDescriptors = db.wordDescriptors
-      // .map(item => ({ word: item.word, phonemics: item.phonemics }));
-      .map(item => ({ word: item.word, phonemics: item.phonemics }))
-      .slice(0, 40);
+      .map(item => ({ word: item.word, phonemics: item.phonemics }));
+      // .map(item => ({ word: item.word, phonemics: item.phonemics }))
+      // .slice(0, 40);
 
     let descriptors = [allDescriptors];
 
@@ -43,8 +45,9 @@ function App() {
   return (
     <div className="App">
       <input value={search} onChange={handleChange} />
+      <button onClick={handleClearClick}>Clear Search</button>
       {getFilteredWords()}
-      <Words words={getDescriptors()[0]} hidden={isFilterActive()} />
+      <Words words={getDescriptors()[0].slice(0, 100)} hidden={isFilterActive()} />
     </div>
   );
 }

@@ -186,20 +186,40 @@ const Phonemes = () =>{
     },
   ]
 
+  const handleOnMouseOver = (e, file) => {
+    document.querySelector(`#${file}`).play();
+  };
 
   const getPhonemList = (items, type) => (
     <div className="phonemSection">
       <p className="title">{type}</p>
       <div className={`phonemList ${type}`}>
-        {items.map(({phonem, word})=>
+        {items.map(({ phonem, word })=> (  
           <div className="pair">
-            <span className="phonem">
+            <span 
+              className="phonem" 
+              onMouseOver={(e)=>handleOnMouseOver(e, phonem)}
+              onClick={(e)=>handleOnMouseOver(e, phonem)}
+            >
               {phonem}
             </span>
-            <span className="word">
+            <audio hidden={false} id={phonem} controls>
+              <source src={`./phonemesFiles/${phonem}.mp3`} type="audio/mpeg"></source>
+              Your browser does not support the audio element.
+            </audio>
+            <span 
+              className="word"
+              onMouseOver={(e)=>handleOnMouseOver(e, word)}
+              onClick={(e)=>handleOnMouseOver(e, word)}
+            >
               {word}
             </span>
+            <audio hidden={false} id={word} controls>
+              <source src={`./phonemesFiles/${word}.mp3`} type="audio/mpeg"></source>
+              Your browser does not support the audio element.
+            </audio>
           </div>
+        )
         )}
       </div>
     </div>

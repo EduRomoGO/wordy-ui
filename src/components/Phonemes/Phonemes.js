@@ -2,26 +2,202 @@ import React from 'react'
 import './Phonemes.css';
 
 const Phonemes = () =>{
-  const consonants = ['p', 'b', 't', 'd','k', 'g', 'm', 'n','ŋ', 'f', 'v', 'θ',
-  'ð', 's', 'z', 'ʃ','ʒ', 'h', 'tʃ', 'dʒ', 'r', 'l', 'j', 'w']
-  const vowels = ['i:','ɪ','e','æ', 'ɑ:', 'ʌ','ɒ','ɔ:','ʊ','u:','ɜ:ʳ','ə']
-  const diphthongs = ['p', 'b', 'd', 't','p', 'b', 'd', 't']
-  
-  const consonantsWords = ['soup', 'bat', 'light', 'dog','cap', 'bag', 'man', 'rain','king', 'fish', 'van', 'thumb','mother', 'mouse', 'zebra', 'shoe','television', 'hand', 'cheese', 'jet', 'write', 'long', 'yo-yo', 'whale']
-  const vowelsWords = [ 'sea','swim','bed','cat', 'car', 'cup','lock','ball','book','two','shirt','father']
-  const diphthongsWords = ['eight','eye','boy','arrow','house','chair','deer','tourist']
+  const consonants = [
+    {
+      phonem: 'p', 
+      word: 'soup'
+    },{
+      phonem: 'b',
+      word: 'bat'
+    },
+    {
+      phonem: 't',
+      word:'light'
+    },
+    {
+      phonem: 'd',
+      word: 'dog'
+    },
+    {
+      phonem: 'k',
+      word: 'cap'
+    },
+    {
+      phonem: 'g',
+      word: 'bag'
+    },
+    {
+      phonem: 'm',
+      word: 'man'
+    },
+    {
+      phonem: 'n',
+      word: 'rain'
+    },
+    {
+      phonem: 'ŋ',
+      word: 'king'
+    },
+    {
+      phonem: 'f',
+      word: 'fish'
+    },
+    {
+      phonem: 'v',
+      word: 'van'
+    },
+    {
+      phonem: 'θ',
+      word: 'thumb'
+    },
+    {
+      phonem: 'ð',
+      word: 'mother'
+    },
+    {
+      phonem: 's',
+      word: 'mouse'
+    },
+    {
+      phonem: 'z',
+      word: 'zebra'
+    },
+    {
+      phonem: 'ʃ',
+      word: 'shoe'
+    },
+    {
+      phonem: 'ʒ',
+      word: 'television'
+    },
+    {
+      phonem: 'h',
+      word: 'hand'
+    },
+    {
+      phonem: 'tʃ',
+      word: 'cheese'
+    },
+    {
+      phonem: 'dʒ',
+      word: 'jet'
+    },
+    {
+      phonem: 'r',
+      word: 'write'
+    },
+    {
+      phonem: 'l',
+      word: 'long'
+    },
+    {
+      phonem: 'j',
+      word: 'yo-yo'
+    },
+    {
+      phonem: 'w',
+      word: 'whale'
+    }
+  ]
 
-  const getPhonemList = (phonemes, type, words) => (
+  const vowels = [    
+    {
+      phonem: 'i:',
+      word: 'sea'
+    },
+    {
+      phonem: 'ɪ',
+      word: 'swim'
+    },
+    {
+      phonem: 'e',
+      word: 'bed'
+    },
+    {
+      phonem: 'æ',
+      word: 'cat'
+    },
+    {
+      phonem: 'ɑ:',
+      word: 'car'
+    },
+    {
+      phonem: 'ʌ',
+      word: 'cup'
+    },
+    {
+      phonem: 'ɒ',
+      word: 'lock'
+    },
+    {
+      phonem: 'ɔ:',
+      word: 'ball'
+    },
+    {
+      phonem: 'ʊ',
+      word: 'book'
+    },
+    {
+      phonem: 'u:',
+      word: 'two'
+    },
+    {
+      phonem: 'ɜ:ʳ',
+      word: 'shirt'
+    },
+    {
+      phonem: 'ə',
+      word: 'father'
+    }
+  ]
+
+  const diphthongs = [ 
+    {
+      phonem: 'eɪ',
+      word: 'eight'
+    },
+    {
+      phonem: 'aɪ',
+      word: 'eye'
+    },
+    {
+      phonem: 'ɔɪ',
+      word: 'boy'
+    },
+    {
+      phonem: 'oʊ',
+      word: 'arrow'
+    },
+    {
+      phonem: 'aʊ',
+      word: 'house'
+    },
+    {
+      phonem: 'eəʳ',
+      word: 'chair'
+    },
+    {
+      phonem: 'ɪəʳ',
+      word: 'deer'
+    },
+    {
+      phonem: 'ʊə',
+      word: 'tourist'
+    },
+  ]
+
+
+  const getPhonemList = (items, type) => (
     <div className="phonemSection">
       <p className="title">{type}</p>
       <div className={`phonemList ${type}`}>
-        {phonemes.map((phonem, index)=>
+        {items.map(({phonem, word})=>
           <div className="pair">
             <span className="phonem">
               {phonem}
             </span>
             <span className="word">
-              {words[index]}
+              {word}
             </span>
           </div>
         )}
@@ -30,10 +206,10 @@ const Phonemes = () =>{
   )
   
   return <div className="group">
-    {getPhonemList(consonants, 'consonants', consonantsWords)}
+    {getPhonemList(consonants, 'consonants')}
     <div className="subgroup">
-      {getPhonemList(vowels, 'vowels', vowelsWords)}
-      {getPhonemList(diphthongs, 'diphthongs', diphthongsWords)}
+      {getPhonemList(vowels, 'vowels')}
+      {getPhonemList(diphthongs, 'diphthongs')}
     </div>
   </div>
 }

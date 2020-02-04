@@ -194,12 +194,14 @@ const Phonemes = () =>{
     <div className="phonemSection">
       <p className="title">{type}</p>
       <div className={`phonemList ${type}`}>
-        {items.map(({ phonem, word })=> (  
+        {items.map(({ phonem, word })=> {
+          const newPhonem = phonem.includes(':') ? phonem.replace(":", "\\:") : phonem
+          return (  
           <div className="pair">
             <span 
               className="phonem" 
-              onMouseOver={(e)=>handleOnMouseOver(e, phonem)}
-              onClick={(e)=>handleOnMouseOver(e, phonem)}
+              onMouseOver={(e)=>handleOnMouseOver(e, newPhonem)}
+              onClick={(e)=>handleOnMouseOver(e, newPhonem)}
             >
               {phonem}
             </span>
@@ -219,7 +221,7 @@ const Phonemes = () =>{
               Your browser does not support the audio element.
             </audio>
           </div>
-        )
+        )}
         )}
       </div>
     </div>

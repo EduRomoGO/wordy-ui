@@ -42,12 +42,14 @@ function App() {
     }
   }
 
+  const knowledge = 0;
+
   return (
     <div className="App">
       <input value={search} onChange={handleChange} />
       <button onClick={handleClearClick}>Clear Search</button>
       {getFilteredWords()}
-      <Words words={getDescriptors()[0].slice(0, 100)} hidden={isFilterActive()} />
+      <Words words={getDescriptors()[0].slice(knowledge, knowledge + 50)} hidden={isFilterActive()} />
     </div>
   );
 }

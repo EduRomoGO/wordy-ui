@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/wordy-ui/precache-manifest.b2f14ed8c4c92f9167c82b6dd7779e7f.js"
+  "/wordy-ui/precache-manifest.ff5eeb42b7d21956d7d7254a3ff5c9a8.js"
 );
 
 self.addEventListener('message', (event) => {

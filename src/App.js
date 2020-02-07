@@ -76,8 +76,8 @@ function App() {
         onKeyDown={onKeyDown}
       >
         <input value={search} onChange={handleChange} placeholder='Command+h to focus' />
+        <button onClick={handlePlayClick}>Play Search (alt+p)</button>
         <button onClick={handleClearClick}>Clear Search</button>
-        <button onClick={handlePlayClick}>Play Search</button>
         {getFilteredWords()}
         <Words words={getDescriptors()[0].slice(knowledge, knowledge + 50)} hidden={isFilterActive()} />
       </Hotkeys>

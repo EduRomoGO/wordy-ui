@@ -10,7 +10,8 @@ import db from './utils/db/db.json';
 function App() {
   const [search, setSearch] = useState('');
 
-  const handleChange = e => setSearch(e.target.value.toLowerCase());
+  const leaveOnlyLetters = str => str.replace(/[^A-Za-z\s]/g, '');
+  const handleChange = e => setSearch(leaveOnlyLetters(e.target.value.toLowerCase()));
 
   const handleClearClick = () => setSearch('');
 

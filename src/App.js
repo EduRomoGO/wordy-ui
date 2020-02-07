@@ -4,22 +4,39 @@ import Words from './components/Words/Words.js';
 import NavMenu from './components/NavMenu/NavMenu.js';
 import Phonemes from './components/Phonemes/Phonemes.js';
 import db from './utils/db/db.json';
+import Hotkeys from 'react-hot-keys';
 
 // [ ] Ver como hacer para que se cacheen los audios, ya que seria una web bastante pesada
 // [ ] Limitar el numero de items que se pintan en pantalla a 200 o algo asi, o que se vayan pintando poco a poco
-// [ ] Mejorar el aspecto y la usabilidad del texto buscado
+// [x] Mejorar el aspecto y la usabilidad del texto buscado
 
 function App() {
   const [search, setSearch] = useState('');
   const [menuItemSelected, setMenuItemSelected] = useState('text');
 
-  const handleChange = e => setSearch(e.target.value);
+  const leaveOnlyLetters = str => str.replace(/[^A-Za-z\s]/g, '');
+  const handleChange = e => setSearch(leaveOnlyLetters(e.target.value.toLowerCase()));
+
+  const handleClearClick = () => setSearch('');
+  const handlePlayClick = () => {
+    if (isFilterActive()) {
+      let timeout = 0;
+
+      [...document.querySelector('.words-short').querySelectorAll('audio')].forEach(audio => {
+        setTimeout(() => {
+          audio.play();
+        }, timeout * 1000);
+        
+        timeout += audio.duration;
+      });
+    }
+  }
 
   const getDescriptors = () => {
     const allDescriptors = db.wordDescriptors
-      // .map(item => ({ word: item.word, phonemics: item.phonemics }));
-      .map(item => ({ word: item.word, phonemics: item.phonemics }))
-      .slice(0, 40);
+      .map(item => ({ word: item.word, phonemics: item.phonemics }));
+      // .map(item => ({ word: item.word, phonemics: item.phonemics }))
+      // .slice(0, 40);
 
     let descriptors = [allDescriptors];
 
@@ -43,6 +60,18 @@ function App() {
     }
   }
 
+  const knowledge = 0;
+
+  const onKeyDown = (keyName) => {
+    const keyMap = {
+      // h for hunt (hunt a word, fun pun)
+      'Command+h': () => document.querySelector('input').focus(),
+      'alt+p': () => handlePlayClick(),
+    }
+
+    keyMap[keyName]();
+  };  
+
   return (
     <div className="App">
       <NavMenu 
@@ -51,15 +80,18 @@ function App() {
         state={menuItemSelected}
       />
       { menuItemSelected === 'text' ? 
-        (
-          <>
-            <input value={search} onChange={handleChange} />
-            {getFilteredWords()}
-            <Words words={getDescriptors()[0]} hidden={isFilterActive()} />
-          </>
-        )
+        <Hotkeys 
+          keyName="Command+h,alt+p" 
+          onKeyDown={onKeyDown}
+        >
+          <input value={search} onChange={handleChange} placeholder='Command+h to focus' />
+          <button onClick={handlePlayClick}>Play Search (alt+p)</button>
+          <button onClick={handleClearClick}>Clear Search</button>
+          {getFilteredWords()}
+          <Words words={getDescriptors()[0].slice(knowledge, knowledge + 50)} hidden={isFilterActive()} />
+        </Hotkeys>
         : 
-        ( <Phonemes/> )
+        <Phonemes/>
       }
     </div>
   );

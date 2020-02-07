@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import './App.css';
 import Words from './components/Words/Words.js';
 import db from './utils/db/db.json';
+import Hotkeys from 'react-hot-keys';
 
 // [ ] Ver como hacer para que se cacheen los audios, ya que seria una web bastante pesada
 // [ ] Limitar el numero de items que se pintan en pantalla a 200 o algo asi, o que se vayan pintando poco a poco
-// [ ] Mejorar el aspecto y la usabilidad del texto buscado
+// [x] Mejorar el aspecto y la usabilidad del texto buscado
 
 function App() {
   const [search, setSearch] = useState('');
@@ -45,12 +46,22 @@ function App() {
 
   const knowledge = 0;
 
+  const onKeyDown = () => {
+    document.querySelector('input').focus();
+  };  
+
   return (
     <div className="App">
-      <input value={search} onChange={handleChange} />
-      <button onClick={handleClearClick}>Clear Search</button>
-      {getFilteredWords()}
-      <Words words={getDescriptors()[0].slice(knowledge, knowledge + 50)} hidden={isFilterActive()} />
+      <Hotkeys 
+        // h for hunt (hunt a word, fun pun)
+        keyName="Command+h" 
+        onKeyDown={onKeyDown}
+      >
+        <input value={search} onChange={handleChange} />
+        <button onClick={handleClearClick}>Clear Search</button>
+        {getFilteredWords()}
+        <Words words={getDescriptors()[0].slice(knowledge, knowledge + 50)} hidden={isFilterActive()} />
+      </Hotkeys>
     </div>
   );
 }

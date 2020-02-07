@@ -5,7 +5,7 @@ import cuid from 'cuid';
 
 const Words = ({words, isFilterActive}) => {
     const getClassName = () => isFilterActive ? 'short' : 'normal';
-    const getKey = id => isFilterActive ? cuid() : id;
+    const getKey = () => cuid();
 
     return <div className={`words-${getClassName()}`}>
         {words.map(({word, phonemics}, id) => <Word short={isFilterActive} key={getKey(id)} word={word} phonemics={phonemics} />)}

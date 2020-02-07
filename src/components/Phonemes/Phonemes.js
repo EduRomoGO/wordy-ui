@@ -1,6 +1,7 @@
 import React from 'react'
 import './Phonemes.css';
 import { consonants, vowels, diphthongs } from './PhonemesList.js';
+import cuid from 'cuid';
 
 const Phonemes = () =>{
   const handleOnMouseOver = (e, file) => {
@@ -14,7 +15,7 @@ const Phonemes = () =>{
         {items.map(({ phonem, word }, id)=> {
           const newPhonem = phonem.includes(':') ? phonem.replace(":", "\\:") : phonem
           return (  
-          <div key={id} className="pair">
+          <div key={cuid()} className="pair">
             <span 
               className="phonem" 
               onMouseOver={(e)=>handleOnMouseOver(e, newPhonem)}

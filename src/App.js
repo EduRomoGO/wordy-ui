@@ -44,7 +44,6 @@ function App() {
       const allWords = allDescriptors.map(item => item.word);
       const leaveOnlyLetters = str => str.replace(/[^A-Za-z\s]/g, '');
 
-      // leaveOnlyLetters(e.target.value.toLowerCase())
       const inputWords = leaveOnlyLetters(search)
         .toLowerCase()
         .split(' ')

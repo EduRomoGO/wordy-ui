@@ -47,12 +47,11 @@ input.search {
 }
 
 .starting-word {
-  width: 40px;
+  width: 80px;
   font-size: 1.1rem;
   border: none;
   margin-left: 6px;
   font-weight: 500;
-  padding-left: 13px;
   box-sizing: border-box;
 }
 

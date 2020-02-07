@@ -4,7 +4,7 @@ import { consonants, vowels, diphthongs } from './PhonemesList.js';
 import cuid from 'cuid';
 
 const Phonemes = () =>{
-  const handleOnMouseOver = (e, file) => {
+  const handleOnClick = (e, file) => {
     document.querySelector(`#${file}`).play();
   };
 
@@ -12,14 +12,13 @@ const Phonemes = () =>{
     <article className="phonemes-article">
       <p className="title">{type}</p>
       <div className={`phonemList ${type}`}>
-        {items.map(({ phonem, word }, id)=> {
+        {items.map(({ phonem, word })=> {
           const newPhonem = phonem.includes(':') ? phonem.replace(":", "\\:") : phonem
           return (  
           <div key={cuid()} className="pair">
             <span 
               className="phonem" 
-              onMouseOver={(e)=>handleOnMouseOver(e, newPhonem)}
-              onClick={(e)=>handleOnMouseOver(e, newPhonem)}
+              onClick={(e)=>handleOnClick(e, newPhonem)}
             >
               {phonem}
             </span>
@@ -29,8 +28,7 @@ const Phonemes = () =>{
             </audio>
             <span 
               className="phonem-word"
-              onMouseOver={(e)=>handleOnMouseOver(e, word)}
-              onClick={(e)=>handleOnMouseOver(e, word)}
+              onClick={(e)=>handleOnClick(e, word)}
             >
               {word}
             </span>

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import './App.css';
 import Words from './components/Words/Words.js';
+import NavMenu from './components/NavMenu/NavMenu.js';
+import Phonemes from './components/Phonemes/Phonemes.js';
 import db from './utils/db/db.json';
 import Hotkeys from 'react-hot-keys';
 
@@ -10,6 +12,7 @@ import Hotkeys from 'react-hot-keys';
 
 function App() {
   const [search, setSearch] = useState('');
+  const [menuItemSelected, setMenuItemSelected] = useState('text');
 
   const leaveOnlyLetters = str => str.replace(/[^A-Za-z\s]/g, '');
   const handleChange = e => setSearch(leaveOnlyLetters(e.target.value.toLowerCase()));
@@ -71,16 +74,25 @@ function App() {
 
   return (
     <div className="App">
-      <Hotkeys 
-        keyName="Command+h,alt+p" 
-        onKeyDown={onKeyDown}
-      >
-        <input value={search} onChange={handleChange} placeholder='Command+h to focus' />
-        <button onClick={handlePlayClick}>Play Search (alt+p)</button>
-        <button onClick={handleClearClick}>Clear Search</button>
-        {getFilteredWords()}
-        <Words words={getDescriptors()[0].slice(knowledge, knowledge + 50)} hidden={isFilterActive()} />
-      </Hotkeys>
+      <NavMenu 
+        listOfItems={['phonemes', 'text']}
+        action={(item) => setMenuItemSelected(item)}
+        state={menuItemSelected}
+      />
+      { menuItemSelected === 'text' ? 
+        <Hotkeys 
+          keyName="Command+h,alt+p" 
+          onKeyDown={onKeyDown}
+        >
+          <input value={search} onChange={handleChange} placeholder='Command+h to focus' />
+          <button onClick={handlePlayClick}>Play Search (alt+p)</button>
+          <button onClick={handleClearClick}>Clear Search</button>
+          {getFilteredWords()}
+          <Words words={getDescriptors()[0].slice(knowledge, knowledge + 50)} hidden={isFilterActive()} />
+        </Hotkeys>
+        : 
+        <Phonemes/>
+      }
     </div>
   );
 }

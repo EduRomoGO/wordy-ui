@@ -7,7 +7,7 @@ const Word = ({short, word, phonemics}) => {
     };
 
     const getWord = () => short
-        ? <span onMouseOver={handleOnMouseOver} onClick={handleOnMouseOver}>
+        ?   <span onMouseOver={handleOnMouseOver} onClick={handleOnMouseOver}>
                 <span className='word-name'> {word}</span>
                 <span className='word-phonemics'> ({phonemics})</span>
             </span>

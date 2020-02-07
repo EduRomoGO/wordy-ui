@@ -12,7 +12,7 @@ import Hotkeys from 'react-hot-keys';
 
 function App() {
   const [search, setSearch] = useState('');
-  const [menuItemSelected, setMenuItemSelected] = useState('text');
+  const [menuItemSelected, setMenuItemSelected] = useState('words');
 
   const leaveOnlyLetters = str => str.replace(/[^A-Za-z\s]/g, '');
   const handleChange = e => setSearch(leaveOnlyLetters(e.target.value.toLowerCase()));
@@ -75,11 +75,11 @@ function App() {
   return (
     <div className="App">
       <NavMenu 
-        listOfItems={['phonemes', 'text']}
+        listOfItems={['words', 'phonemes']}
         action={(item) => setMenuItemSelected(item)}
         state={menuItemSelected}
       />
-      { menuItemSelected === 'text' ? 
+      { menuItemSelected === 'words' ? 
         <Hotkeys 
           keyName="Command+h,alt+p" 
           onKeyDown={onKeyDown}

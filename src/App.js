@@ -12,6 +12,7 @@ import Hotkeys from 'react-hot-keys';
 
 function App() {
   const [search, setSearch] = useState('');
+  const [initialWordNumber, setInitialWordNumber] = useState(0);
   const [menuItemSelected, setMenuItemSelected] = useState('words');
 
   const leaveOnlyLetters = str => str.replace(/[^A-Za-z\s]/g, '');
@@ -60,7 +61,7 @@ function App() {
     }
   }
 
-  const knowledge = 0;
+  const handleInitialWordNumberChange = (e) => setInitialWordNumber(e.target.value);
 
   const onKeyDown = (keyName) => {
     const keyMap = {
@@ -84,11 +85,15 @@ function App() {
           keyName="Command+h,alt+p" 
           onKeyDown={onKeyDown}
         >
-          <input value={search} onChange={handleChange} placeholder='Command+h to focus' />
+          <input className='search' value={search} onChange={handleChange} placeholder='Command+h to focus' />
           <button onClick={handlePlayClick}>Play Search (alt+p)</button>
           <button onClick={handleClearClick}>Clear Search</button>
+          <section className='starting-word-section'>
+            <p>Initial word number:</p>
+            <input onChange={handleInitialWordNumberChange} className='starting-word' value={initialWordNumber} />
+          </section>
           {getFilteredWords()}
-          <Words words={getDescriptors()[0].slice(knowledge, knowledge + 50)} hidden={isFilterActive()} />
+          <Words words={getDescriptors()[0].slice(parseInt(initialWordNumber, 10), parseInt(initialWordNumber, 10) + 50)} hidden={isFilterActive()} />
         </Hotkeys>
         : 
         <Phonemes/>

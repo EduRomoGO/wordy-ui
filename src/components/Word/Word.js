@@ -20,7 +20,7 @@ const Word = ({short, word, phonemics}) => {
 
     return <div className={getClassName()} onClick={handleOnMouseOver}>
         {getWord()}
-        <audio hidden={short} id={word} controls>
+        <audio hidden={true} id={word} controls>
             <source src={`./audioFiles/${word}.mp3`} type="audio/mpeg"></source>
             Your browser does not support the audio element.
         </audio>

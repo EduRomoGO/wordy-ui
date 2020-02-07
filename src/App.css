@@ -37,11 +37,25 @@
   }
 }
 
-input {
+input.search {
   width: 200px;
   height: 30px;
   margin: 23px;
   font-size: 1.3rem;
   border: 1px solid #410677;
   border-radius: 3px;
+}
+
+.starting-word {
+  width: 40px;
+  font-size: 1.1rem;
+  border: none;
+  margin-left: 6px;
+  font-weight: 500;
+  padding-left: 13px;
+  box-sizing: border-box;
+}
+
+.starting-word-section p {
+  display: inline-block;
 }

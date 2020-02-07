@@ -7,8 +7,8 @@ const Phonemes = () =>{
     document.querySelector(`#${file}`).play();
   };
 
-  const getPhonemList = (items, type) => (
-    <div className="phonemSection">
+  const getPhonemList = (items, type) =>
+    <article className="phonemes-article">
       <p className="title">{type}</p>
       <div className={`phonemList ${type}`}>
         {items.map(({ phonem, word }, id)=> {
@@ -27,7 +27,7 @@ const Phonemes = () =>{
               Your browser does not support the audio element.
             </audio>
             <span 
-              className="word"
+              className="phonem-word"
               onMouseOver={(e)=>handleOnMouseOver(e, word)}
               onClick={(e)=>handleOnMouseOver(e, word)}
             >
@@ -41,16 +41,15 @@ const Phonemes = () =>{
         )}
         )}
       </div>
-    </div>
-  )
+    </article>
   
-  return <div className="group">
-    {getPhonemList(consonants, 'consonants')}
-    <div className="subgroup">
+  return <section className="phonemes-component-wrapper">
+    <section className='phonemes-lists-wrapper'>
+      {getPhonemList(consonants, 'consonants')}
       {getPhonemList(vowels, 'vowels')}
       {getPhonemList(diphthongs, 'diphthongs')}
-    </div>
-  </div>
+    </section>
+  </section>
 }
 
 export default Phonemes

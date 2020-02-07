@@ -1,15 +1,12 @@
-.group {
-  display: flex;
-  justify-content: center;
-  padding: 36px 20px 0px;
-}
-
-.subgroup {
-  width: 290px;
-  padding-left: 80px;
+.phonemes-component-wrapper {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  align-items: center;
+  padding: 16px 12px 0px;
+}
+
+.phonemes-lists-wrapper {
+  max-width: 800px;
 }
 
 .phonemSection {
@@ -28,21 +25,24 @@
   justify-content: space-between;
 }
 
-.phonemList.consonants {
-  width: 290px;
+.phonemes-article {
+  padding-bottom: 16px;
 }
 
-.phonemList.vowels {
-  padding-bottom: 36px;
-}
 
 .pair {
   display: flex;
   flex-direction: column;
-  padding: 21px;
+  border: 1px solid black;
+  border-radius: 2px;
+  margin: 10px 10px 0 0;
 }
 
 .phonem {
   padding-bottom: 8px;
   font-weight: bold;
+}
+
+.phonem-word {
+  padding: 6px;
 }

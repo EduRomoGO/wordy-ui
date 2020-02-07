@@ -1,7 +1,7 @@
 .group {
   display: flex;
   justify-content: center;
-  padding-top: 36px;
+  padding: 36px 20px 0px;
 }
 
 .subgroup {
@@ -39,19 +39,10 @@
 .pair {
   display: flex;
   flex-direction: column;
-  padding: 12px;
-  width: 36px;
-  height: 44px;
-  position: relative;
-  background-color: white;
-}
-
-.pair:hover {
-  border: 1px solid #ABABAB;
-  transform: scale(2);
-  z-index: 2;
+  padding: 21px;
 }
 
 .phonem {
   padding-bottom: 8px;
+  font-weight: bold;
 }

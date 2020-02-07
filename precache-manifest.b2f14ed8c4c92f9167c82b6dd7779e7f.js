@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "b980d0a4f294ae39d1afd542b9ededa2",
+    "revision": "b22e3c88e8434c44e1e3905afb91dd39",
     "url": "/wordy-ui/index.html"
   },
   {

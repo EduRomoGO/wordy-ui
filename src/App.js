@@ -15,8 +15,7 @@ function App() {
   const [initialWordNumber, setInitialWordNumber] = useState(0);
   const [menuItemSelected, setMenuItemSelected] = useState('words');
 
-  const leaveOnlyLetters = str => str.replace(/[^A-Za-z\s]/g, '');
-  const handleChange = e => setSearch(leaveOnlyLetters(e.target.value.toLowerCase()));
+  const handleChange = e => setSearch(e.target.value);
 
   const handleClearClick = () => setSearch('');
   const handlePlayClick = () => {
@@ -43,7 +42,14 @@ function App() {
 
     if (search.length > 0) {
       const allWords = allDescriptors.map(item => item.word);
-      const inputWords = search.split(' ').filter(item => !!item).filter(item => allWords.includes(item));
+      const leaveOnlyLetters = str => str.replace(/[^A-Za-z\s]/g, '');
+
+      // leaveOnlyLetters(e.target.value.toLowerCase())
+      const inputWords = leaveOnlyLetters(search)
+        .toLowerCase()
+        .split(' ')
+        .filter(item => !!item)
+        .filter(item => allWords.includes(item));
       const filtered = allDescriptors.filter(item => inputWords.includes(item.word));
       const ordered = inputWords.map(input => filtered.find(filteredItem => filteredItem.word === input));
 

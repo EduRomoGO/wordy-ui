@@ -15,6 +15,19 @@ function App() {
   const handleChange = e => setSearch(leaveOnlyLetters(e.target.value.toLowerCase()));
 
   const handleClearClick = () => setSearch('');
+  const handlePlayClick = () => {
+    if (isFilterActive()) {
+      let timeout = 0;
+
+      [...document.querySelector('.words-short').querySelectorAll('audio')].forEach(audio => {
+        setTimeout(() => {
+          audio.play();
+        }, timeout * 1000);
+        
+        timeout += audio.duration;
+      });
+    }
+  }
 
   const getDescriptors = () => {
     const allDescriptors = db.wordDescriptors
@@ -46,19 +59,25 @@ function App() {
 
   const knowledge = 0;
 
-  const onKeyDown = () => {
-    document.querySelector('input').focus();
+  const onKeyDown = (keyName) => {
+    const keyMap = {
+      // h for hunt (hunt a word, fun pun)
+      'Command+h': () => document.querySelector('input').focus(),
+      'alt+p': () => handlePlayClick(),
+    }
+
+    keyMap[keyName]();
   };  
 
   return (
     <div className="App">
       <Hotkeys 
-        // h for hunt (hunt a word, fun pun)
-        keyName="Command+h" 
+        keyName="Command+h,alt+p" 
         onKeyDown={onKeyDown}
       >
-        <input value={search} onChange={handleChange} />
+        <input value={search} onChange={handleChange} placeholder='Command+h to focus' />
         <button onClick={handleClearClick}>Clear Search</button>
+        <button onClick={handlePlayClick}>Play Search</button>
         {getFilteredWords()}
         <Words words={getDescriptors()[0].slice(knowledge, knowledge + 50)} hidden={isFilterActive()} />
       </Hotkeys>

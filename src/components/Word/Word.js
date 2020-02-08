@@ -1,9 +1,12 @@
 import React from 'react';
 import './Word.css';
 
-const Word = ({short, word, phonemics, type}) => {
+const Word = ({short, word, phonemics, type, onClick}) => {
     const handleOnMouseOver = (e) => {
         document.querySelector(`#${word}`).play();
+        if (!short) {
+            onClick(word);
+        }
     };
 
     const getWord = () => short

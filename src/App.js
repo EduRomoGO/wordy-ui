@@ -7,6 +7,8 @@ import Spell from './components/Spell/Spell.js';
 import db from './utils/db/db.json';
 import Hotkeys from 'react-hot-keys';
 import { ReactComponent as CancelIcon } from './SVG/cancel.svg';
+import { debounce } from "debounce";
+import {DebounceInput} from 'react-debounce-input';
 
 // [ ] Ver como hacer para que se cacheen los audios, ya que seria una web bastante pesada
 // [ ] Las palabras que no encuentre, en lugar de filtrarlas, marcarlas para pintarlas en rojo 
@@ -68,17 +70,21 @@ function App() {
     return descriptors;
   };
 
-  const getDefinition = () => {
+  const getDefinition = word => {
+    const allDescriptors = db.wordDescriptors;
+    const wordDescriptor = allDescriptors.find(item => item.word === word);
+
+    return wordDescriptor ? wordDescriptor.definitions[0].defs[0].def : '';
+  };
+
+  const getDefinitionForInputWords = () => {
     let definition = '';
 
     if (isFilterActive()) {
-      const allDescriptors = db.wordDescriptors;
       const inputWords = getInputWords(search);
       
       if (inputWords.length === 1) {
-        const word = allDescriptors.find(item => item.word === inputWords[0]);
-
-        definition = word ? word.definitions[0].defs[0].def : '';
+        definition = getDefinition(inputWords[0]);
       }
     }
 
@@ -105,6 +111,10 @@ function App() {
     keyMap[keyName]();
   };
 
+  const handleWordClick = word => {
+    console.log(word);
+  }
+
 
   const renderWords = () => {
     return <Hotkeys
@@ -112,7 +122,7 @@ function App() {
       onKeyDown={onKeyDown}
     >
       <div className='search-wrapper'>
-        <input className='search' value={search} onChange={handleChange} placeholder='Command+h to focus' />
+        <DebounceInput debounceTimeout={300} className='search' value={search} onChange={handleChange} placeholder='Command+h to focus' />
         <CancelIcon />
       </div>
       <button onClick={handlePlayClick}>Play Search (alt+p)</button>
@@ -122,8 +132,8 @@ function App() {
         <input onChange={handleInitialWordNumberChange} className='starting-word' value={initialWordNumber} />
       </section>
       {getFilteredWords()}
-      <div>{getDefinition()}</div>
-      <Words words={getDescriptors()[0].slice(parseInt(initialWordNumber, 10), parseInt(initialWordNumber, 10) + 50)} hidden={isFilterActive()} />
+      <div>{getDefinitionForInputWords()}</div>
+      <Words onClick={handleWordClick} words={getDescriptors()[0].slice(parseInt(initialWordNumber, 10), parseInt(initialWordNumber, 10) + 50)} hidden={isFilterActive()} />
     </Hotkeys>
   };
 

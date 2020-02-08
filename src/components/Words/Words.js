@@ -3,12 +3,12 @@ import Word from '../Word/Word.js';
 import './Words.css';
 import cuid from 'cuid';
 
-const Words = ({words, isFilterActive}) => {
+const Words = ({words, isFilterActive, onClick}) => {
     const getClassName = () => isFilterActive ? 'short' : 'normal';
     const getKey = () => cuid();
 
     return <div className={`words-${getClassName()}`}>
-        {words.map(({word, phonemics}, id) => <Word short={isFilterActive} key={getKey(id)} word={word} phonemics={phonemics} />)}
+        {words.map(({word, phonemics}, id) => <Word onClick={onClick} short={isFilterActive} key={getKey(id)} word={word} phonemics={phonemics} />)}
     </div>
 };
 

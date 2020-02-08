@@ -2,6 +2,10 @@
     display: inline;
 }
 
+.word {
+    cursor: pointer;
+}
+
 .word-phonemics {
     font-size: 0.7rem;
 }

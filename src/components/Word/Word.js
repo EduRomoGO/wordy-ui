@@ -17,11 +17,15 @@ const Word = ({short, word, phonemics, type}) => {
         </div>;
     
     const getClassName = () => {
+        let typeClass = '';
+
         if (type === 'spell') {
-            return 'spell';
+            typeClass = 'spell';
         } else {
-            return short ? 'short' : 'normal';
+            typeClass = short ? 'short' : 'normal';
         }
+
+        return `word ${typeClass}`;
     }
 
     return <div className={getClassName()} onClick={handleOnMouseOver}>

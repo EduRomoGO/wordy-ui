@@ -58,3 +58,7 @@ input.search {
 .starting-word-section p {
   display: inline-block;
 }
+
+button {
+  cursor: pointer;
+}

@@ -135,7 +135,7 @@ function App() {
         <input onChange={handleInitialWordNumberChange} className='starting-word' value={initialWordNumber} />
       </section>
       {getFilteredWords()}
-      <div>{renderDefinition(definition)}</div>
+      {renderDefinition(definition)}
       <Words onClick={handleWordClick} words={getAllDescriptors().slice(parseInt(initialWordNumber, 10), parseInt(initialWordNumber, 10) + 50)} hidden={isFilterActive()} />
     </Hotkeys>
   };

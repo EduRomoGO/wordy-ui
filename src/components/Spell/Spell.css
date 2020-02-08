@@ -1,5 +1,8 @@
 .spell-component-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    grid-gap: 1.5rem;
+    padding: 2rem;
+    max-width: 960px;
+    margin: 0 auto;
 }

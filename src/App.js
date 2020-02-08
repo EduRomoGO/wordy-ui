@@ -19,7 +19,7 @@ function App() {
     input: '',
     inputWords: [],
   });
-  // const [definition, setDefinition] = useState('');
+  const [definition, setDefinition] = useState('');
   const [initialWordNumber, setInitialWordNumber] = useState(0);
   const [menuItemSelected, setMenuItemSelected] = useState('words');
 
@@ -65,52 +65,23 @@ function App() {
     const existingInputWordDescriptors = allDescriptors.filter(item => existingInputWords.includes(item.word));
     const orderedInputWordsDescriptors = existingInputWords.map(input => existingInputWordDescriptors.find(n => n.word === input));
 
+    const definit = existingInputWords.length === 1
+      ? getDefinition(existingInputWords[0])
+      : '';
+    setDefinition(definit);
 
     setSearch(search => ({
       ...search,
       inputWords: orderedInputWordsDescriptors,
       input: e.target.value,
     }));
-  }
-
-  // const getDescriptors = () => {
-  //   const allDescriptors = getAllDescriptors();
-
-  //   let descriptors = [allDescriptors];
-
-  //   if (search.length > 0) {
-  //     const allWords = allDescriptors.map(item => item.word);
-
-  //     const inputWords = getInputWords(search)
-  //       .filter(item => allWords.includes(item));
-  //     const filtered = allDescriptors.filter(item => inputWords.includes(item.word));
-  //     const ordered = inputWords.map(input => filtered.find(filteredItem => filteredItem.word === input));
-
-  //     descriptors.push(ordered);
-  //   }
-
-  //   return descriptors;
-  // };
+  };
 
   const getDefinition = word => {
     const allDescriptors = db.wordDescriptors;
     const wordDescriptor = allDescriptors.find(item => item.word === word);
 
     return wordDescriptor ? wordDescriptor.definitions[0].defs[0].def : '';
-  };
-
-  const getDefinitionForInputWords = () => {
-    let definition = '';
-
-    if (isFilterActive()) {
-      const inputWords = getInputWords(search.input);
-      
-      if (inputWords.length === 1) {
-        definition = getDefinition(inputWords[0]);
-      }
-    }
-
-    return definition;
   };
 
   const isFilterActive = () => search.input.length > 0;
@@ -154,7 +125,7 @@ function App() {
         <input onChange={handleInitialWordNumberChange} className='starting-word' value={initialWordNumber} />
       </section>
       {getFilteredWords()}
-      <div>{getDefinitionForInputWords()}</div>
+      <div>{definition}</div>
       <Words onClick={handleWordClick} words={getAllDescriptors().slice(parseInt(initialWordNumber, 10), parseInt(initialWordNumber, 10) + 50)} hidden={isFilterActive()} />
     </Hotkeys>
   };

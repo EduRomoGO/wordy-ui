@@ -15,11 +15,13 @@ import {DebounceInput} from 'react-debounce-input';
 // [ ] Mejorar los estilos del input de busqueda
 
 function App() {
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState({
+    input: '',
+    inputWords: [],
+  });
+  // const [definition, setDefinition] = useState('');
   const [initialWordNumber, setInitialWordNumber] = useState(0);
   const [menuItemSelected, setMenuItemSelected] = useState('words');
-
-  const handleChange = e => setSearch(e.target.value);
 
   const handleClearClick = () => setSearch('');
   const handlePlayClick = () => {
@@ -47,27 +49,48 @@ function App() {
     return inputWords;
   };
 
-  const getDescriptors = () => {
-    const allDescriptors = db.wordDescriptors
+  const getAllDescriptors = () => {
+    return db.wordDescriptors
       .map(item => ({ word: item.word, phonemics: item.phonemics }));
     // .map(item => ({ word: item.word, phonemics: item.phonemics }))
     // .slice(0, 40);
-
-    let descriptors = [allDescriptors];
-
-    if (search.length > 0) {
-      const allWords = allDescriptors.map(item => item.word);
-
-      const inputWords = getInputWords(search)
-        .filter(item => allWords.includes(item));
-      const filtered = allDescriptors.filter(item => inputWords.includes(item.word));
-      const ordered = inputWords.map(input => filtered.find(filteredItem => filteredItem.word === input));
-
-      descriptors.push(ordered);
-    }
-
-    return descriptors;
   };
+
+  const handleChange = e => {
+    const allDescriptors = getAllDescriptors();
+    const allWords = allDescriptors.map(item => item.word);
+
+    const existingInputWords = getInputWords(e.target.value)
+      .filter(item => allWords.includes(item));
+    const existingInputWordDescriptors = allDescriptors.filter(item => existingInputWords.includes(item.word));
+    const orderedInputWordsDescriptors = existingInputWords.map(input => existingInputWordDescriptors.find(n => n.word === input));
+
+
+    setSearch(search => ({
+      ...search,
+      inputWords: orderedInputWordsDescriptors,
+      input: e.target.value,
+    }));
+  }
+
+  // const getDescriptors = () => {
+  //   const allDescriptors = getAllDescriptors();
+
+  //   let descriptors = [allDescriptors];
+
+  //   if (search.length > 0) {
+  //     const allWords = allDescriptors.map(item => item.word);
+
+  //     const inputWords = getInputWords(search)
+  //       .filter(item => allWords.includes(item));
+  //     const filtered = allDescriptors.filter(item => inputWords.includes(item.word));
+  //     const ordered = inputWords.map(input => filtered.find(filteredItem => filteredItem.word === input));
+
+  //     descriptors.push(ordered);
+  //   }
+
+  //   return descriptors;
+  // };
 
   const getDefinition = word => {
     const allDescriptors = db.wordDescriptors;
@@ -80,7 +103,7 @@ function App() {
     let definition = '';
 
     if (isFilterActive()) {
-      const inputWords = getInputWords(search);
+      const inputWords = getInputWords(search.input);
       
       if (inputWords.length === 1) {
         definition = getDefinition(inputWords[0]);
@@ -90,11 +113,11 @@ function App() {
     return definition;
   };
 
-  const isFilterActive = () => search.length > 0;
+  const isFilterActive = () => search.input.length > 0;
 
   const getFilteredWords = () => {
     if (isFilterActive()) {
-      return <Words words={getDescriptors()[1]} isFilterActive={isFilterActive()} />
+      return <Words words={search.inputWords} isFilterActive={isFilterActive()} />
     }
   }
 
@@ -121,7 +144,7 @@ function App() {
       onKeyDown={onKeyDown}
     >
       <div className='search-wrapper'>
-        <DebounceInput debounceTimeout={300} className='search' value={search} onChange={handleChange} placeholder='Command+h to focus' />
+        <DebounceInput debounceTimeout={300} className='search' value={search.input} onChange={handleChange} placeholder='Command+h to focus' />
         <CancelIcon />
       </div>
       <button onClick={handlePlayClick}>Play Search (alt+p)</button>
@@ -132,7 +155,7 @@ function App() {
       </section>
       {getFilteredWords()}
       <div>{getDefinitionForInputWords()}</div>
-      <Words onClick={handleWordClick} words={getDescriptors()[0].slice(parseInt(initialWordNumber, 10), parseInt(initialWordNumber, 10) + 50)} hidden={isFilterActive()} />
+      <Words onClick={handleWordClick} words={getAllDescriptors().slice(parseInt(initialWordNumber, 10), parseInt(initialWordNumber, 10) + 50)} hidden={isFilterActive()} />
     </Hotkeys>
   };
 

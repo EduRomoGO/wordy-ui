@@ -5,10 +5,12 @@ import NavMenu from './components/NavMenu/NavMenu.js';
 import Phonemes from './components/Phonemes/Phonemes.js';
 import db from './utils/db/db.json';
 import Hotkeys from 'react-hot-keys';
+import { ReactComponent as CancelIcon } from './SVG/cancel.svg';
 
 // [ ] Ver como hacer para que se cacheen los audios, ya que seria una web bastante pesada
-// [ ] Limitar el numero de items que se pintan en pantalla a 200 o algo asi, o que se vayan pintando poco a poco
-// [x] Mejorar el aspecto y la usabilidad del texto buscado
+// [ ] Las palabras que no encuentre, en lugar de filtrarlas, marcarlas para pintarlas en rojo 
+// [ ] Crear seccion spell con el abecedario
+// [ ] Si solo hay una palabra buscada, entonces mostrar su definicion
 
 function App() {
   const [search, setSearch] = useState('');
@@ -26,7 +28,7 @@ function App() {
         setTimeout(() => {
           audio.play();
         }, timeout * 1000);
-        
+
         timeout += audio.duration;
       });
     }
@@ -35,8 +37,8 @@ function App() {
   const getDescriptors = () => {
     const allDescriptors = db.wordDescriptors
       .map(item => ({ word: item.word, phonemics: item.phonemics }));
-      // .map(item => ({ word: item.word, phonemics: item.phonemics }))
-      // .slice(0, 40);
+    // .map(item => ({ word: item.word, phonemics: item.phonemics }))
+    // .slice(0, 40);
 
     let descriptors = [allDescriptors];
 
@@ -58,6 +60,21 @@ function App() {
     return descriptors;
   };
 
+  const getDefinition = () => {
+    if (isFilterActive()) {
+      const allDescriptors = db.wordDescriptors;
+      const descriptors = getDescriptors();
+      
+      if (descriptors[1].length === 1) {
+        const word = allDescriptors.find(item => item.word === descriptors[1][0].word);
+
+        return word.definitions[0].defs[0].def;
+      }
+    } else {
+      return '';
+    }
+  };
+
   const isFilterActive = () => search.length > 0;
 
   const getFilteredWords = () => {
@@ -76,21 +93,24 @@ function App() {
     }
 
     keyMap[keyName]();
-  };  
+  };
 
   return (
     <div className="App">
-      <NavMenu 
+      <NavMenu
         listOfItems={['words', 'phonemes']}
         action={(item) => setMenuItemSelected(item)}
         state={menuItemSelected}
       />
-      { menuItemSelected === 'words' ? 
-        <Hotkeys 
-          keyName="Command+h,alt+p" 
+      {menuItemSelected === 'words' ?
+        <Hotkeys
+          keyName="Command+h,alt+p"
           onKeyDown={onKeyDown}
         >
-          <input className='search' value={search} onChange={handleChange} placeholder='Command+h to focus' />
+          <div className='search-wrapper'>
+            <input className='search' value={search} onChange={handleChange} placeholder='Command+h to focus' />
+            <CancelIcon />
+          </div>
           <button onClick={handlePlayClick}>Play Search (alt+p)</button>
           <button onClick={handleClearClick}>Clear Search</button>
           <section className='starting-word-section'>
@@ -98,10 +118,11 @@ function App() {
             <input onChange={handleInitialWordNumberChange} className='starting-word' value={initialWordNumber} />
           </section>
           {getFilteredWords()}
+          <div>{getDefinition()}</div>
           <Words words={getDescriptors()[0].slice(parseInt(initialWordNumber, 10), parseInt(initialWordNumber, 10) + 50)} hidden={isFilterActive()} />
         </Hotkeys>
-        : 
-        <Phonemes/>
+        :
+        <Phonemes />
       }
     </div>
   );

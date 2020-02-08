@@ -1,7 +1,7 @@
 import React from 'react';
 import './Word.css';
 
-const Word = ({short, word, phonemics}) => {
+const Word = ({short, word, phonemics, type}) => {
     const handleOnMouseOver = (e) => {
         document.querySelector(`#${word}`).play();
     };
@@ -16,7 +16,13 @@ const Word = ({short, word, phonemics}) => {
             <div>{phonemics}</div>
         </div>;
     
-    const getClassName = () => short ? 'short' : 'normal';
+    const getClassName = () => {
+        if (type === 'spell') {
+            return 'spell';
+        } else {
+            return short ? 'short' : 'normal';
+        }
+    }
 
     return <div className={getClassName()} onClick={handleOnMouseOver}>
         {getWord()}

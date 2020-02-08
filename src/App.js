@@ -3,6 +3,7 @@ import './App.css';
 import Words from './components/Words/Words.js';
 import NavMenu from './components/NavMenu/NavMenu.js';
 import Phonemes from './components/Phonemes/Phonemes.js';
+import Spell from './components/Spell/Spell.js';
 import db from './utils/db/db.json';
 import Hotkeys from 'react-hot-keys';
 import { ReactComponent as CancelIcon } from './SVG/cancel.svg';
@@ -10,7 +11,7 @@ import { ReactComponent as CancelIcon } from './SVG/cancel.svg';
 // [ ] Ver como hacer para que se cacheen los audios, ya que seria una web bastante pesada
 // [ ] Las palabras que no encuentre, en lugar de filtrarlas, marcarlas para pintarlas en rojo 
 // [ ] Crear seccion spell con el abecedario
-// [ ] Si solo hay una palabra buscada, entonces mostrar su definicion
+// [ ] Mejorar los estilos del input de busqueda
 
 function App() {
   const [search, setSearch] = useState('');
@@ -104,35 +105,46 @@ function App() {
     keyMap[keyName]();
   };
 
+
+  const renderWords = () => {
+    return <Hotkeys
+      keyName="Command+h,alt+p"
+      onKeyDown={onKeyDown}
+    >
+      <div className='search-wrapper'>
+        <input className='search' value={search} onChange={handleChange} placeholder='Command+h to focus' />
+        <CancelIcon />
+      </div>
+      <button onClick={handlePlayClick}>Play Search (alt+p)</button>
+      <button onClick={handleClearClick}>Clear Search</button>
+      <section className='starting-word-section'>
+        <p>Initial word number:</p>
+        <input onChange={handleInitialWordNumberChange} className='starting-word' value={initialWordNumber} />
+      </section>
+      {getFilteredWords()}
+      <div>{getDefinition()}</div>
+      <Words words={getDescriptors()[0].slice(parseInt(initialWordNumber, 10), parseInt(initialWordNumber, 10) + 50)} hidden={isFilterActive()} />
+    </Hotkeys>
+  };
+
+  const renderMenuItem = menuItemSelected => {
+    if (menuItemSelected === 'words') {
+      return renderWords();
+    } else if (menuItemSelected === 'phonemes') {
+      return <Phonemes />;
+    } else if (menuItemSelected === 'spell') {
+      return <Spell />;
+    }
+  };
+
   return (
     <div className="App">
       <NavMenu
-        listOfItems={['words', 'phonemes']}
+        listOfItems={['words', 'phonemes', 'spell']}
         action={(item) => setMenuItemSelected(item)}
         state={menuItemSelected}
       />
-      {menuItemSelected === 'words' ?
-        <Hotkeys
-          keyName="Command+h,alt+p"
-          onKeyDown={onKeyDown}
-        >
-          <div className='search-wrapper'>
-            <input className='search' value={search} onChange={handleChange} placeholder='Command+h to focus' />
-            <CancelIcon />
-          </div>
-          <button onClick={handlePlayClick}>Play Search (alt+p)</button>
-          <button onClick={handleClearClick}>Clear Search</button>
-          <section className='starting-word-section'>
-            <p>Initial word number:</p>
-            <input onChange={handleInitialWordNumberChange} className='starting-word' value={initialWordNumber} />
-          </section>
-          {getFilteredWords()}
-          <div>{getDefinition()}</div>
-          <Words words={getDescriptors()[0].slice(parseInt(initialWordNumber, 10), parseInt(initialWordNumber, 10) + 50)} hidden={isFilterActive()} />
-        </Hotkeys>
-        :
-        <Phonemes />
-      }
+      {renderMenuItem(menuItemSelected)}
     </div>
   );
 }

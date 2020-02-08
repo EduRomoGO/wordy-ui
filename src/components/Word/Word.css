@@ -26,3 +26,14 @@ audio {
     align-items: center;
     border-radius: 3px;
 }
+
+.spell {
+    width: 23%;
+    border: 1px solid lightgrey;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 16px;
+    border-radius: 3px;
+}

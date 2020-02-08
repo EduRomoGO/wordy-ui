@@ -2,11 +2,15 @@ import React from 'react';
 import './Word.css';
 
 const Word = ({short, word, phonemics, type, onClick}) => {
-    const handleOnMouseOver = (e) => {
-        document.querySelector(`#${word}`).play();
-        if (onClick !== undefined) {
-            onClick(word);
-        }
+    const handleOnMouseOver = () => {
+        const audio = document.querySelector(`#${word}`);
+        audio.play();
+
+        setTimeout(() => {
+            if (onClick !== undefined) {
+                onClick(word);
+            }
+        }, audio.duration * 1000);
     };
 
     const getWord = () => short

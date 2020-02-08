@@ -11,7 +11,6 @@ import {DebounceInput} from 'react-debounce-input';
 
 // [ ] Ver como hacer para que se cacheen los audios, ya que seria una web bastante pesada
 // [ ] Las palabras que no encuentre, en lugar de filtrarlas, marcarlas para pintarlas en rojo 
-// [ ] Crear seccion spell con el abecedario
 // [ ] Mejorar los estilos del input de busqueda
 
 function App() {
@@ -105,7 +104,7 @@ function App() {
   };
 
   const handleWordClick = word => {
-    console.log(word);
+    setDefinition(getDefinition(word));
   }
 
 

@@ -34,6 +34,17 @@ function App() {
     }
   }
 
+  const getInputWords = search => {
+    const leaveOnlyLetters = str => str.replace(/[^A-Za-z\s]/g, '');
+
+    const inputWords = leaveOnlyLetters(search)
+      .toLowerCase()
+      .split(' ')
+      .filter(item => !!item);
+
+    return inputWords;
+  };
+
   const getDescriptors = () => {
     const allDescriptors = db.wordDescriptors
       .map(item => ({ word: item.word, phonemics: item.phonemics }));
@@ -44,12 +55,8 @@ function App() {
 
     if (search.length > 0) {
       const allWords = allDescriptors.map(item => item.word);
-      const leaveOnlyLetters = str => str.replace(/[^A-Za-z\s]/g, '');
 
-      const inputWords = leaveOnlyLetters(search)
-        .toLowerCase()
-        .split(' ')
-        .filter(item => !!item)
+      const inputWords = getInputWords(search)
         .filter(item => allWords.includes(item));
       const filtered = allDescriptors.filter(item => inputWords.includes(item.word));
       const ordered = inputWords.map(input => filtered.find(filteredItem => filteredItem.word === input));

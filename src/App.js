@@ -68,18 +68,20 @@ function App() {
   };
 
   const getDefinition = () => {
+    let definition = '';
+
     if (isFilterActive()) {
       const allDescriptors = db.wordDescriptors;
-      const descriptors = getDescriptors();
+      const inputWords = getInputWords(search);
       
-      if (descriptors[1].length === 1) {
-        const word = allDescriptors.find(item => item.word === descriptors[1][0].word);
+      if (inputWords.length === 1) {
+        const word = allDescriptors.find(item => item.word === inputWords[0]);
 
-        return word.definitions[0].defs[0].def;
+        definition = word ? word.definitions[0].defs[0].def : '';
       }
-    } else {
-      return '';
     }
+
+    return definition;
   };
 
   const isFilterActive = () => search.length > 0;

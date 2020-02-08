@@ -4,7 +4,7 @@ import './Word.css';
 const Word = ({short, word, phonemics, type, onClick}) => {
     const handleOnMouseOver = (e) => {
         document.querySelector(`#${word}`).play();
-        if (!short) {
+        if (onClick !== undefined) {
             onClick(word);
         }
     };

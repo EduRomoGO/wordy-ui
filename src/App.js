@@ -7,7 +7,6 @@ import Spell from './components/Spell/Spell.js';
 import db from './utils/db/db.json';
 import Hotkeys from 'react-hot-keys';
 import { ReactComponent as CancelIcon } from './SVG/cancel.svg';
-import { debounce } from "debounce";
 import {DebounceInput} from 'react-debounce-input';
 
 // [ ] Ver como hacer para que se cacheen los audios, ya que seria una web bastante pesada

@@ -18,7 +18,10 @@ function App() {
     input: '',
     inputWords: [],
   });
-  const [definition, setDefinition] = useState('');
+  const [definition, setDefinition] = useState({
+    word: '',
+    definition: '',
+  });
   const [initialWordNumber, setInitialWordNumber] = useState(0);
   const [menuItemSelected, setMenuItemSelected] = useState('words');
 
@@ -64,10 +67,11 @@ function App() {
     const existingInputWordDescriptors = allDescriptors.filter(item => existingInputWords.includes(item.word));
     const orderedInputWordsDescriptors = existingInputWords.map(input => existingInputWordDescriptors.find(n => n.word === input));
 
-    const definit = existingInputWords.length === 1
-      ? getDefinition(existingInputWords[0])
-      : '';
-    setDefinition(definit);
+    if (existingInputWords.length === 1) {
+      setDefinition({word: existingInputWords[0], definition: getDefinition(existingInputWords[0])});
+    } else {
+      setDefinition({word: '', definition: ''});
+    }
 
     setSearch(search => ({
       ...search,
@@ -104,7 +108,11 @@ function App() {
   };
 
   const handleWordClick = word => {
-    setDefinition(getDefinition(word));
+    setDefinition({word, definition: getDefinition(word)});
+  }
+
+  const renderDefinition = ({word, definition}) => {
+    return word && definition ? <div>{word} - {definition}</div> : '';
   }
 
 
@@ -124,7 +132,7 @@ function App() {
         <input onChange={handleInitialWordNumberChange} className='starting-word' value={initialWordNumber} />
       </section>
       {getFilteredWords()}
-      <div>{definition}</div>
+      <div>{renderDefinition(definition)}</div>
       <Words onClick={handleWordClick} words={getAllDescriptors().slice(parseInt(initialWordNumber, 10), parseInt(initialWordNumber, 10) + 50)} hidden={isFilterActive()} />
     </Hotkeys>
   };

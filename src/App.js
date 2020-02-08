@@ -25,7 +25,10 @@ function App() {
   const [initialWordNumber, setInitialWordNumber] = useState(0);
   const [menuItemSelected, setMenuItemSelected] = useState('words');
 
-  const handleClearClick = () => setSearch('');
+  const handleClearClick = () => {
+    setSearch({ input: '', inputWords: [] });
+    setDefinition({word: '', definition: ''});
+  }
   const handlePlayClick = () => {
     if (isFilterActive()) {
       let timeout = 0;

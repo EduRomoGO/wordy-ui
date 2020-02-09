@@ -124,19 +124,21 @@ function App() {
       keyName="Command+h,alt+p"
       onKeyDown={onKeyDown}
     >
-      <div className='search-wrapper'>
-        <DebounceInput debounceTimeout={300} className='search' value={search.input} onChange={handleChange} placeholder='Command+h to focus' />
-        <CancelIcon />
-      </div>
+      <article className='b-search'>
+        <div className='b-search__wrapper'>
+          <label htmlFor='search' hidden>Search</label>
+          <DebounceInput id='search' debounceTimeout={300} className='b-search__input' value={search.input} onChange={handleChange} placeholder='Command+h to focus' />
+          <CancelIcon className='b-search__cancel' tabIndex='0' onKeyPress={handleClearClick} onClick={handleClearClick} />
+        </div>
+      </article>
       <button onClick={handlePlayClick}>Play Search (alt+p)</button>
-      <button onClick={handleClearClick}>Clear Search</button>
+      {getFilteredWords()}
+      {renderDefinition(definition)}
       <section className='starting-word-section'>
         <p>Initial word number:</p>
         <input onChange={handleInitialWordNumberChange} className='starting-word' value={initialWordNumber} />
       </section>
-      {getFilteredWords()}
-      {renderDefinition(definition)}
-      <Words onClick={handleWordClick} words={getAllDescriptors().slice(parseInt(initialWordNumber, 10), parseInt(initialWordNumber, 10) + 50)} hidden={isFilterActive()} />
+      <Words onClick={handleWordClick} words={getAllDescriptors().slice(parseInt(initialWordNumber, 10), parseInt(initialWordNumber, 10) + 3)} hidden={isFilterActive()} />
     </Hotkeys>
   };
 

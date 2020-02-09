@@ -37,14 +37,36 @@
   }
 }
 
-input.search {
-  width: 200px;
-  height: 30px;
-  margin: 23px;
-  font-size: 1.3rem;
+
+
+/* Search */
+
+.b-search {
+  display: flex;
+  justify-content: center;
+  padding: 30px;
+}
+
+.b-search__wrapper {
   border: 1px solid #410677;
   border-radius: 3px;
+  display: flex;
+  padding: 5px;
 }
+
+.b-search__input {
+  border: none;
+  font-size: 1.3rem;
+}
+
+.b-search__cancel {
+  width: 29px;
+  stroke: white;
+  stroke-width: 4px;
+  cursor: pointer;
+}
+
+
 
 .starting-word {
   width: 80px;

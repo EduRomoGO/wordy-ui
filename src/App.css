@@ -20,7 +20,6 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
   color: white;
 }
 
@@ -56,7 +55,7 @@
 
 .b-search__input {
   border: none;
-  font-size: 1.3rem;
+  font-size: 1.3em;
 }
 
 .b-search__cancel {
@@ -70,7 +69,7 @@
 
 .starting-word {
   width: 80px;
-  font-size: 1.1rem;
+  font-size: 1.1em;
   border: none;
   margin-left: 6px;
   font-weight: 500;

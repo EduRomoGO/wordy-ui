@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "18c99fb8ad757e5b035f1b20c35193a9",
+    "revision": "83fcf69a4e1c1871c0ae0b99935afbec",
     "url": "/wordy-ui/index.html"
   },
   {
-    "revision": "ed24a325346d6a7ec2cf",
-    "url": "/wordy-ui/static/css/main.fd195434.chunk.css"
+    "revision": "10f20dbdf5ccda50b0e6",
+    "url": "/wordy-ui/static/css/main.43b5b5db.chunk.css"
   },
   {
     "revision": "5f8fd300631562d0b1ef",
@@ -16,7 +16,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/wordy-ui/static/js/2.fc05de3f.chunk.js.LICENSE"
   },
   {
-    "revision": "ed24a325346d6a7ec2cf",
+    "revision": "10f20dbdf5ccda50b0e6",
     "url": "/wordy-ui/static/js/main.4c428bd3.chunk.js"
   },
   {

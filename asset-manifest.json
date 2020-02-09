@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/wordy-ui/static/css/main.fd195434.chunk.css",
+    "main.css": "/wordy-ui/static/css/main.43b5b5db.chunk.css",
     "main.js": "/wordy-ui/static/js/main.4c428bd3.chunk.js",
     "main.js.map": "/wordy-ui/static/js/main.4c428bd3.chunk.js.map",
     "runtime-main.js": "/wordy-ui/static/js/runtime-main.a5e03777.js",
@@ -8,16 +8,16 @@
     "static/js/2.fc05de3f.chunk.js": "/wordy-ui/static/js/2.fc05de3f.chunk.js",
     "static/js/2.fc05de3f.chunk.js.map": "/wordy-ui/static/js/2.fc05de3f.chunk.js.map",
     "index.html": "/wordy-ui/index.html",
-    "precache-manifest.1475f35a1a8eec1e9b6dc0e26406aff2.js": "/wordy-ui/precache-manifest.1475f35a1a8eec1e9b6dc0e26406aff2.js",
+    "precache-manifest.5adee91ec8c89bb2b7cc627926d0233a.js": "/wordy-ui/precache-manifest.5adee91ec8c89bb2b7cc627926d0233a.js",
     "service-worker.js": "/wordy-ui/service-worker.js",
-    "static/css/main.fd195434.chunk.css.map": "/wordy-ui/static/css/main.fd195434.chunk.css.map",
+    "static/css/main.43b5b5db.chunk.css.map": "/wordy-ui/static/css/main.43b5b5db.chunk.css.map",
     "static/js/2.fc05de3f.chunk.js.LICENSE": "/wordy-ui/static/js/2.fc05de3f.chunk.js.LICENSE",
     "static/media/cancel.444e3404.svg": "/wordy-ui/static/media/cancel.444e3404.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.a5e03777.js",
     "static/js/2.fc05de3f.chunk.js",
-    "static/css/main.fd195434.chunk.css",
+    "static/css/main.43b5b5db.chunk.css",
     "static/js/main.4c428bd3.chunk.js"
   ]
 }

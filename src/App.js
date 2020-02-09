@@ -153,7 +153,7 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div className="App fluid-type">
       <NavMenu
         listOfItems={['words', 'phonemes', 'spell']}
         action={(item) => setMenuItemSelected(item)}

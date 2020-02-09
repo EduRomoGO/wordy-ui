@@ -90,7 +90,7 @@ function App() {
     return wordDescriptor ? wordDescriptor.definitions[0].defs[0].def : '';
   };
 
-  const isFilterActive = () => search.input.length > 0;
+  const isFilterActive = () => search.inputWords.length > 0;
 
   const getFilteredWords = () => {
     if (isFilterActive()) {

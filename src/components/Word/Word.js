@@ -19,10 +19,10 @@ const Word = ({short, word, phonemics, type, onClick}) => {
                 <span className='word-phonemics'> ({phonemics})</span>
             </span>
         : <div>
-            <div>{word}</div>
-            <div>{phonemics}</div>
+            <div className='word-name'>{word}</div>
+            <div className='word-phonemics'>{phonemics}</div>
         </div>;
-    
+
     const getClassName = () => {
         let typeClass = '';
 

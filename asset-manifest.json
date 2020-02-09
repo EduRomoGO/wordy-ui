@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/wordy-ui/static/css/main.154ac3d8.chunk.css",
-    "main.js": "/wordy-ui/static/js/main.7bf538db.chunk.js",
-    "main.js.map": "/wordy-ui/static/js/main.7bf538db.chunk.js.map",
+    "main.css": "/wordy-ui/static/css/main.d98e4e65.chunk.css",
+    "main.js": "/wordy-ui/static/js/main.6f2c0952.chunk.js",
+    "main.js.map": "/wordy-ui/static/js/main.6f2c0952.chunk.js.map",
     "runtime-main.js": "/wordy-ui/static/js/runtime-main.a5e03777.js",
     "runtime-main.js.map": "/wordy-ui/static/js/runtime-main.a5e03777.js.map",
     "static/js/2.61bce719.chunk.js": "/wordy-ui/static/js/2.61bce719.chunk.js",
     "static/js/2.61bce719.chunk.js.map": "/wordy-ui/static/js/2.61bce719.chunk.js.map",
     "index.html": "/wordy-ui/index.html",
-    "precache-manifest.6755b14a0a13967bc59bdcaff1b679e5.js": "/wordy-ui/precache-manifest.6755b14a0a13967bc59bdcaff1b679e5.js",
+    "precache-manifest.954527c5ea14504cb4588231114690be.js": "/wordy-ui/precache-manifest.954527c5ea14504cb4588231114690be.js",
     "service-worker.js": "/wordy-ui/service-worker.js",
-    "static/css/main.154ac3d8.chunk.css.map": "/wordy-ui/static/css/main.154ac3d8.chunk.css.map",
+    "static/css/main.d98e4e65.chunk.css.map": "/wordy-ui/static/css/main.d98e4e65.chunk.css.map",
     "static/js/2.61bce719.chunk.js.LICENSE": "/wordy-ui/static/js/2.61bce719.chunk.js.LICENSE",
     "static/media/cancel.444e3404.svg": "/wordy-ui/static/media/cancel.444e3404.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.a5e03777.js",
     "static/js/2.61bce719.chunk.js",
-    "static/css/main.154ac3d8.chunk.css",
-    "static/js/main.7bf538db.chunk.js"
+    "static/css/main.d98e4e65.chunk.css",
+    "static/js/main.6f2c0952.chunk.js"
   ]
 }

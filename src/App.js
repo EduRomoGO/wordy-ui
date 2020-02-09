@@ -10,7 +10,7 @@ import { ReactComponent as CancelIcon } from './SVG/cancel.svg';
 import {DebounceInput} from 'react-debounce-input';
 
 // [ ] Ver como hacer para que se cacheen los audios, ya que seria una web bastante pesada
-// [ ] Las palabras que no encuentre, en lugar de filtrarlas, marcarlas para pintarlas en rojo 
+// [ ] Las palabras que no encuentre, en lugar de filtrarlas, marcarlas para pintarlas en rojo
 // [ ] Mejorar los estilos del input de busqueda
 
 function App() {
@@ -138,7 +138,7 @@ function App() {
         <p>Initial word number:</p>
         <input onChange={handleInitialWordNumberChange} className='starting-word' value={initialWordNumber} />
       </section>
-      <Words onClick={handleWordClick} words={getAllDescriptors().slice(parseInt(initialWordNumber, 10), parseInt(initialWordNumber, 10) + 3)} hidden={isFilterActive()} />
+      <Words onClick={handleWordClick} words={getAllDescriptors().slice(parseInt(initialWordNumber, 10), parseInt(initialWordNumber, 10) + 50)} hidden={isFilterActive()} />
     </Hotkeys>
   };
 

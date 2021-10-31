@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import './App.css';
-import Words from './components/Words/Words.js';
-import NavMenu from './components/NavMenu/NavMenu.js';
-import Phonemes from './components/Phonemes/Phonemes.js';
-import Spell from './components/Spell/Spell.js';
-import db from './utils/db/db.json';
-import Hotkeys from 'react-hot-keys';
-import { ReactComponent as CancelIcon } from './SVG/cancel.svg';
-import {DebounceInput} from 'react-debounce-input';
+import React, { useState } from "react";
+import "./App.css";
+import Words from "./components/Words/Words.js";
+import NavMenu from "./components/NavMenu/NavMenu.js";
+import Phonemes from "./components/Phonemes/Phonemes.js";
+import Spell from "./components/Spell/Spell.js";
+import db from "./utils/db/db.json";
+import Hotkeys from "react-hot-keys";
+import { ReactComponent as CancelIcon } from "./SVG/cancel.svg";
+import { DebounceInput } from "react-debounce-input";
 
 // [ ] Ver como hacer para que se cacheen los audios, ya que seria una web bastante pesada
 // [ ] Las palabras que no encuentre, en lugar de filtrarlas, marcarlas para pintarlas en rojo
@@ -15,21 +15,21 @@ import {DebounceInput} from 'react-debounce-input';
 
 function App() {
   const [search, setSearch] = useState({
-    input: '',
+    input: "",
     inputWords: [],
   });
   const [definition, setDefinition] = useState({
-    word: '',
-    definition: '',
+    word: "",
+    definition: "",
   });
   const [initialWordNumber, setInitialWordNumber] = useState(0);
-  const [menuItemSelected, setMenuItemSelected] = useState('words');
+  const [menuItemSelected, setMenuItemSelected] = useState("words");
   const [muted, setMuted] = useState(false);
 
   const handleClearClick = () => {
-    setSearch({ input: '', inputWords: [] });
-    setDefinition({word: '', definition: ''});
-  }
+    setSearch({ input: "", inputWords: [] });
+    setDefinition({ word: "", definition: "" });
+  };
 
   // const playAudio = ({audio, timeout}) => new Promise((resolve, reject) => {
   //   setTimeout(() => {
@@ -38,7 +38,9 @@ function App() {
   // });
 
   const handlePlayClick = () => {
-    const audioElements = [...document.querySelector('.words-short').querySelectorAll('audio')];
+    const audioElements = [
+      ...document.querySelector(".words-short").querySelectorAll("audio"),
+    ];
 
     // let userIDs = [1,2,3];
 
@@ -52,7 +54,7 @@ function App() {
     if (isFilterActive()) {
       let timeout = 0;
 
-      audioElements.forEach(audio => {
+      audioElements.forEach((audio) => {
         setTimeout(() => {
           if (!muted) {
             audio.play();
@@ -63,116 +65,158 @@ function App() {
         timeout += audio.duration;
       });
     }
-  }
+  };
 
-  const getInputWords = search => {
-    const leaveOnlyLetters = str => str.replace(/[^A-Za-z\s]/g, '');
+  const getInputWords = (search) => {
+    const leaveOnlyLetters = (str) => str.replace(/[^A-Za-z\s]/g, "");
 
     const inputWords = leaveOnlyLetters(search)
       .toLowerCase()
-      .split(' ')
-      .filter(item => !!item);
+      .split(" ")
+      .filter((item) => !!item);
 
     return inputWords;
   };
 
   const getAllDescriptors = () => {
-    return db.wordDescriptors
-      .map(item => ({ word: item.word, phonemics: item.phonemics }));
+    return db.wordDescriptors.map((item) => ({
+      word: item.word,
+      phonemics: item.phonemics,
+    }));
     // .map(item => ({ word: item.word, phonemics: item.phonemics }))
     // .slice(0, 40);
   };
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     const allDescriptors = getAllDescriptors();
-    const allWords = allDescriptors.map(item => item.word);
+    const allWords = allDescriptors.map((item) => item.word);
 
-    const existingInputWords = getInputWords(e.target.value)
-      .filter(item => allWords.includes(item));
-    const existingInputWordDescriptors = allDescriptors.filter(item => existingInputWords.includes(item.word));
-    const orderedInputWordsDescriptors = existingInputWords.map(input => existingInputWordDescriptors.find(n => n.word === input));
+    const existingInputWords = getInputWords(e.target.value).filter((item) =>
+      allWords.includes(item)
+    );
+    const existingInputWordDescriptors = allDescriptors.filter((item) =>
+      existingInputWords.includes(item.word)
+    );
+    const orderedInputWordsDescriptors = existingInputWords.map((input) =>
+      existingInputWordDescriptors.find((n) => n.word === input)
+    );
 
     if (existingInputWords.length === 1) {
-      setDefinition({word: existingInputWords[0], definition: getDefinition(existingInputWords[0])});
+      setDefinition({
+        word: existingInputWords[0],
+        definition: getDefinition(existingInputWords[0]),
+      });
     } else {
-      setDefinition({word: '', definition: ''});
+      setDefinition({ word: "", definition: "" });
     }
 
-    setSearch(search => ({
+    setSearch((search) => ({
       ...search,
       inputWords: orderedInputWordsDescriptors,
       input: e.target.value,
     }));
   };
 
-  const getDefinition = word => {
+  const getDefinition = (word) => {
     const allDescriptors = db.wordDescriptors;
-    const wordDescriptor = allDescriptors.find(item => item.word === word);
+    const wordDescriptor = allDescriptors.find((item) => item.word === word);
 
-    return wordDescriptor ? wordDescriptor.definitions[0].defs[0].def : '';
+    return wordDescriptor ? wordDescriptor.definitions[0].defs[0].def : "";
   };
 
   const isFilterActive = () => search.inputWords.length > 0;
 
   const getFilteredWords = () => {
     if (isFilterActive()) {
-      return <Words words={search.inputWords} isFilterActive={isFilterActive()} />
+      return (
+        <Words words={search.inputWords} isFilterActive={isFilterActive()} />
+      );
     }
-  }
+  };
 
-  const handleInitialWordNumberChange = (e) => setInitialWordNumber(e.target.value);
+  const handleInitialWordNumberChange = (e) =>
+    setInitialWordNumber(e.target.value);
 
   const onKeyDown = (keyName) => {
     const keyMap = {
       // h for hunt (hunt a word, fun pun)
-      'Command+h': () => document.querySelector('input').focus(),
-      'alt+p': () => handlePlayClick(),
-    }
+      "Command+h": () => document.querySelector("input").focus(),
+      "alt+p": () => handlePlayClick(),
+    };
 
     keyMap[keyName]();
   };
 
-  const handleWordClick = word => {
-    setDefinition({word, definition: getDefinition(word)});
-  }
-
-  const renderDefinition = ({word, definition}) => {
-    return word && definition ? <div>{word} - {definition}</div> : '';
-  }
-
-  const handleMuteButtonClick = () => setMuted(muted => !muted);
-
-
-  const renderWords = () => {
-    return <Hotkeys
-      keyName="Command+h,alt+p"
-      onKeyDown={onKeyDown}
-    >
-      <article className='b-search'>
-        <div className='b-search__wrapper'>
-          <label htmlFor='search' hidden>Search</label>
-          <DebounceInput id='search' debounceTimeout={300} className='b-search__input' value={search.input} onChange={handleChange} placeholder='Command+h to focus' />
-          <CancelIcon className='b-search__cancel' tabIndex='0' onKeyPress={handleClearClick} onClick={handleClearClick} />
-        </div>
-      </article>
-      <button onClick={handlePlayClick}>Play Search (alt+p)</button>
-      <button onClick={handleMuteButtonClick}>mute</button>
-      {getFilteredWords()}
-      {renderDefinition(definition)}
-      <section className='starting-word-section'>
-        <p>Initial word number:</p>
-        <input onChange={handleInitialWordNumberChange} className='starting-word' value={initialWordNumber} />
-      </section>
-      <Words onClick={handleWordClick} words={getAllDescriptors().slice(parseInt(initialWordNumber, 10), parseInt(initialWordNumber, 10) + 20)} hidden={isFilterActive()} />
-    </Hotkeys>
+  const handleWordClick = (word) => {
+    setDefinition({ word, definition: getDefinition(word) });
   };
 
-  const renderMenuItem = menuItemSelected => {
-    if (menuItemSelected === 'words') {
+  const renderDefinition = ({ word, definition }) => {
+    return word && definition ? (
+      <div>
+        {word} - {definition}
+      </div>
+    ) : (
+      ""
+    );
+  };
+
+  const handleMuteButtonClick = () => setMuted((muted) => !muted);
+
+  const renderWords = () => {
+    return (
+      <Hotkeys keyName="Command+h,alt+p" onKeyDown={onKeyDown}>
+        <article className="b-search">
+          <div className="b-search__wrapper">
+            <label htmlFor="search" hidden>
+              Search
+            </label>
+            <DebounceInput
+              id="search"
+              debounceTimeout={300}
+              className="b-search__input"
+              value={search.input}
+              onChange={handleChange}
+              placeholder="Command+h to focus"
+            />
+            <CancelIcon
+              className="b-search__cancel"
+              tabIndex="0"
+              onKeyPress={handleClearClick}
+              onClick={handleClearClick}
+            />
+          </div>
+        </article>
+        <button onClick={handlePlayClick}>Play Search (alt+p)</button>
+        <button onClick={handleMuteButtonClick}>mute</button>
+        {getFilteredWords()}
+        {renderDefinition(definition)}
+        <section className="starting-word-section">
+          <p>Initial word number:</p>
+          <input
+            onChange={handleInitialWordNumberChange}
+            className="starting-word"
+            value={initialWordNumber}
+          />
+        </section>
+        <Words
+          onClick={handleWordClick}
+          words={getAllDescriptors().slice(
+            parseInt(initialWordNumber, 10),
+            parseInt(initialWordNumber, 10) + 20
+          )}
+          hidden={isFilterActive()}
+        />
+      </Hotkeys>
+    );
+  };
+
+  const renderMenuItem = (menuItemSelected) => {
+    if (menuItemSelected === "words") {
       return renderWords();
-    } else if (menuItemSelected === 'phonemes') {
+    } else if (menuItemSelected === "phonemes") {
       return <Phonemes />;
-    } else if (menuItemSelected === 'spell') {
+    } else if (menuItemSelected === "spell") {
       return <Spell />;
     }
   };
@@ -180,7 +224,7 @@ function App() {
   return (
     <div className="App fluid-type">
       <NavMenu
-        listOfItems={['words', 'phonemes', 'spell']}
+        listOfItems={["words", "phonemes", "spell"]}
         action={(item) => setMenuItemSelected(item)}
         state={menuItemSelected}
       />

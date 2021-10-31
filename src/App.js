@@ -9,10 +9,6 @@ import Hotkeys from "react-hot-keys";
 import { ReactComponent as CancelIcon } from "./SVG/cancel.svg";
 import { DebounceInput } from "react-debounce-input";
 
-// [ ] Ver como hacer para que se cacheen los audios, ya que seria una web bastante pesada
-// [ ] Las palabras que no encuentre, en lugar de filtrarlas, marcarlas para pintarlas en rojo
-// [ ] Mejorar los estilos del input de busqueda
-
 function App() {
   const [search, setSearch] = useState({
     input: "",
@@ -139,8 +135,8 @@ function App() {
 
   const onKeyDown = (keyName) => {
     const keyMap = {
-      // h for hunt (hunt a word, fun pun)
-      "Command+h": () => document.querySelector("input").focus(),
+      // j cause it is free
+      "Command+j": () => document.querySelector("input").focus(),
       "alt+p": () => handlePlayClick(),
     };
 
@@ -165,7 +161,7 @@ function App() {
 
   const renderWords = () => {
     return (
-      <Hotkeys keyName="Command+h,alt+p" onKeyDown={onKeyDown}>
+      <Hotkeys keyName="Command+j,alt+p" onKeyDown={onKeyDown}>
         <article className="b-search">
           <div className="b-search__wrapper">
             <label htmlFor="search" hidden>
@@ -177,7 +173,7 @@ function App() {
               className="b-search__input"
               value={search.input}
               onChange={handleChange}
-              placeholder="Command+h to focus"
+              placeholder="Command+j to focus"
             />
             <CancelIcon
               className="b-search__cancel"

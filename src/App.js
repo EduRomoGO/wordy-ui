@@ -24,20 +24,42 @@ function App() {
   });
   const [initialWordNumber, setInitialWordNumber] = useState(0);
   const [menuItemSelected, setMenuItemSelected] = useState('words');
+  const [muted, setMuted] = useState(false);
 
   const handleClearClick = () => {
     setSearch({ input: '', inputWords: [] });
     setDefinition({word: '', definition: ''});
   }
+
+  // const playAudio = ({audio, timeout}) => new Promise((resolve, reject) => {
+  //   setTimeout(() => {
+  //     audio.play();
+  //   }, timeout * 1000);
+  // });
+
   const handlePlayClick = () => {
+    const audioElements = [...document.querySelector('.words-short').querySelectorAll('audio')];
+
+    // let userIDs = [1,2,3];
+
+    // audioElements.reduce( async (previousPromise, next) => {
+    //   await previousPromise;
+
+    //   return next.play();
+    // }, Promise.resolve());
+
+    // audioElements[0].play().then(() => console.log('cool'));
     if (isFilterActive()) {
       let timeout = 0;
 
-      [...document.querySelector('.words-short').querySelectorAll('audio')].forEach(audio => {
+      audioElements.forEach(audio => {
         setTimeout(() => {
-          audio.play();
+          if (!muted) {
+            audio.play();
+          }
         }, timeout * 1000);
 
+        console.log(audio.duration);
         timeout += audio.duration;
       });
     }
@@ -118,6 +140,8 @@ function App() {
     return word && definition ? <div>{word} - {definition}</div> : '';
   }
 
+  const handleMuteButtonClick = () => setMuted(muted => !muted);
+
 
   const renderWords = () => {
     return <Hotkeys
@@ -132,13 +156,14 @@ function App() {
         </div>
       </article>
       <button onClick={handlePlayClick}>Play Search (alt+p)</button>
+      <button onClick={handleMuteButtonClick}>mute</button>
       {getFilteredWords()}
       {renderDefinition(definition)}
       <section className='starting-word-section'>
         <p>Initial word number:</p>
         <input onChange={handleInitialWordNumberChange} className='starting-word' value={initialWordNumber} />
       </section>
-      <Words onClick={handleWordClick} words={getAllDescriptors().slice(parseInt(initialWordNumber, 10), parseInt(initialWordNumber, 10) + 50)} hidden={isFilterActive()} />
+      <Words onClick={handleWordClick} words={getAllDescriptors().slice(parseInt(initialWordNumber, 10), parseInt(initialWordNumber, 10) + 20)} hidden={isFilterActive()} />
     </Hotkeys>
   };
 

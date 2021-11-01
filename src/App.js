@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./App.css";
 import NavMenu from "./components/NavMenu/NavMenu.js";
 import Phonemes from "./components/Phonemes/Phonemes.js";
@@ -7,16 +7,10 @@ import { Words } from "./components/pages/words/Words";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
-  const [menuItemSelected, setMenuItemSelected] = useState("words");
-
   return (
     <Router>
       <div className="App fluid-type">
-        <NavMenu
-          listOfItems={["words", "phonemes", "spell"]}
-          action={(item) => setMenuItemSelected(item)}
-          state={menuItemSelected}
-        />
+        <NavMenu listOfItems={["words", "phonemes", "spell"]} />
 
         <Switch>
           <Route path="/words">

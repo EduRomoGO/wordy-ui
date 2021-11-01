@@ -1,24 +1,22 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "./NavMenu.css";
 
-function NavMenu({ listOfItems, action, state }) {
-  console.log(listOfItems);
-
+function NavMenu({ listOfItems }) {
   return (
     <nav>
       <ul className="navList">
         {listOfItems.map((item) => (
           <li key={item}>
-            <Link
+            <NavLink
               to={`/${item}`}
-              className={`link ${state === item ? "active" : ""} `}
-              onClick={(e) => {
-                action(item);
+              className="link"
+              activeStyle={{
+                color: "#000",
               }}
             >
               {item}
-            </Link>
+            </NavLink>
           </li>
         ))}
       </ul>

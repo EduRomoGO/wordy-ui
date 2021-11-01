@@ -3,7 +3,7 @@ import Word from "../Word/Word.js";
 import "./WordsList.css";
 import cuid from "cuid";
 
-const WordsList = ({ words, isFilterActive, onClick }) => {
+const WordsList = ({ words, isFilterActive = false, onClick }) => {
   const getClassName = () => (isFilterActive ? "short" : "normal");
   const getKey = () => cuid();
 

@@ -130,10 +130,12 @@ const Words = () => {
   return (
     <Hotkeys keyName="Command+j,alt+p" onKeyDown={onKeyDown}>
       <SearchWordsForm onChange={handleSearchInputChange} />
-      <Phrase
-        inputWords={search.inputWords}
-        handlePlayClick={handlePlayClick}
-      />
+      {isFilterActive() && (
+        <Phrase
+          inputWords={search.inputWords}
+          handlePlayClick={(muted) => handlePlayClick(isFilterActive(), muted)}
+        />
+      )}
 
       {renderDefinition(definition)}
       <section className="starting-word-section">

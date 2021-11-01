@@ -1,33 +1,29 @@
-import React from 'react'
-import './NavMenu.css';
+import React from "react";
+import { Link } from "react-router-dom";
+import "./NavMenu.css";
 
-const NavMenu = ({
-  listOfItems,
-  action,
-  state
-}) => (
-  <nav>
-    <ul 
-      className="navList"
-    >
-      {listOfItems.map((item) => (
-        <li
-          key={item}
-        >
-          <a
-            className={`link ${state === item ? 'active' : ''} `}
-            onClick={(e) => {
-              e.preventDefault()
-              action(item)
-            }}
-            href={item}
-          >
-            {item}
-          </a>
-        </li>
-      ))}
-    </ul>
-  </nav>
-)
+function NavMenu({ listOfItems, action, state }) {
+  console.log(listOfItems);
 
-export default NavMenu
+  return (
+    <nav>
+      <ul className="navList">
+        {listOfItems.map((item) => (
+          <li key={item}>
+            <Link
+              to={`/${item}`}
+              className={`link ${state === item ? "active" : ""} `}
+              onClick={(e) => {
+                action(item);
+              }}
+            >
+              {item}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  );
+}
+
+export default NavMenu;

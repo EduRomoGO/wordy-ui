@@ -8,23 +8,31 @@ import { useDatabase } from "../../../hooks/useDatabase";
 import SearchWordsForm from "../../search-words-form/SearchWordsForm";
 import Phrase from "../../phrase/Phrase";
 
+let timeoutList = [];
+
 const handlePlayClick = ({ isFilterActive, muted = false, wordsRef }) => {
   if (isFilterActive) {
     const audioElements = [...wordsRef.current.querySelectorAll("audio")];
 
+    const wordsSeparation = 50;
     let timeout = 0;
 
     audioElements.forEach((audio) => {
-      setTimeout(() => {
-        if (!muted) {
-          audio.play();
-        }
-      }, timeout * 1000);
+      timeoutList.push(
+        setTimeout(() => {
+          if (!muted) {
+            audio.play();
+          }
+        }, timeout * 1000 + wordsSeparation)
+      );
 
-      console.log(audio.duration);
       timeout += audio.duration;
     });
   }
+};
+
+const handleStopClick = () => {
+  timeoutList.forEach(clearTimeout);
 };
 
 const WordInfo = ({ wordInfo: { word, definition } }) => {
@@ -100,13 +108,13 @@ const Words = () => {
       {isFilterActive() && (
         <Phrase
           inputWords={searchInputWords}
-          handlePlayClick={(muted, wordsRef) =>
+          handlePlayClick={(wordsRef) =>
             handlePlayClick({
               isFilterActive: isFilterActive(),
-              muted,
               wordsRef,
             })
           }
+          handleStopClick={handleStopClick}
         />
       )}
 

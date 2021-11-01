@@ -2,22 +2,31 @@ import React, { useRef } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 import WordsList from "../WordsList/WordsList";
 
-let timeoutList = [];
-
 function Phrase({ inputWords }) {
   const wordsRef = useRef();
+  let { current: timeoutListRef } = useRef([]);
   useHotkeys("Command+u", () => {
-    handlePlayClick({ isFilterActive: true, wordsRef });
+    if (timeoutListRef.length > 0) {
+      clearTimeoutList();
+    } else {
+      handlePlayClick({ isFilterActive: true, wordsRef });
+    }
   });
 
+  const clearTimeoutList = () => {
+    timeoutListRef.forEach(clearTimeout);
+    timeoutListRef = [];
+  };
+
   const handlePlayClick = ({ wordsRef }) => {
+    clearTimeoutList();
     const audioElements = [...wordsRef.current.querySelectorAll("audio")];
 
     const wordsSeparation = 50;
     let timeout = 0;
 
     audioElements.forEach((audio) => {
-      timeoutList.push(
+      timeoutListRef.push(
         setTimeout(() => {
           audio.play();
         }, timeout * 1000 + wordsSeparation)
@@ -28,7 +37,7 @@ function Phrase({ inputWords }) {
   };
 
   const handleStopButtonClick = () => {
-    timeoutList.forEach(clearTimeout);
+    clearTimeoutList();
   };
 
   return (

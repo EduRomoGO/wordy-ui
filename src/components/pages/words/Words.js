@@ -131,7 +131,6 @@ const Words = () => {
     <Hotkeys keyName="Command+j,alt+p" onKeyDown={onKeyDown}>
       <SearchWordsForm onChange={handleSearchInputChange} />
       <Phrase
-        isFilterActive={isFilterActive()}
         inputWords={search.inputWords}
         handlePlayClick={handlePlayClick}
       />

@@ -14,6 +14,25 @@ const NavList = styled.ul`
   font-weight: 700;
 `;
 
+const NavItem = ({ item }) => {
+  return (
+    <li>
+      <NavLink
+        css={css`
+          color: #ababab;
+          text-decoration: none;
+        `}
+        to={`/${item}`}
+        activeStyle={{
+          color: "#000",
+        }}
+      >
+        {item}
+      </NavLink>
+    </li>
+  );
+};
+
 function NavMenu({ listOfItems }) {
   return (
     <nav
@@ -21,23 +40,10 @@ function NavMenu({ listOfItems }) {
         border-bottom: 1px solid #ababab;
       `}
     >
-      <NavList className="navList">
-        {listOfItems.map((item) => (
-          <li key={item}>
-            <NavLink
-              to={`/${item}`}
-              css={css`
-                color: #ababab;
-                text-decoration: none;
-              `}
-              activeStyle={{
-                color: "#000",
-              }}
-            >
-              {item}
-            </NavLink>
-          </li>
-        ))}
+      <NavList>
+        <NavItem item="words" />
+        <NavItem item="phonemes" />
+        <NavItem item="spell" />
       </NavList>
     </nav>
   );

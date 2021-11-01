@@ -10,7 +10,7 @@ function App() {
   return (
     <Router>
       <div className="App fluid-type">
-        <NavMenu listOfItems={["words", "phonemes", "spell"]} />
+        <NavMenu />
 
         <Switch>
           <Route path="/words">

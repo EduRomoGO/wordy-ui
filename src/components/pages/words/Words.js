@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import WordsList from "../../WordsList/WordsList";
 import Hotkeys from "react-hot-keys";
-import { ReactComponent as CancelIcon } from "../../../SVG/cancel.svg";
-import { DebounceInput } from "react-debounce-input";
 import { useDatabase } from "../../../hooks/useDatabase";
+import SearchWordsForm from "../../search-words-form/SearchWordsForm";
 
 const Words = () => {
   const { getAllDescriptors, getDefinition } = useDatabase();
@@ -18,15 +17,11 @@ const Words = () => {
   const [initialWordNumber, setInitialWordNumber] = useState(0);
   const [muted, setMuted] = useState(false);
 
+  const isFilterActive = () => search.inputWords.length > 0;
   const words = getAllDescriptors()?.slice(
     parseInt(initialWordNumber, 10),
     parseInt(initialWordNumber, 10) + 20
   );
-
-  const handleClearClick = () => {
-    setSearch({ input: "", inputWords: [] });
-    setDefinition({ word: "", definition: "" });
-  };
 
   // const playAudio = ({audio, timeout}) => new Promise((resolve, reject) => {
   //   setTimeout(() => {
@@ -75,11 +70,11 @@ const Words = () => {
     return inputWords;
   };
 
-  const handleSearchInputChange = (e) => {
+  const handleSearchInputChange = (input) => {
     const allDescriptors = getAllDescriptors();
     const allWords = allDescriptors.map((item) => item.word);
 
-    const existingInputWords = getInputWords(e.target.value).filter((item) =>
+    const existingInputWords = getInputWords(input).filter((item) =>
       allWords.includes(item)
     );
     const existingInputWordDescriptors = allDescriptors.filter((item) =>
@@ -100,12 +95,10 @@ const Words = () => {
 
     setSearch((search) => ({
       ...search,
-      inputWords: orderedInputWordsDescriptors,
-      input: e.target.value,
+      inputWords: input.length > 0 ? orderedInputWordsDescriptors : [],
+      input,
     }));
   };
-
-  const isFilterActive = () => search.inputWords.length > 0;
 
   const getFilteredWords = () => {
     if (isFilterActive()) {
@@ -149,27 +142,7 @@ const Words = () => {
 
   return (
     <Hotkeys keyName="Command+j,alt+p" onKeyDown={onKeyDown}>
-      <article className="b-search">
-        <div className="b-search__wrapper">
-          <label htmlFor="search" hidden>
-            Search
-          </label>
-          <DebounceInput
-            id="search"
-            debounceTimeout={300}
-            className="b-search__input"
-            value={search.input}
-            onChange={handleSearchInputChange}
-            placeholder="Command+j to focus"
-          />
-          <CancelIcon
-            className="b-search__cancel"
-            tabIndex="0"
-            onKeyPress={handleClearClick}
-            onClick={handleClearClick}
-          />
-        </div>
-      </article>
+      <SearchWordsForm onChange={handleSearchInputChange} />
       <button onClick={handlePlayClick}>Play Search (alt+p)</button>
       <button onClick={handleMuteButtonClick}>mute</button>
       {getFilteredWords()}

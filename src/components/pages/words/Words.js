@@ -118,7 +118,7 @@ const Words = () => {
               value={initialWordNumber}
             />
           </section>
-          <WordsList onClick={handleWordClick} words={words} />
+          <WordsList onClick={handleWordClick} display="grid" words={words} />
         </div>
       )}
     </section>

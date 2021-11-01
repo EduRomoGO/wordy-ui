@@ -12,7 +12,7 @@ function Phrase({ inputWords, handlePlayClick }) {
         Play Search (alt+p)
       </button>
       <button onClick={handleMuteButtonClick}>mute</button>
-      <WordsList words={inputWords} isFilterActive={true} />
+      <WordsList words={inputWords} display="inline" />
     </section>
   );
 }

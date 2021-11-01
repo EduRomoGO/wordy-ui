@@ -35,6 +35,16 @@ const handlePlayClick = (isFilterActive, muted = false) => {
   }
 };
 
+const WordInfo = ({ def: { word, definition } }) => {
+  return word && definition ? (
+    <div>
+      {word} - {definition}
+    </div>
+  ) : (
+    ""
+  );
+};
+
 const Words = () => {
   const { getAllDescriptors, getDefinition } = useDatabase();
   const [search, setSearch] = useState({
@@ -117,16 +127,6 @@ const Words = () => {
     setDefinition({ word, definition: getDefinition(word) });
   };
 
-  const renderDefinition = ({ word, definition }) => {
-    return word && definition ? (
-      <div>
-        {word} - {definition}
-      </div>
-    ) : (
-      ""
-    );
-  };
-
   return (
     <Hotkeys keyName="Command+j,alt+p" onKeyDown={onKeyDown}>
       <SearchWordsForm onChange={handleSearchInputChange} />
@@ -137,7 +137,7 @@ const Words = () => {
         />
       )}
 
-      {renderDefinition(definition)}
+      <WordInfo def={definition} />
 
       {words && !isFilterActive() && (
         <div>

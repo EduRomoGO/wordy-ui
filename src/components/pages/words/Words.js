@@ -8,12 +8,10 @@ import { useDatabase } from "../../../hooks/useDatabase";
 import SearchWordsForm from "../../search-words-form/SearchWordsForm";
 import Phrase from "../../phrase/Phrase";
 
-const handlePlayClick = (isFilterActive, muted = false) => {
-  const audioElements = [
-    ...document.querySelector(".words-short").querySelectorAll("audio"),
-  ];
-
+const handlePlayClick = ({ isFilterActive, muted = false, wordsRef }) => {
   if (isFilterActive) {
+    const audioElements = [...wordsRef.current.querySelectorAll("audio")];
+
     let timeout = 0;
 
     audioElements.forEach((audio) => {
@@ -49,7 +47,7 @@ const Words = () => {
   const [initialWordNumber, setInitialWordNumber] = useState(0);
 
   useHotkeys("Command+u", () => {
-    handlePlayClick(isFilterActive);
+    handlePlayClick({ isFilterActive: isFilterActive() });
   });
   const isFilterActive = () => searchInputWords.length > 0;
 
@@ -102,7 +100,13 @@ const Words = () => {
       {isFilterActive() && (
         <Phrase
           inputWords={searchInputWords}
-          handlePlayClick={(muted) => handlePlayClick(isFilterActive(), muted)}
+          handlePlayClick={(muted, wordsRef) =>
+            handlePlayClick({
+              isFilterActive: isFilterActive(),
+              muted,
+              wordsRef,
+            })
+          }
         />
       )}
 

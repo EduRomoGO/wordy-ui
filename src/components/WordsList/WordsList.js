@@ -2,6 +2,7 @@
 import { jsx, css } from "@emotion/react";
 import Word from "../Word/Word.js";
 import cuid from "cuid";
+import { forwardRef } from "react";
 
 const getStyle = (display) => {
   const inline = css`
@@ -26,11 +27,11 @@ const getStyle = (display) => {
   return displayOptions[display];
 };
 
-const WordsList = ({ words, display, onClick }) => {
+const WordsList = ({ words, display, onClick }, wordsRef) => {
   const getKey = () => cuid();
 
   return (
-    <div css={getStyle(display)}>
+    <div css={getStyle(display)} ref={wordsRef}>
       {words.map(({ word, phonemics }, id) => (
         <Word
           onClick={onClick}
@@ -44,4 +45,4 @@ const WordsList = ({ words, display, onClick }) => {
   );
 };
 
-export default WordsList;
+export default forwardRef(WordsList);

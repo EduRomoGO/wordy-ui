@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import "./App.css";
-import Words from "./components/Words/Words.js";
+import WordsList from "./components/WordsList/WordsList.js";
 import NavMenu from "./components/NavMenu/NavMenu.js";
 import Phonemes from "./components/Phonemes/Phonemes.js";
 import Spell from "./components/Spell/Spell.js";
-// import db from "./utils/db/db.json";
 import Hotkeys from "react-hot-keys";
 import { ReactComponent as CancelIcon } from "./SVG/cancel.svg";
 import { DebounceInput } from "react-debounce-input";
@@ -116,7 +115,10 @@ function App() {
   const getFilteredWords = () => {
     if (isFilterActive()) {
       return (
-        <Words words={search.inputWords} isFilterActive={isFilterActive()} />
+        <WordsList
+          words={search.inputWords}
+          isFilterActive={isFilterActive()}
+        />
       );
     }
   };
@@ -187,7 +189,7 @@ function App() {
           />
         </section>
         {words && (
-          <Words
+          <WordsList
             onClick={handleWordClick}
             words={words}
             hidden={isFilterActive()}

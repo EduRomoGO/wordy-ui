@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+// import { useState, useEffect } from "react";
+import { useDatabaseContext } from "../components/providers/DatabaseProvider";
 
 const getAllDescriptorsImpl = (db) => {
   return db?.wordDescriptors.map((item) => ({
@@ -17,22 +18,8 @@ const getDefinitionImpl = (db, word) => {
 };
 
 function useDatabase() {
-  const [db, setDb] = useState();
-
-  useEffect(() => {
-    const loadDatabase = async () => {
-      try {
-        const data = await import(
-          /* webpackPrefetch: true */ "../utils/db/db.json"
-        );
-        setDb(data);
-      } catch (error) {
-        throw new Error(`Error loading database ${error}`);
-      }
-    };
-
-    loadDatabase();
-  }, []);
+  const db = useDatabaseContext();
+  // const [db, setDb] = useState();
 
   return {
     getAllDescriptors: () => getAllDescriptorsImpl(db),

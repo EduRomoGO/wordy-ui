@@ -4,12 +4,14 @@ import Words from "./components/Words/Words.js";
 import NavMenu from "./components/NavMenu/NavMenu.js";
 import Phonemes from "./components/Phonemes/Phonemes.js";
 import Spell from "./components/Spell/Spell.js";
-import db from "./utils/db/db.json";
+// import db from "./utils/db/db.json";
 import Hotkeys from "react-hot-keys";
 import { ReactComponent as CancelIcon } from "./SVG/cancel.svg";
 import { DebounceInput } from "react-debounce-input";
+import { useDatabase } from "./hooks/useDatabase";
 
 function App() {
+  const { getAllDescriptors, getDefinition } = useDatabase();
   const [search, setSearch] = useState({
     input: "",
     inputWords: [],
@@ -21,6 +23,11 @@ function App() {
   const [initialWordNumber, setInitialWordNumber] = useState(0);
   const [menuItemSelected, setMenuItemSelected] = useState("words");
   const [muted, setMuted] = useState(false);
+
+  const words = getAllDescriptors()?.slice(
+    parseInt(initialWordNumber, 10),
+    parseInt(initialWordNumber, 10) + 20
+  );
 
   const handleClearClick = () => {
     setSearch({ input: "", inputWords: [] });
@@ -74,16 +81,7 @@ function App() {
     return inputWords;
   };
 
-  const getAllDescriptors = () => {
-    return db.wordDescriptors.map((item) => ({
-      word: item.word,
-      phonemics: item.phonemics,
-    }));
-    // .map(item => ({ word: item.word, phonemics: item.phonemics }))
-    // .slice(0, 40);
-  };
-
-  const handleChange = (e) => {
+  const handleSearchInputChange = (e) => {
     const allDescriptors = getAllDescriptors();
     const allWords = allDescriptors.map((item) => item.word);
 
@@ -111,13 +109,6 @@ function App() {
       inputWords: orderedInputWordsDescriptors,
       input: e.target.value,
     }));
-  };
-
-  const getDefinition = (word) => {
-    const allDescriptors = db.wordDescriptors;
-    const wordDescriptor = allDescriptors.find((item) => item.word === word);
-
-    return wordDescriptor ? wordDescriptor.definitions[0].defs[0].def : "";
   };
 
   const isFilterActive = () => search.inputWords.length > 0;
@@ -172,7 +163,7 @@ function App() {
               debounceTimeout={300}
               className="b-search__input"
               value={search.input}
-              onChange={handleChange}
+              onChange={handleSearchInputChange}
               placeholder="Command+j to focus"
             />
             <CancelIcon
@@ -195,14 +186,13 @@ function App() {
             value={initialWordNumber}
           />
         </section>
-        <Words
-          onClick={handleWordClick}
-          words={getAllDescriptors().slice(
-            parseInt(initialWordNumber, 10),
-            parseInt(initialWordNumber, 10) + 20
-          )}
-          hidden={isFilterActive()}
-        />
+        {words && (
+          <Words
+            onClick={handleWordClick}
+            words={words}
+            hidden={isFilterActive()}
+          />
+        )}
       </Hotkeys>
     );
   };

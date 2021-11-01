@@ -10,15 +10,6 @@ const handlePlayClick = (isFilterActive, muted = false) => {
     ...document.querySelector(".words-short").querySelectorAll("audio"),
   ];
 
-  // let userIDs = [1,2,3];
-
-  // audioElements.reduce( async (previousPromise, next) => {
-  //   await previousPromise;
-
-  //   return next.play();
-  // }, Promise.resolve());
-
-  // audioElements[0].play().then(() => console.log('cool'));
   if (isFilterActive) {
     let timeout = 0;
 
@@ -48,26 +39,47 @@ const WordInfo = ({ def: { word, definition } }) => {
 const Words = () => {
   const { getAllDescriptors, getDefinition } = useDatabase();
   const [search, setSearch] = useState({
-    input: "",
     inputWords: [],
   });
   const [definition, setDefinition] = useState({
     word: "",
     definition: "",
   });
+  const [selectedWord, setSelectedWord] = useState();
   const [initialWordNumber, setInitialWordNumber] = useState(0);
 
+  const allDescriptors = getAllDescriptors();
+
+  const getRefinition = (inputWords, selectedWord) => {
+    if (inputWords.length === 1) {
+      const word = inputWords[0].word;
+      return {
+        word,
+        definition: getDefinition(word),
+      };
+    } else if (selectedWord) {
+      const word = selectedWord;
+      return {
+        word,
+        definition: getDefinition(word),
+      };
+    } else {
+      return {
+        word: "",
+        definition: "",
+      };
+    }
+  };
+
+  const refinition = getRefinition(search.inputWords, selectedWord);
+  console.log("refinition");
+  console.log(refinition);
+
   const isFilterActive = () => search.inputWords.length > 0;
-  const words = getAllDescriptors()?.slice(
+  const words = allDescriptors?.slice(
     parseInt(initialWordNumber, 10),
     parseInt(initialWordNumber, 10) + 20
   );
-
-  // const playAudio = ({audio, timeout}) => new Promise((resolve, reject) => {
-  //   setTimeout(() => {
-  //     audio.play();
-  //   }, timeout * 1000);
-  // });
 
   const getInputWords = (search) => {
     const leaveOnlyLetters = (str) => str.replace(/[^A-Za-z\s]/g, "");
@@ -81,7 +93,6 @@ const Words = () => {
   };
 
   const handleSearchInputChange = (input) => {
-    const allDescriptors = getAllDescriptors();
     const allWords = allDescriptors.map((item) => item.word);
 
     const existingInputWords = getInputWords(input).filter((item) =>
@@ -106,7 +117,6 @@ const Words = () => {
     setSearch((search) => ({
       ...search,
       inputWords: input.length > 0 ? orderedInputWordsDescriptors : [],
-      input,
     }));
   };
 
@@ -115,7 +125,6 @@ const Words = () => {
 
   const onKeyDown = (keyName) => {
     const keyMap = {
-      // j cause it is free
       "Command+j": () => document.querySelector("input").focus(),
       "alt+p": () => handlePlayClick(isFilterActive()),
     };
@@ -125,6 +134,7 @@ const Words = () => {
 
   const handleWordClick = (word) => {
     setDefinition({ word, definition: getDefinition(word) });
+    setSelectedWord(word);
   };
 
   return (

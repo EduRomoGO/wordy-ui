@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import WordsList from "../../WordsList/WordsList";
-import Hotkeys from "react-hot-keys";
 import { useDatabase } from "../../../hooks/useDatabase";
 import SearchWordsForm from "../../search-words-form/SearchWordsForm";
 import Phrase from "../../phrase/Phrase";
+import { useHotkeys } from "react-hotkeys-hook";
 
 const handlePlayClick = (isFilterActive, muted = false) => {
   const audioElements = [
@@ -43,6 +43,11 @@ const Words = () => {
   });
   const [selectedWord, setSelectedWord] = useState();
   const [initialWordNumber, setInitialWordNumber] = useState(0);
+
+  useHotkeys("Command+j", () => document.querySelector("input").focus());
+  useHotkeys("Command+u", () => {
+    return handlePlayClick(isFilterActive);
+  });
   const isFilterActive = () => search.inputWords.length > 0;
 
   const allDescriptors = getAllDescriptors();
@@ -108,21 +113,12 @@ const Words = () => {
   const handleInitialWordNumberChange = (e) =>
     setInitialWordNumber(e.target.value);
 
-  const onKeyDown = (keyName) => {
-    const keyMap = {
-      "Command+j": () => document.querySelector("input").focus(),
-      "alt+p": () => handlePlayClick(isFilterActive()),
-    };
-
-    keyMap[keyName]();
-  };
-
   const handleWordClick = (word) => {
     setSelectedWord(word);
   };
 
   return (
-    <Hotkeys keyName="Command+j,alt+p" onKeyDown={onKeyDown}>
+    <section>
       <SearchWordsForm onChange={handleSearchInputChange} />
       {isFilterActive() && (
         <Phrase
@@ -131,6 +127,7 @@ const Words = () => {
         />
       )}
 
+      {/* <div>{count}</div> */}
       <WordInfo wordInfo={wordInfo} />
 
       {words && !isFilterActive() && (
@@ -146,7 +143,7 @@ const Words = () => {
           <WordsList onClick={handleWordClick} words={words} />
         </div>
       )}
-    </Hotkeys>
+    </section>
   );
 };
 

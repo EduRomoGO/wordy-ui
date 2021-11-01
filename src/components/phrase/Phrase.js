@@ -12,7 +12,7 @@ function Phrase({ inputWords, handlePlayClick, handleStopClick }) {
   return (
     <section>
       <button onClick={() => handlePlayClick(wordsRef)}>
-        Play Search (alt+p)
+        Play Search (Command + u)
       </button>
       <button onClick={handleStopButtonClick}>Stop</button>
       <WordsList ref={wordsRef} words={inputWords} display="inline" />

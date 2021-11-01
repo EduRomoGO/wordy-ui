@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { DebounceInput } from "react-debounce-input";
 import { ReactComponent as CancelIcon } from "../../SVG/cancel.svg";
 
-function SearchWordsForm({ onChange }) {
+function SearchWordsForm({ onChange }, searchInputRef) {
   const [search, setSearch] = useState({
     input: "",
   });
@@ -25,6 +25,7 @@ function SearchWordsForm({ onChange }) {
         </label>
         <DebounceInput
           id="search"
+          inputRef={searchInputRef}
           debounceTimeout={600}
           className="b-search__input"
           value={search.input}
@@ -42,4 +43,4 @@ function SearchWordsForm({ onChange }) {
   );
 }
 
-export default SearchWordsForm;
+export default React.forwardRef(SearchWordsForm);

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import WordsList from "../../WordsList/WordsList";
 import { useDatabase } from "../../../hooks/useDatabase";
 import SearchWordsForm from "../../search-words-form/SearchWordsForm";
@@ -43,10 +43,13 @@ const Words = () => {
   });
   const [selectedWord, setSelectedWord] = useState();
   const [initialWordNumber, setInitialWordNumber] = useState(0);
+  const searchInputRef = useRef();
 
-  useHotkeys("Command+j", () => document.querySelector("input").focus());
+  useHotkeys("Command+j", () => {
+    searchInputRef.current.focus();
+  });
   useHotkeys("Command+u", () => {
-    return handlePlayClick(isFilterActive);
+    handlePlayClick(isFilterActive);
   });
   const isFilterActive = () => search.inputWords.length > 0;
 
@@ -119,7 +122,10 @@ const Words = () => {
 
   return (
     <section>
-      <SearchWordsForm onChange={handleSearchInputChange} />
+      <SearchWordsForm
+        ref={searchInputRef}
+        onChange={handleSearchInputChange}
+      />
       {isFilterActive() && (
         <Phrase
           inputWords={search.inputWords}
@@ -127,7 +133,6 @@ const Words = () => {
         />
       )}
 
-      {/* <div>{count}</div> */}
       <WordInfo wordInfo={wordInfo} />
 
       {words && !isFilterActive() && (

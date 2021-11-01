@@ -1,4 +1,3 @@
-// import db from "../utils/db/db.json";
 import { useState, useEffect } from "react";
 
 const getAllDescriptorsImpl = (db) => {
@@ -23,7 +22,9 @@ function useDatabase() {
   useEffect(() => {
     const loadDatabase = async () => {
       try {
-        const data = await import("../utils/db/db.json");
+        const data = await import(
+          /* webpackPrefetch: true */ "../utils/db/db.json"
+        );
         setDb(data);
       } catch (error) {
         throw new Error(`Error loading database ${error}`);

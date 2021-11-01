@@ -3,6 +3,7 @@ import WordsList from "../../WordsList/WordsList";
 import Hotkeys from "react-hot-keys";
 import { useDatabase } from "../../../hooks/useDatabase";
 import SearchWordsForm from "../../search-words-form/SearchWordsForm";
+import Phrase from "../../phrase/Phrase";
 
 const handlePlayClick = (isFilterActive, muted = false) => {
   const audioElements = [
@@ -32,28 +33,6 @@ const handlePlayClick = (isFilterActive, muted = false) => {
       timeout += audio.duration;
     });
   }
-};
-
-const Phrase = ({ isFilterActive, inputWords }) => {
-  const [muted, setMuted] = useState(false);
-
-  const handleMuteButtonClick = () => setMuted((muted) => !muted);
-
-  const getFilteredWords = () => {
-    if (isFilterActive) {
-      return <WordsList words={inputWords} isFilterActive={isFilterActive} />;
-    }
-  };
-
-  return (
-    <section>
-      <button onClick={() => handlePlayClick(isFilterActive, muted)}>
-        Play Search (alt+p)
-      </button>
-      <button onClick={handleMuteButtonClick}>mute</button>
-      {getFilteredWords()}
-    </section>
-  );
 };
 
 const Words = () => {
@@ -154,6 +133,7 @@ const Words = () => {
       <Phrase
         isFilterActive={isFilterActive()}
         inputWords={search.inputWords}
+        handlePlayClick={handlePlayClick}
       />
 
       {renderDefinition(definition)}

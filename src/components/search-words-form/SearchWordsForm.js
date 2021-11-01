@@ -1,10 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { DebounceInput } from "react-debounce-input";
 import { ReactComponent as CancelIcon } from "../../SVG/cancel.svg";
+import { useHotkeys } from "react-hotkeys-hook";
 
-function SearchWordsForm({ onChange }, searchInputRef) {
+function SearchWordsForm({ onChange }) {
   const [search, setSearch] = useState({
     input: "",
+  });
+  const searchInputRef = useRef();
+
+  useHotkeys("Command+j", () => {
+    searchInputRef.current.focus();
   });
 
   const handleClearClick = () => {
@@ -43,4 +49,4 @@ function SearchWordsForm({ onChange }, searchInputRef) {
   );
 }
 
-export default React.forwardRef(SearchWordsForm);
+export default SearchWordsForm;

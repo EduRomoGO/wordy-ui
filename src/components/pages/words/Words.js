@@ -26,7 +26,7 @@ const handlePlayClick = (isFilterActive, muted = false) => {
   }
 };
 
-const WordInfo = ({ def: { word, definition } }) => {
+const WordInfo = ({ wordInfo: { word, definition } }) => {
   return word && definition ? (
     <div>
       {word} - {definition}
@@ -41,23 +41,20 @@ const Words = () => {
   const [search, setSearch] = useState({
     inputWords: [],
   });
-  const [definition, setDefinition] = useState({
-    word: "",
-    definition: "",
-  });
   const [selectedWord, setSelectedWord] = useState();
   const [initialWordNumber, setInitialWordNumber] = useState(0);
+  const isFilterActive = () => search.inputWords.length > 0;
 
   const allDescriptors = getAllDescriptors();
 
-  const getRefinition = (inputWords, selectedWord) => {
+  const getWordInfo = (inputWords, selectedWord) => {
     if (inputWords.length === 1) {
       const word = inputWords[0].word;
       return {
         word,
         definition: getDefinition(word),
       };
-    } else if (selectedWord) {
+    } else if (selectedWord && !isFilterActive) {
       const word = selectedWord;
       return {
         word,
@@ -71,11 +68,8 @@ const Words = () => {
     }
   };
 
-  const refinition = getRefinition(search.inputWords, selectedWord);
-  console.log("refinition");
-  console.log(refinition);
+  const wordInfo = getWordInfo(search.inputWords, selectedWord);
 
-  const isFilterActive = () => search.inputWords.length > 0;
   const words = allDescriptors?.slice(
     parseInt(initialWordNumber, 10),
     parseInt(initialWordNumber, 10) + 20
@@ -105,15 +99,6 @@ const Words = () => {
       existingInputWordDescriptors.find((n) => n.word === input)
     );
 
-    if (existingInputWords.length === 1) {
-      setDefinition({
-        word: existingInputWords[0],
-        definition: getDefinition(existingInputWords[0]),
-      });
-    } else {
-      setDefinition({ word: "", definition: "" });
-    }
-
     setSearch((search) => ({
       ...search,
       inputWords: input.length > 0 ? orderedInputWordsDescriptors : [],
@@ -133,7 +118,6 @@ const Words = () => {
   };
 
   const handleWordClick = (word) => {
-    setDefinition({ word, definition: getDefinition(word) });
     setSelectedWord(word);
   };
 
@@ -147,7 +131,7 @@ const Words = () => {
         />
       )}
 
-      <WordInfo def={definition} />
+      <WordInfo wordInfo={wordInfo} />
 
       {words && !isFilterActive() && (
         <div>

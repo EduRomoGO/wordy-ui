@@ -34,7 +34,8 @@ function DatabaseProvider({ children }) {
     const loadDatabase = async () => {
       try {
         const data = await import(
-          /* webpackPrefetch: true */ "../../utils/db/db.json"
+          // TODO: Cambiar a db.json cuando termine de probar en dev
+          /* webpackPrefetch: true */ "../../utils/db/db-test.json"
         );
         setDb(data);
       } catch (error) {

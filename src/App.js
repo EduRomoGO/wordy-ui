@@ -1,4 +1,5 @@
-import React from "react";
+/** @jsx jsx */
+import { jsx, css } from "@emotion/react";
 import "./App.css";
 import NavMenu from "./components/NavMenu/NavMenu.js";
 import Phonemes from "./components/Phonemes/Phonemes.js";
@@ -16,22 +17,30 @@ function App() {
   return (
     <Router>
       <div className="App fluid-type">
-        <NavMenu />
+        <header>
+          <NavMenu />
+        </header>
 
-        <Redirect from="/" to="/words" />
-        <Switch>
-          <Route path="/words">
-            <DatabaseProvider>
-              <Words />
-            </DatabaseProvider>
-          </Route>
-          <Route path="/phonemes">
-            <Phonemes />
-          </Route>
-          <Route path="/spell">
-            <Spell />
-          </Route>
-        </Switch>
+        <main
+          css={css`
+            padding: 20px;
+          `}
+        >
+          <Redirect from="/" to="/words" />
+          <Switch>
+            <Route path="/words">
+              <DatabaseProvider>
+                <Words />
+              </DatabaseProvider>
+            </Route>
+            <Route path="/phonemes">
+              <Phonemes />
+            </Route>
+            <Route path="/spell">
+              <Spell />
+            </Route>
+          </Switch>
+        </main>
       </div>
     </Router>
   );

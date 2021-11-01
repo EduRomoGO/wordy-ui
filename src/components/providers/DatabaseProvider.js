@@ -14,11 +14,21 @@ function useDatabaseContext() {
   } else {
     console.info("useDatabaseState was used within DatabaseProvider");
   }
+
   return context;
 }
 
 function DatabaseProvider({ children }) {
   const [db, setDb] = useState();
+
+  const parseDescriptors = (db) => {
+    return db?.wordDescriptors.map((item) => ({
+      word: item.word,
+      phonemics: item.phonemics,
+    }));
+  };
+
+  const parsedDescriptors = React.useMemo(() => parseDescriptors(db), [db]);
 
   useEffect(() => {
     const loadDatabase = async () => {
@@ -36,7 +46,9 @@ function DatabaseProvider({ children }) {
   }, []);
 
   return (
-    <DatabaseContext.Provider value={db}>{children}</DatabaseContext.Provider>
+    <DatabaseContext.Provider value={{ db, parsedDescriptors }}>
+      {children}
+    </DatabaseContext.Provider>
   );
 }
 

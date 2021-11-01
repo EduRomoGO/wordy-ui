@@ -37,7 +37,7 @@ const WordInfo = ({ wordInfo: { word, definition } }) => {
 };
 
 const Words = () => {
-  const { getAllDescriptors, getDefinition } = useDatabase();
+  const { parsedDescriptors, getDefinition } = useDatabase();
   const [search, setSearch] = useState({
     inputWords: [],
   });
@@ -49,8 +49,6 @@ const Words = () => {
   });
   const isFilterActive = () => search.inputWords.length > 0;
 
-  const allDescriptors = getAllDescriptors();
-
   const getWordInfo = (inputWords, selectedWord) => {
     if (inputWords.length === 1) {
       const word = inputWords[0].word;
@@ -58,7 +56,7 @@ const Words = () => {
         word,
         definition: getDefinition(word),
       };
-    } else if (selectedWord && !isFilterActive) {
+    } else if (selectedWord && !isFilterActive()) {
       const word = selectedWord;
       return {
         word,
@@ -74,7 +72,7 @@ const Words = () => {
 
   const wordInfo = getWordInfo(search.inputWords, selectedWord);
 
-  const words = allDescriptors?.slice(
+  const words = parsedDescriptors?.slice(
     parseInt(initialWordNumber, 10),
     parseInt(initialWordNumber, 10) + 20
   );
@@ -91,12 +89,12 @@ const Words = () => {
   };
 
   const handleSearchInputChange = (input) => {
-    const allWords = allDescriptors.map((item) => item.word);
+    const allWords = parsedDescriptors?.map((item) => item.word);
 
     const existingInputWords = getInputWords(input).filter((item) =>
       allWords.includes(item)
     );
-    const existingInputWordDescriptors = allDescriptors.filter((item) =>
+    const existingInputWordDescriptors = parsedDescriptors?.filter((item) =>
       existingInputWords.includes(item.word)
     );
     const orderedInputWordsDescriptors = existingInputWords.map((input) =>

@@ -1,4 +1,7 @@
-import React, { useState } from "react";
+/** @jsx jsx */
+import { jsx, css } from "@emotion/react";
+// import styled from "@emotion/styled";
+import { useState } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 import WordsList from "../../WordsList/WordsList";
 import { useDatabase } from "../../../hooks/useDatabase";
@@ -27,12 +30,15 @@ const handlePlayClick = (isFilterActive, muted = false) => {
 };
 
 const WordInfo = ({ wordInfo: { word, definition } }) => {
-  return word && definition ? (
-    <div>
+  return (
+    <div
+      css={css`
+        background-color: blue;
+        padding: 2rem;
+      `}
+    >
       {word} - {definition}
     </div>
-  ) : (
-    ""
   );
 };
 
@@ -87,7 +93,11 @@ const Words = () => {
   };
 
   return (
-    <section>
+    <section
+      css={css`
+        padding: 2rem;
+      `}
+    >
       <SearchWordsForm onChange={handleSearchInputChange} />
       {isFilterActive() && (
         <Phrase
@@ -96,7 +106,7 @@ const Words = () => {
         />
       )}
 
-      <WordInfo wordInfo={wordInfo} />
+      {wordInfo.word && wordInfo.definition && <WordInfo wordInfo={wordInfo} />}
 
       {words && !isFilterActive() && (
         <div>

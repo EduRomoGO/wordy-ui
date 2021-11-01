@@ -1,9 +1,9 @@
 import React, { useState } from "react";
+import { useHotkeys } from "react-hotkeys-hook";
 import WordsList from "../../WordsList/WordsList";
 import { useDatabase } from "../../../hooks/useDatabase";
 import SearchWordsForm from "../../search-words-form/SearchWordsForm";
 import Phrase from "../../phrase/Phrase";
-import { useHotkeys } from "react-hotkeys-hook";
 
 const handlePlayClick = (isFilterActive, muted = false) => {
   const audioElements = [
@@ -38,16 +38,14 @@ const WordInfo = ({ wordInfo: { word, definition } }) => {
 
 const Words = () => {
   const { parsedDescriptors, getDefinition } = useDatabase();
-  const [search, setSearch] = useState({
-    inputWords: [],
-  });
+  const [searchInputWords, setSearchInputWords] = useState([]);
   const [selectedWord, setSelectedWord] = useState();
   const [initialWordNumber, setInitialWordNumber] = useState(0);
 
   useHotkeys("Command+u", () => {
     handlePlayClick(isFilterActive);
   });
-  const isFilterActive = () => search.inputWords.length > 0;
+  const isFilterActive = () => searchInputWords.length > 0;
 
   const getWordInfo = (inputWords, selectedWord) => {
     if (inputWords.length === 1) {
@@ -70,41 +68,15 @@ const Words = () => {
     }
   };
 
-  const wordInfo = getWordInfo(search.inputWords, selectedWord);
+  const wordInfo = getWordInfo(searchInputWords, selectedWord);
 
   const words = parsedDescriptors?.slice(
     parseInt(initialWordNumber, 10),
     parseInt(initialWordNumber, 10) + 20
   );
 
-  const getInputWords = (search) => {
-    const leaveOnlyLetters = (str) => str.replace(/[^A-Za-z\s]/g, "");
-
-    const inputWords = leaveOnlyLetters(search)
-      .toLowerCase()
-      .split(" ")
-      .filter((item) => !!item);
-
-    return inputWords;
-  };
-
-  const handleSearchInputChange = (input) => {
-    const allWords = parsedDescriptors?.map((item) => item.word);
-
-    const existingInputWords = getInputWords(input).filter((item) =>
-      allWords.includes(item)
-    );
-    const existingInputWordDescriptors = parsedDescriptors?.filter((item) =>
-      existingInputWords.includes(item.word)
-    );
-    const orderedInputWordsDescriptors = existingInputWords.map((input) =>
-      existingInputWordDescriptors.find((n) => n.word === input)
-    );
-
-    setSearch((search) => ({
-      ...search,
-      inputWords: input.length > 0 ? orderedInputWordsDescriptors : [],
-    }));
+  const handleSearchInputChange = (inputWords) => {
+    setSearchInputWords(inputWords);
   };
 
   const handleInitialWordNumberChange = (e) =>
@@ -119,7 +91,7 @@ const Words = () => {
       <SearchWordsForm onChange={handleSearchInputChange} />
       {isFilterActive() && (
         <Phrase
-          inputWords={search.inputWords}
+          inputWords={searchInputWords}
           handlePlayClick={(muted) => handlePlayClick(isFilterActive(), muted)}
         />
       )}

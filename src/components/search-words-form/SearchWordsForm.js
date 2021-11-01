@@ -1,9 +1,12 @@
 import React, { useState, useRef } from "react";
+import { useHotkeys } from "react-hotkeys-hook";
 import { DebounceInput } from "react-debounce-input";
 import { ReactComponent as CancelIcon } from "../../SVG/cancel.svg";
-import { useHotkeys } from "react-hotkeys-hook";
+import { useDatabase } from "../../hooks/useDatabase";
 
 function SearchWordsForm({ onChange }) {
+  const { parsedDescriptors } = useDatabase();
+
   const [search, setSearch] = useState({
     input: "",
   });
@@ -18,9 +21,34 @@ function SearchWordsForm({ onChange }) {
     onChange("");
   };
 
-  const handleSearchInputChange = (e) => {
-    setSearch(e.target.value);
-    onChange(e.target.value);
+  const getInputWords = (search) => {
+    const leaveOnlyLetters = (str) => str.replace(/[^A-Za-z\s]/g, "");
+
+    const inputWords = leaveOnlyLetters(search)
+      .toLowerCase()
+      .split(" ")
+      .filter((item) => !!item);
+
+    return inputWords;
+  };
+
+  const handleSearchInputChange = (event) => {
+    const input = event.target.value;
+    setSearch(input);
+
+    const allWords = parsedDescriptors?.map((item) => item.word);
+
+    const existingInputWords = getInputWords(input).filter((item) =>
+      allWords.includes(item)
+    );
+    const existingInputWordDescriptors = parsedDescriptors?.filter((item) =>
+      existingInputWords.includes(item.word)
+    );
+    const orderedInputWordsDescriptors = existingInputWords.map((input) =>
+      existingInputWordDescriptors.find((n) => n.word === input)
+    );
+
+    onChange(input.length > 0 ? orderedInputWordsDescriptors : []);
   };
 
   return (

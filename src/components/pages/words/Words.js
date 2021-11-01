@@ -138,20 +138,19 @@ const Words = () => {
       )}
 
       {renderDefinition(definition)}
-      <section className="starting-word-section">
-        <p>Initial word number:</p>
-        <input
-          onChange={handleInitialWordNumberChange}
-          className="starting-word"
-          value={initialWordNumber}
-        />
-      </section>
-      {words && (
-        <WordsList
-          onClick={handleWordClick}
-          words={words}
-          hidden={isFilterActive()}
-        />
+
+      {words && !isFilterActive() && (
+        <div>
+          <section className="starting-word-section">
+            <p>Initial word number:</p>
+            <input
+              onChange={handleInitialWordNumberChange}
+              className="starting-word"
+              value={initialWordNumber}
+            />
+          </section>
+          <WordsList onClick={handleWordClick} words={words} />
+        </div>
       )}
     </Hotkeys>
   );

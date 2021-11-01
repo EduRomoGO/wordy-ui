@@ -27,7 +27,6 @@ const getStyle = (display) => {
 };
 
 const WordsList = ({ words, display, onClick }) => {
-  // const getClassName = () => (isFilterActive ? "short" : "normal");
   const getKey = () => cuid();
 
   return (

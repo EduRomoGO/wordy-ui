@@ -1,17 +1,39 @@
-import React from "react";
+import React, { useRef } from "react";
+import { useHotkeys } from "react-hotkeys-hook";
 import WordsList from "../WordsList/WordsList";
-import { useRef } from "react";
 
-function Phrase({ inputWords, handlePlayClick, handleStopClick }) {
+let timeoutList = [];
+
+function Phrase({ inputWords }) {
   const wordsRef = useRef();
+  useHotkeys("Command+u", () => {
+    handlePlayClick({ isFilterActive: true, wordsRef });
+  });
+
+  const handlePlayClick = ({ wordsRef }) => {
+    const audioElements = [...wordsRef.current.querySelectorAll("audio")];
+
+    const wordsSeparation = 50;
+    let timeout = 0;
+
+    audioElements.forEach((audio) => {
+      timeoutList.push(
+        setTimeout(() => {
+          audio.play();
+        }, timeout * 1000 + wordsSeparation)
+      );
+
+      timeout += audio.duration;
+    });
+  };
 
   const handleStopButtonClick = () => {
-    handleStopClick();
+    timeoutList.forEach(clearTimeout);
   };
 
   return (
     <section>
-      <button onClick={() => handlePlayClick(wordsRef)}>
+      <button onClick={() => handlePlayClick({ wordsRef })}>
         Play Search (Command + u)
       </button>
       <button onClick={handleStopButtonClick}>Stop</button>

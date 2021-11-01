@@ -1,39 +1,10 @@
 /** @jsx jsx */
 import { jsx, css } from "@emotion/react";
-// import styled from "@emotion/styled";
 import { useState } from "react";
-import { useHotkeys } from "react-hotkeys-hook";
 import WordsList from "../../WordsList/WordsList";
 import { useDatabase } from "../../../hooks/useDatabase";
 import SearchWordsForm from "../../search-words-form/SearchWordsForm";
 import Phrase from "../../phrase/Phrase";
-
-let timeoutList = [];
-
-const handlePlayClick = ({ isFilterActive, muted = false, wordsRef }) => {
-  if (isFilterActive) {
-    const audioElements = [...wordsRef.current.querySelectorAll("audio")];
-
-    const wordsSeparation = 50;
-    let timeout = 0;
-
-    audioElements.forEach((audio) => {
-      timeoutList.push(
-        setTimeout(() => {
-          if (!muted) {
-            audio.play();
-          }
-        }, timeout * 1000 + wordsSeparation)
-      );
-
-      timeout += audio.duration;
-    });
-  }
-};
-
-const handleStopClick = () => {
-  timeoutList.forEach(clearTimeout);
-};
 
 const WordInfo = ({ wordInfo: { word, definition } }) => {
   return (
@@ -54,9 +25,6 @@ const Words = () => {
   const [selectedWord, setSelectedWord] = useState();
   const [initialWordNumber, setInitialWordNumber] = useState(0);
 
-  useHotkeys("Command+u", () => {
-    handlePlayClick({ isFilterActive: isFilterActive() });
-  });
   const isFilterActive = () => searchInputWords.length > 0;
 
   const getWordInfo = (inputWords, selectedWord) => {
@@ -105,18 +73,7 @@ const Words = () => {
       `}
     >
       <SearchWordsForm onChange={handleSearchInputChange} />
-      {isFilterActive() && (
-        <Phrase
-          inputWords={searchInputWords}
-          handlePlayClick={(wordsRef) =>
-            handlePlayClick({
-              isFilterActive: isFilterActive(),
-              wordsRef,
-            })
-          }
-          handleStopClick={handleStopClick}
-        />
-      )}
+      {isFilterActive() && <Phrase inputWords={searchInputWords} />}
 
       {wordInfo.word && wordInfo.definition && <WordInfo wordInfo={wordInfo} />}
 

@@ -4,6 +4,58 @@ import Hotkeys from "react-hot-keys";
 import { useDatabase } from "../../../hooks/useDatabase";
 import SearchWordsForm from "../../search-words-form/SearchWordsForm";
 
+const handlePlayClick = (isFilterActive, muted = false) => {
+  const audioElements = [
+    ...document.querySelector(".words-short").querySelectorAll("audio"),
+  ];
+
+  // let userIDs = [1,2,3];
+
+  // audioElements.reduce( async (previousPromise, next) => {
+  //   await previousPromise;
+
+  //   return next.play();
+  // }, Promise.resolve());
+
+  // audioElements[0].play().then(() => console.log('cool'));
+  if (isFilterActive) {
+    let timeout = 0;
+
+    audioElements.forEach((audio) => {
+      setTimeout(() => {
+        if (!muted) {
+          audio.play();
+        }
+      }, timeout * 1000);
+
+      console.log(audio.duration);
+      timeout += audio.duration;
+    });
+  }
+};
+
+const Phrase = ({ isFilterActive, inputWords }) => {
+  const [muted, setMuted] = useState(false);
+
+  const handleMuteButtonClick = () => setMuted((muted) => !muted);
+
+  const getFilteredWords = () => {
+    if (isFilterActive) {
+      return <WordsList words={inputWords} isFilterActive={isFilterActive} />;
+    }
+  };
+
+  return (
+    <section>
+      <button onClick={() => handlePlayClick(isFilterActive, muted)}>
+        Play Search (alt+p)
+      </button>
+      <button onClick={handleMuteButtonClick}>mute</button>
+      {getFilteredWords()}
+    </section>
+  );
+};
+
 const Words = () => {
   const { getAllDescriptors, getDefinition } = useDatabase();
   const [search, setSearch] = useState({
@@ -15,7 +67,6 @@ const Words = () => {
     definition: "",
   });
   const [initialWordNumber, setInitialWordNumber] = useState(0);
-  const [muted, setMuted] = useState(false);
 
   const isFilterActive = () => search.inputWords.length > 0;
   const words = getAllDescriptors()?.slice(
@@ -28,36 +79,6 @@ const Words = () => {
   //     audio.play();
   //   }, timeout * 1000);
   // });
-
-  const handlePlayClick = () => {
-    const audioElements = [
-      ...document.querySelector(".words-short").querySelectorAll("audio"),
-    ];
-
-    // let userIDs = [1,2,3];
-
-    // audioElements.reduce( async (previousPromise, next) => {
-    //   await previousPromise;
-
-    //   return next.play();
-    // }, Promise.resolve());
-
-    // audioElements[0].play().then(() => console.log('cool'));
-    if (isFilterActive()) {
-      let timeout = 0;
-
-      audioElements.forEach((audio) => {
-        setTimeout(() => {
-          if (!muted) {
-            audio.play();
-          }
-        }, timeout * 1000);
-
-        console.log(audio.duration);
-        timeout += audio.duration;
-      });
-    }
-  };
 
   const getInputWords = (search) => {
     const leaveOnlyLetters = (str) => str.replace(/[^A-Za-z\s]/g, "");
@@ -100,17 +121,6 @@ const Words = () => {
     }));
   };
 
-  const getFilteredWords = () => {
-    if (isFilterActive()) {
-      return (
-        <WordsList
-          words={search.inputWords}
-          isFilterActive={isFilterActive()}
-        />
-      );
-    }
-  };
-
   const handleInitialWordNumberChange = (e) =>
     setInitialWordNumber(e.target.value);
 
@@ -118,7 +128,7 @@ const Words = () => {
     const keyMap = {
       // j cause it is free
       "Command+j": () => document.querySelector("input").focus(),
-      "alt+p": () => handlePlayClick(),
+      "alt+p": () => handlePlayClick(isFilterActive()),
     };
 
     keyMap[keyName]();
@@ -138,14 +148,14 @@ const Words = () => {
     );
   };
 
-  const handleMuteButtonClick = () => setMuted((muted) => !muted);
-
   return (
     <Hotkeys keyName="Command+j,alt+p" onKeyDown={onKeyDown}>
       <SearchWordsForm onChange={handleSearchInputChange} />
-      <button onClick={handlePlayClick}>Play Search (alt+p)</button>
-      <button onClick={handleMuteButtonClick}>mute</button>
-      {getFilteredWords()}
+      <Phrase
+        isFilterActive={isFilterActive()}
+        inputWords={search.inputWords}
+      />
+
       {renderDefinition(definition)}
       <section className="starting-word-section">
         <p>Initial word number:</p>

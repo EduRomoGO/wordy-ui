@@ -1,51 +1,75 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 import WordsList from "../WordsList/WordsList";
 
+const MediaButton = ({ playing }) => {
+  return <div>{playing ? "hola" : "nada"}</div>;
+};
+
 function Phrase({ inputWords }) {
+  let { current: playing } = useRef(false);
+  // const [playing, setPlaying] = useState(false);
   const wordsRef = useRef();
   let { current: timeoutListRef } = useRef([]);
-  useHotkeys("Command+u", () => {
-    if (timeoutListRef.length > 0) {
-      clearTimeoutList();
+  useHotkeys("Command+u", togglePlaying);
+
+  function togglePlaying() {
+    if (playing) {
+      playing = false;
+      handleStopButtonClick();
     } else {
-      handlePlayClick({ isFilterActive: true, wordsRef });
+      playing = true;
+      managePlay();
     }
-  });
+  }
 
   const clearTimeoutList = () => {
     timeoutListRef.forEach(clearTimeout);
     timeoutListRef = [];
   };
 
-  const handlePlayClick = ({ wordsRef }) => {
-    clearTimeoutList();
+  function handlePlayClick() {
+    if (playing) {
+      handleStopButtonClick();
+    }
+    // setPlaying(true);
+    else managePlay();
+  }
+
+  const managePlay = () => {
     const audioElements = [...wordsRef.current.querySelectorAll("audio")];
 
     const wordsSeparation = 50;
-    let timeout = 0;
+    let elapsedTime = 0;
 
     audioElements.forEach((audio) => {
       timeoutListRef.push(
         setTimeout(() => {
           audio.play();
-        }, timeout * 1000 + wordsSeparation)
+        }, elapsedTime * 1000)
       );
 
-      timeout += audio.duration;
+      elapsedTime += audio.duration + wordsSeparation / 1000;
     });
+
+    setTimeout(() => {
+      // setPlaying(false);
+      playing = false;
+    }, elapsedTime * 1000);
   };
 
   const handleStopButtonClick = () => {
+    playing = false;
     clearTimeoutList();
+    // setPlaying(false);
   };
 
   return (
     <section>
-      <button onClick={() => handlePlayClick({ wordsRef })}>
-        Play Search (Command + u)
-      </button>
+      <MediaButton playing={playing} />
+      <button onClick={handlePlayClick}>Play Search (Command + u)</button>
       <button onClick={handleStopButtonClick}>Stop</button>
+
       <WordsList ref={wordsRef} words={inputWords} display="inline" />
     </section>
   );

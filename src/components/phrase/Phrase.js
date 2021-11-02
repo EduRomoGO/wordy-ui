@@ -27,9 +27,9 @@ function Phrase({ inputWords }) {
   };
 
   function handlePlayClick() {
-    if (playing) {
-      stopPlaying();
-    } else startPlaying();
+    if (!playing) {
+      startPlaying();
+    }
   }
 
   const startPlaying = () => {

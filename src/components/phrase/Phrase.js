@@ -1,4 +1,6 @@
-import React, { useRef } from "react";
+/** @jsx jsx */
+import { jsx, css } from "@emotion/react";
+import { useRef } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 import WordsList from "../WordsList/WordsList";
 
@@ -67,9 +69,28 @@ function Phrase({ inputWords }) {
     <section>
       <button onClick={handlePlayClick}>Play Search</button>
       <button onClick={handleStopButtonClick}>Stop</button>
-      <p>
-        Toggle play/stop using <strong>Command + u</strong> from your keyboard
-      </p>
+      <small
+        css={css`
+          margin-top: 4px;
+          display: inline-block;
+          padding: 8px;
+          font-size: 0.7rem;
+        `}
+      >
+        Toggle play/stop using{" "}
+        <kbd
+          css={css`
+            font-weight: bold;
+            background: #e8e2e2;
+            border-radius: 2px;
+            font-style: italic;
+            padding: 2px 4px;
+          `}
+        >
+          Command + u
+        </kbd>{" "}
+        from your keyboard
+      </small>
 
       <WordsList ref={wordsRef} words={inputWords} display="inline" />
     </section>

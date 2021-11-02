@@ -34,24 +34,24 @@ function Phrase({ inputWords }) {
     playing = true;
     const audioElements = [...wordsRef.current.querySelectorAll("audio")];
 
-    const wordsSeparation = 50;
-    let elapsedTime = 0;
+    const timeBetweenWordsInMs = 50;
+    let elapsedTimeInMs = 0;
 
     // We schedule each audio to play after the previous one has finished
     audioElements.forEach((audio) => {
       timeoutListRef.push(
         setTimeout(() => {
           audio.play();
-        }, elapsedTime * 1000)
+        }, elapsedTimeInMs)
       );
 
-      elapsedTime += audio.duration + wordsSeparation / 1000;
+      elapsedTimeInMs += audio.duration * 1000 + timeBetweenWordsInMs;
     });
 
     // After all the audios have finished playing we change reference to playing false
     setTimeout(() => {
       playing = false;
-    }, elapsedTime * 1000);
+    }, elapsedTimeInMs);
   };
 
   const stopPlaying = () => {

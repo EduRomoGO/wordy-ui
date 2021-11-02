@@ -10,11 +10,9 @@ function Phrase({ inputWords }) {
 
   function togglePlaying() {
     if (playing) {
-      playing = false;
-      handleStopButtonClick();
+      stopPlaying();
     } else {
-      playing = true;
-      managePlay();
+      startPlaying();
     }
   }
 
@@ -25,11 +23,12 @@ function Phrase({ inputWords }) {
 
   function handlePlayClick() {
     if (playing) {
-      handleStopButtonClick();
-    } else managePlay();
+      stopPlaying();
+    } else startPlaying();
   }
 
-  const managePlay = () => {
+  const startPlaying = () => {
+    playing = true;
     const audioElements = [...wordsRef.current.querySelectorAll("audio")];
 
     const wordsSeparation = 50;
@@ -50,9 +49,13 @@ function Phrase({ inputWords }) {
     }, elapsedTime * 1000);
   };
 
-  const handleStopButtonClick = () => {
+  const stopPlaying = () => {
     playing = false;
     clearTimeoutList();
+  };
+
+  const handleStopButtonClick = () => {
+    stopPlaying();
   };
 
   return (

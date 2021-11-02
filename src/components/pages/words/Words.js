@@ -25,7 +25,7 @@ const Words = () => {
   const [selectedWord, setSelectedWord] = useState();
   const [initialWordNumber, setInitialWordNumber] = useState(0);
 
-  const isFilterActive = () => searchInputWords.length > 0;
+  const isSearchActive = () => searchInputWords.length > 0;
 
   const getWordInfo = (inputWords, selectedWord) => {
     if (inputWords.length === 1) {
@@ -34,7 +34,7 @@ const Words = () => {
         word,
         definition: getDefinition(word),
       };
-    } else if (selectedWord && !isFilterActive()) {
+    } else if (selectedWord && !isSearchActive()) {
       const word = selectedWord;
       return {
         word,
@@ -73,11 +73,11 @@ const Words = () => {
       `}
     >
       <SearchWordsForm onChange={handleSearchInputChange} />
-      {isFilterActive() && <Phrase inputWords={searchInputWords} />}
+      {isSearchActive() && <Phrase inputWords={searchInputWords} />}
 
       {wordInfo.word && wordInfo.definition && <WordInfo wordInfo={wordInfo} />}
 
-      {words && !isFilterActive() && (
+      {words && !isSearchActive() && (
         <div>
           <section className="starting-word-section">
             <p>Initial word number:</p>

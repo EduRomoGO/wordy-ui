@@ -1,14 +1,9 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 import WordsList from "../WordsList/WordsList";
 
-const MediaButton = ({ playing }) => {
-  return <div>{playing ? "hola" : "nada"}</div>;
-};
-
 function Phrase({ inputWords }) {
   let { current: playing } = useRef(false);
-  // const [playing, setPlaying] = useState(false);
   const wordsRef = useRef();
   let { current: timeoutListRef } = useRef([]);
   useHotkeys("Command+u", togglePlaying);
@@ -31,9 +26,7 @@ function Phrase({ inputWords }) {
   function handlePlayClick() {
     if (playing) {
       handleStopButtonClick();
-    }
-    // setPlaying(true);
-    else managePlay();
+    } else managePlay();
   }
 
   const managePlay = () => {
@@ -53,7 +46,6 @@ function Phrase({ inputWords }) {
     });
 
     setTimeout(() => {
-      // setPlaying(false);
       playing = false;
     }, elapsedTime * 1000);
   };
@@ -61,14 +53,15 @@ function Phrase({ inputWords }) {
   const handleStopButtonClick = () => {
     playing = false;
     clearTimeoutList();
-    // setPlaying(false);
   };
 
   return (
     <section>
-      <MediaButton playing={playing} />
-      <button onClick={handlePlayClick}>Play Search (Command + u)</button>
+      <button onClick={handlePlayClick}>Play Search</button>
       <button onClick={handleStopButtonClick}>Stop</button>
+      <p>
+        Toggle play/stop using <strong>Command + u</strong> from your keyboard
+      </p>
 
       <WordsList ref={wordsRef} words={inputWords} display="inline" />
     </section>

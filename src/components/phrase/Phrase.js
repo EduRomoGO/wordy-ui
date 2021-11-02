@@ -2,6 +2,9 @@ import React, { useRef } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 import WordsList from "../WordsList/WordsList";
 
+// Note: There is probably a much better way of doing this, but I don't want to spend more time on it atm
+// Using references is the way to avoid rerenderings of the ui while helping to manage playing/stop states
+
 function Phrase({ inputWords }) {
   let { current: playing } = useRef(false);
   const wordsRef = useRef();
@@ -34,6 +37,7 @@ function Phrase({ inputWords }) {
     const wordsSeparation = 50;
     let elapsedTime = 0;
 
+    // We schedule each audio to play after the previous one has finished
     audioElements.forEach((audio) => {
       timeoutListRef.push(
         setTimeout(() => {
@@ -44,6 +48,7 @@ function Phrase({ inputWords }) {
       elapsedTime += audio.duration + wordsSeparation / 1000;
     });
 
+    // After all the audios have finished playing we change reference to playing false
     setTimeout(() => {
       playing = false;
     }, elapsedTime * 1000);

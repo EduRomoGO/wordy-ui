@@ -55,33 +55,6 @@ function DatabaseProvider({ children }) {
       });
   };
 
-  // eslint-disable-next-line no-unused-vars
-  const testDb = async (db) => {
-    // db.get("1a687eb1-6bdb-43b2-b181-2ac8036ec39a")
-    //   .then((result) => {
-    //     console.log(`found result ${result}`);
-    //     console.log(result);
-    //   })
-    //   .catch(console.log);
-
-    await db.createIndex({
-      index: { fields: ["word"] },
-    });
-
-    db.find({
-      selector: { word: "school" },
-      fields: ["_id", "word"],
-      sort: ["word"],
-    })
-      .then(function (result) {
-        console.log(`found result`);
-        console.log(result.docs);
-      })
-      .catch(function (err) {
-        console.log(err);
-      });
-  };
-
   useEffect(() => {
     const loadDatabase = async () => {
       try {
@@ -89,14 +62,11 @@ function DatabaseProvider({ children }) {
 
         const dbDocsCount = await checkDb(db);
 
-        // testDb(db);
-
         if (dbDocsCount > 0) {
           setDb(db);
         } else {
           const data = await import(
-            // TODO: Cambiar a db.json cuando termine de probar en dev
-            /* webpackPrefetch: true */ "../../utils/db/db-test.json"
+            /* webpackPrefetch: true */ "../../utils/db/db.json"
           );
 
           await populate(db, data);

@@ -11,7 +11,6 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
-import { DatabaseProvider } from "./components/providers/DatabaseProvider";
 
 function App() {
   return (
@@ -29,9 +28,7 @@ function App() {
           <Redirect from="/" to="/words" />
           <Switch>
             <Route path="/words">
-              <DatabaseProvider>
-                <Words />
-              </DatabaseProvider>
+              <Words />
             </Route>
             <Route path="/phonemes">
               <Phonemes />

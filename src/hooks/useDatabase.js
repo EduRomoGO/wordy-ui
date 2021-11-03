@@ -1,14 +1,6 @@
 import { useCallback } from "react";
 import { useDatabaseContext } from "../components/providers/DatabaseProvider";
 
-const getDefinitionImpl = (db, word) => {
-  // const wordDescriptor = db?.wordDescriptors.find((item) => item.word === word);
-
-  // return wordDescriptor ? wordDescriptor.definitions[0].defs[0].def : "";
-  return "fake definition";
-};
-
-// TODO: Refactor to simplify function calls
 function useDatabase() {
   const { db } = useDatabaseContext();
 
@@ -35,6 +27,22 @@ function useDatabase() {
     }
   }, []);
 
+  const getDefinition = useCallback(
+    async (word) => {
+      try {
+        const wordDescriptor = await db.find({
+          selector: { word },
+          fields: ["definitions"],
+        });
+
+        return wordDescriptor.docs[0].definitions[0].defs[0].def;
+      } catch (error) {
+        console.log(`Error finding descriptor for word ${word}`);
+      }
+    },
+    [db]
+  );
+
   return {
     getSomeWords: useCallback(
       async (numberOfWords) => {
@@ -43,7 +51,7 @@ function useDatabase() {
       },
       [db, getSomeWords]
     ),
-    getDefinition: (word) => getDefinitionImpl(db, word),
+    getDefinition,
     db,
   };
 }

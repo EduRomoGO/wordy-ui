@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx, css } from "@emotion/react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import WordsList from "../../WordsList/WordsList";
 import { useDatabase } from "../../../hooks/useDatabase";
 import SearchWordsForm from "../../search-words-form/SearchWordsForm";
@@ -25,31 +25,41 @@ const Words = () => {
   const [selectedWord, setSelectedWord] = useState();
   const [initialWordNumber, setInitialWordNumber] = useState(0);
   const [words, setWords] = useState([]);
+  const [wordInfo, setWordInfo] = useState({
+    word: "",
+    definition: "",
+  });
 
-  const isSearchActive = () => searchInputWords.length > 0;
+  const isSearchActive = useCallback(
+    () => searchInputWords.length > 0,
+    [searchInputWords.length]
+  );
 
-  const getWordInfo = (inputWords, selectedWord) => {
-    if (inputWords.length === 1) {
-      const word = inputWords[0].word;
-      return {
-        word,
-        definition: getDefinition(word),
-      };
-    } else if (selectedWord && !isSearchActive()) {
-      const word = selectedWord;
-      return {
-        word,
-        definition: getDefinition(word),
-      };
-    } else {
-      return {
-        word: "",
-        definition: "",
-      };
-    }
-  };
+  useEffect(() => {
+    const getWordInfo = async (inputWords, selectedWord) => {
+      if (inputWords.length === 1) {
+        const word = inputWords[0].word;
 
-  const wordInfo = getWordInfo(searchInputWords, selectedWord);
+        setWordInfo({
+          word,
+          definition: await getDefinition(word),
+        });
+      } else if (selectedWord && !isSearchActive()) {
+        const word = selectedWord;
+        setWordInfo({
+          word,
+          definition: await getDefinition(word),
+        });
+      } else {
+        setWordInfo({
+          word: "",
+          definition: "",
+        });
+      }
+    };
+
+    getWordInfo(searchInputWords, selectedWord);
+  }, [getDefinition, isSearchActive, searchInputWords, selectedWord]);
 
   useEffect(() => {
     const loadWords = async () => {

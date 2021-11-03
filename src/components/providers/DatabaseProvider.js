@@ -103,9 +103,6 @@ function DatabaseProvider({ children }) {
 
           setDb(db);
         }
-
-        // Ahora estoy devolviendo la db en lugar de los documentos, por eso
-        // hay que cambiar la manera en la que se usa todo
       } catch (error) {
         throw new Error(`Error loading database ${error}`);
       }

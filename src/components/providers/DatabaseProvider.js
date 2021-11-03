@@ -101,6 +101,10 @@ function DatabaseProvider({ children }) {
 
           await populate(db, data);
 
+          await db.createIndex({
+            index: { fields: ["word"] },
+          });
+
           setDb(db);
         }
       } catch (error) {

@@ -36,10 +36,6 @@ function SearchWordsForm({ onChange }) {
     const input = event.target.value;
     setSearch(input);
 
-    await db.createIndex({
-      index: { fields: ["word"] },
-    });
-
     // Given an array of input words (which may or may not be correct)
     // I want back the descriptors for these words
     const queries = getInputWords(input).map((word) => {

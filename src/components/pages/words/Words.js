@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx, css } from "@emotion/react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import WordsList from "../../WordsList/WordsList";
 import { useDatabase } from "../../../hooks/useDatabase";
 import SearchWordsForm from "../../search-words-form/SearchWordsForm";
@@ -20,10 +20,11 @@ const WordInfo = ({ wordInfo: { word, definition } }) => {
 };
 
 const Words = () => {
-  const { parsedDescriptors, getDefinition } = useDatabase();
+  const { getSomeWords, getDefinition } = useDatabase();
   const [searchInputWords, setSearchInputWords] = useState([]);
   const [selectedWord, setSelectedWord] = useState();
   const [initialWordNumber, setInitialWordNumber] = useState(0);
+  const [words, setWords] = useState([]);
 
   const isSearchActive = () => searchInputWords.length > 0;
 
@@ -50,10 +51,14 @@ const Words = () => {
 
   const wordInfo = getWordInfo(searchInputWords, selectedWord);
 
-  const words = parsedDescriptors?.slice(
-    parseInt(initialWordNumber, 10),
-    parseInt(initialWordNumber, 10) + 20
-  );
+  useEffect(() => {
+    const loadWords = async () => {
+      const words = await getSomeWords(20);
+      setWords(words);
+    };
+
+    loadWords();
+  }, [getSomeWords]);
 
   const handleSearchInputChange = (inputWords) => {
     setSearchInputWords(inputWords);
@@ -73,11 +78,13 @@ const Words = () => {
       `}
     >
       <SearchWordsForm onChange={handleSearchInputChange} />
-      {isSearchActive() && <Phrase inputWords={searchInputWords} />}
+      {isSearchActive() && searchInputWords.length > 0 && (
+        <Phrase inputWords={searchInputWords} />
+      )}
 
       {wordInfo.word && wordInfo.definition && <WordInfo wordInfo={wordInfo} />}
 
-      {words && !isSearchActive() && (
+      {words.length > 0 && !isSearchActive() && (
         <div>
           <section className="starting-word-section">
             <p>Initial word number:</p>

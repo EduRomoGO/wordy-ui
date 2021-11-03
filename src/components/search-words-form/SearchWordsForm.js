@@ -5,7 +5,7 @@ import { ReactComponent as CancelIcon } from "../../SVG/cancel.svg";
 import { useDatabase } from "../../hooks/useDatabase";
 
 function SearchWordsForm({ onChange }) {
-  const { parsedDescriptors } = useDatabase();
+  const { db } = useDatabase();
 
   const [search, setSearch] = useState({
     input: "",
@@ -32,23 +32,33 @@ function SearchWordsForm({ onChange }) {
     return inputWords;
   };
 
-  const handleSearchInputChange = (event) => {
+  const handleSearchInputChange = async (event) => {
     const input = event.target.value;
     setSearch(input);
 
-    const allWords = parsedDescriptors?.map((item) => item.word);
+    await db.createIndex({
+      index: { fields: ["word"] },
+    });
 
-    const existingInputWords = getInputWords(input).filter((item) =>
-      allWords.includes(item)
-    );
-    const existingInputWordDescriptors = parsedDescriptors?.filter((item) =>
-      existingInputWords.includes(item.word)
-    );
-    const orderedInputWordsDescriptors = existingInputWords.map((input) =>
-      existingInputWordDescriptors.find((n) => n.word === input)
-    );
+    // Given an array of input words (which may or may not be correct)
+    // I want back the descriptors for these words
+    const queries = getInputWords(input).map((word) => {
+      return db.find({
+        selector: { word },
+        fields: ["phonemics", "word"],
+      });
+    });
 
-    onChange(input.length > 0 ? orderedInputWordsDescriptors : []);
+    const queriesResults = await Promise.allSettled(queries);
+
+    const inputWordsDescriptors = queriesResults.reduce((acc, queryResult) => {
+      return queryResult.status === "fulfilled" &&
+        queryResult.value.docs.length > 0
+        ? [...acc, queryResult.value.docs[0]]
+        : acc;
+    }, []);
+
+    onChange(inputWordsDescriptors);
   };
 
   return (

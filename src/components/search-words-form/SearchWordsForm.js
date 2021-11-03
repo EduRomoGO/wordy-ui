@@ -5,7 +5,7 @@ import { ReactComponent as CancelIcon } from "../../SVG/cancel.svg";
 import { useDatabase } from "../../hooks/useDatabase";
 
 function SearchWordsForm({ onChange }) {
-  const { db } = useDatabase();
+  const { getDescriptorsForWords } = useDatabase();
 
   const [search, setSearch] = useState({
     input: "",
@@ -36,23 +36,11 @@ function SearchWordsForm({ onChange }) {
     const input = event.target.value;
     setSearch(input);
 
+    const inputWords = getInputWords(input);
+
     // Given an array of input words (which may or may not be correct)
     // I want back the descriptors for these words
-    const queries = getInputWords(input).map((word) => {
-      return db.find({
-        selector: { word },
-        fields: ["phonemics", "word"],
-      });
-    });
-
-    const queriesResults = await Promise.allSettled(queries);
-
-    const inputWordsDescriptors = queriesResults.reduce((acc, queryResult) => {
-      return queryResult.status === "fulfilled" &&
-        queryResult.value.docs.length > 0
-        ? [...acc, queryResult.value.docs[0]]
-        : acc;
-    }, []);
+    const inputWordsDescriptors = await getDescriptorsForWords(inputWords);
 
     onChange(inputWordsDescriptors);
   };

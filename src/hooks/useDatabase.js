@@ -43,25 +43,31 @@ function useDatabase() {
     [db]
   );
 
-  const getDescriptorsForWords = async (words) => {
-    const queries = words.map((word) => {
-      return db.find({
-        selector: { word },
-        fields: ["phonemics", "word"],
+  const getDescriptorsForWords = useCallback(
+    async (words) => {
+      const queries = words.map((word) => {
+        return db.find({
+          selector: { word },
+          fields: ["phonemics", "word"],
+        });
       });
-    });
 
-    const queriesResults = await Promise.allSettled(queries);
+      const queriesResults = await Promise.allSettled(queries);
 
-    const inputWordsDescriptors = queriesResults.reduce((acc, queryResult) => {
-      return queryResult.status === "fulfilled" &&
-        queryResult.value.docs.length > 0
-        ? [...acc, queryResult.value.docs[0]]
-        : acc;
-    }, []);
+      const inputWordsDescriptors = queriesResults.reduce(
+        (acc, queryResult) => {
+          return queryResult.status === "fulfilled" &&
+            queryResult.value.docs.length > 0
+            ? [...acc, queryResult.value.docs[0]]
+            : acc;
+        },
+        []
+      );
 
-    return inputWordsDescriptors;
-  };
+      return inputWordsDescriptors;
+    },
+    [db]
+  );
 
   return {
     getSomeWords: useCallback(

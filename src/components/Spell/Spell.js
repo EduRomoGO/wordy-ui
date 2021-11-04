@@ -1,23 +1,80 @@
-import React from 'react';
-import db from '../../utils/db/db.json';
-import Word from '../Word/Word.js';
-import cuid from 'cuid';
-import './Spell.css';
+import React, { useEffect, useState } from "react";
+import { useDatabase } from "hooks/useDatabase";
+import Word from "../Word/Word.js";
+import cuid from "cuid";
+import "./Spell.css";
 
 const Spell = () => {
-    const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
-    const allDescriptors = db.wordDescriptors
-    .map(item => ({ word: item.word, phonemics: item.phonemics }));
-    
-    const letterDescriptors = letters
-        .map(item => {
-            return allDescriptors.find(descriptor => descriptor.word === item.toLowerCase());
-        })
-        .filter(item => !!item);
+  const { getDescriptorsForWords } = useDatabase();
+  const [letterDescriptors, setLetterDescriptors] = useState([]);
+  const [status, setStatus] = useState("idle");
 
-    return <div className='spell-component-wrapper'>
-        {letterDescriptors.map(({word, phonemics}) => <Word type='spell' key={cuid()} word={word} phonemics={phonemics} />)}
-    </div>
+  const letters = React.useMemo(
+    () => [
+      "a",
+      "b",
+      "c",
+      "d",
+      "e",
+      "f",
+      "g",
+      "h",
+      "i",
+      "j",
+      "k",
+      "l",
+      "m",
+      "n",
+      "o",
+      "p",
+      "q",
+      "r",
+      "s",
+      "t",
+      "u",
+      "v",
+      "w",
+      "x",
+      "y",
+      "z",
+    ],
+    []
+  );
+
+  useEffect(() => {
+    const loadLetterDescriptors = async () => {
+      try {
+        setStatus("loading");
+
+        const letterDescriptors = await getDescriptorsForWords(letters);
+        setStatus("resolved");
+        setLetterDescriptors(letterDescriptors);
+      } catch (error) {
+        setStatus("rejected");
+        console.error(`Error loading letter descriptors - ${error}`);
+      }
+    };
+
+    loadLetterDescriptors();
+  }, [getDescriptorsForWords, letters]);
+
+  if (status === "idle" || status === "loading") {
+    return <div>loading...</div>;
+  }
+
+  if (status === "rejected") {
+    return <div>An error has happened</div>;
+  }
+
+  if (status === "resolved") {
+    return (
+      <div className="spell-component-wrapper">
+        {letterDescriptors.map(({ word, phonemics }) => (
+          <Word type="spell" key={cuid()} word={word} phonemics={phonemics} />
+        ))}
+      </div>
+    );
+  }
 };
 
 export default Spell;

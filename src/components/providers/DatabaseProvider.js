@@ -80,6 +80,7 @@ function DatabaseProvider({ children }) {
             index: { fields: ["word"] },
           });
 
+          setStatus("resolved");
           setDb(db);
         }
       } catch (error) {

@@ -101,6 +101,7 @@ function DatabaseProvider({ children }) {
   const Frame = styled.div`
     height: 100vh;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
   `;
@@ -108,6 +109,9 @@ function DatabaseProvider({ children }) {
   if (status === "loading" || status === "idle") {
     return (
       <Frame>
+        <div>Loading database. This may take a couple of minutes</div>
+        <div>All the reloads after this first load will be very fast</div>
+
         <BounceLoader color="#ff0000" loading={true} speedMultiplier={0.8} />
       </Frame>
     );

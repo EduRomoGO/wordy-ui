@@ -1,9 +1,8 @@
 /** @jsx jsx */
 import { jsx, css } from "@emotion/react";
+import { Suspense, lazy } from "react";
 import "./App.css";
 import NavMenu from "./components/NavMenu/NavMenu.js";
-import Phonemes from "./components/Phonemes/Phonemes.js";
-import Spell from "./components/Spell/Spell.js";
 import { Words } from "./components/pages/words/Words";
 import {
   BrowserRouter as Router,
@@ -11,6 +10,9 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
+
+const Phonemes = lazy(() => import("./components/Phonemes/Phonemes.js"));
+const Spell = lazy(() => import("./components/Spell/Spell.js"));
 
 function App() {
   return (
@@ -30,12 +32,14 @@ function App() {
             <Route path="/words">
               <Words />
             </Route>
-            <Route path="/phonemes">
-              <Phonemes />
-            </Route>
-            <Route path="/spell">
-              <Spell />
-            </Route>
+            <Suspense fallback={<div>Loading...</div>}>
+              <Route path="/phonemes">
+                <Phonemes />
+              </Route>
+              <Route path="/spell">
+                <Spell />
+              </Route>
+            </Suspense>
           </Switch>
         </main>
       </div>

@@ -4,12 +4,7 @@ import { Suspense, lazy } from "react";
 import "./App.css";
 import NavMenu from "./components/NavMenu/NavMenu.js";
 import { Words } from "./components/pages/words/Words";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 const Phonemes = lazy(() => import("./components/Phonemes/Phonemes.js"));
 const Spell = lazy(() => import("./components/Spell/Spell.js"));
@@ -27,7 +22,6 @@ function App() {
             padding: 20px;
           `}
         >
-          <Redirect from="/" to="/words" />
           <Switch>
             <Route path="/words">
               <Words />
@@ -40,6 +34,9 @@ function App() {
                 <Spell />
               </Route>
             </Suspense>
+            <Route path="/">
+              <Words />
+            </Route>
           </Switch>
         </main>
       </div>

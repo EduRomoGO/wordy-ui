@@ -2,7 +2,7 @@
 import { jsx, css } from "@emotion/react";
 import { useState, useEffect, useCallback } from "react";
 import WordsList from "../../WordsList/WordsList";
-import { useDatabase } from "../../../hooks/useDatabase";
+import { useDatabase } from "hooks/useDatabase";
 import SearchWordsForm from "../../search-words-form/SearchWordsForm";
 import Phrase from "../../phrase/Phrase";
 

@@ -72,11 +72,11 @@ function App() {
         >
           <Switch>
             <Route path="/words">
-              <Words />
+              <Words onComponentLoad={handleComponentLoaded} />
             </Route>
             <Suspense fallback={<div>Loading...</div>}>
               <Route path="/phonemes">
-                <Phonemes />
+                <Phonemes onComponentLoad={handleComponentLoaded} />
               </Route>
               <Route path="/spell">
                 <Spell onComponentLoad={handleComponentLoaded} />

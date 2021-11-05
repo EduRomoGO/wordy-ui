@@ -20,8 +20,7 @@ const createOrOpenDb = () => {
 };
 
 const DatabaseLoadingStatus = () => {
-  const [fullyLoaded, setFullyLoaded] = useState(false);
-  const { setLoadStatus } = useDatabaseLoadStatusContext();
+  const { loadStatus, setLoadStatus } = useDatabaseLoadStatusContext();
 
   useEffect(() => {
     const db = createOrOpenDb();
@@ -32,21 +31,19 @@ const DatabaseLoadingStatus = () => {
         await loadPendingParts(db, failedPendingParts);
 
         setLoadStatus("fullyLoaded");
-        setFullyLoaded(true);
       } else {
         setLoadStatus("fullyLoaded");
-        setFullyLoaded(true);
       }
     };
 
-    if (!fullyLoaded) {
+    if (loadStatus !== "fullyLoaded") {
       asyncWrapper();
     }
-  }, [fullyLoaded, setLoadStatus]);
+  }, [loadStatus, setLoadStatus]);
 
   return (
     <div>
-      {fullyLoaded ? (
+      {loadStatus === "fullyLoaded" ? (
         <div>Database is fully updated</div>
       ) : (
         <div>database loading in progress</div>

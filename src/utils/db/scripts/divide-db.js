@@ -8,8 +8,6 @@ async function divideDatabase(fileUrl, GROUP_LENGTH, destinationFilesBasePath) {
     const fileString = await readFile(fileUrl, "utf8");
     const { wordDescriptors } = JSON.parse(fileString);
 
-    // console.log(wordDescriptors);
-
     // create array groups
     let dbGroups = [];
     while (wordDescriptors.length > 0) {

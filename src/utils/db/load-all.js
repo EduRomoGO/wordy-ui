@@ -1,10 +1,3 @@
-const createOrOpenDb = () => {
-  const db = new window.PouchDB("wordsDB");
-  console.log(`Opened connection to db ${db.name} using adapter ${db.adapter}`);
-
-  return db;
-};
-
 const checkDb = async (db) => {
   try {
     const dbInfo = await db.info();
@@ -33,16 +26,7 @@ const writePendingPartWordsToDb = async (part, db) => {
   try {
     const loadFromDiskResult = await import(`./divided/${part}`);
 
-    // console.log("loadFromDiskResult");
-    // console.log(loadFromDiskResult.wordDescriptors);
-
     await populate(db, loadFromDiskResult.wordDescriptors);
-
-    // await partsDb.put({
-    //   _id: `${part}`,
-    //   name: `${part}`,
-    //   loaded: true,
-    // });
 
     console.log(
       `${part} has been successfully populated into databaes ${db.name}`
@@ -55,11 +39,10 @@ const writePendingPartWordsToDb = async (part, db) => {
 };
 
 export async function loadPendingParts(
+  db,
   pendingParts = ["db-2.json", "db-3.json", "db-fail-4.json"]
 ) {
   try {
-    const db = createOrOpenDb();
-
     const dbDocsCount = await checkDb(db);
 
     if (dbDocsCount < 3800) {
@@ -76,7 +59,7 @@ export async function loadPendingParts(
         .filter((result) => result.status !== "fulfilled")
         .map((result) => result.reason);
     } else {
-      console.log("database is already populated");
+      console.info("database is already populated");
       return [];
     }
   } catch (error) {

@@ -3,8 +3,6 @@ import { jsx } from "@emotion/react";
 import styled from "@emotion/styled";
 import React, { useState, useEffect } from "react";
 import BounceLoader from "react-spinners/BounceLoader";
-// import { loadPendingParts } from "utils/db/workerizedLoadAll";
-import { loadPendingParts } from "utils/db/load-all";
 
 const DatabaseContext = React.createContext();
 DatabaseContext.displayName = "DatabaseContext";
@@ -26,8 +24,10 @@ function useDatabaseContext() {
 
 // Database helper methods
 
-const createOrOpenDb = () => {
-  const db = new window.PouchDB("wordsDB");
+const createOrOpenDb = async () => {
+  let db = new window.PouchDB("wordsDB");
+  await db.destroy();
+  db = new window.PouchDB("wordsDB");
   console.log(`Opened connection to db ${db.name} using adapter ${db.adapter}`);
 
   return db;
@@ -57,21 +57,14 @@ const populate = (db, data) => {
     });
 };
 
-// const initialPendingParts = ["db-2.json", "db-3.json", "db-4.json"];
-
 function DatabaseProvider({ children }) {
   const [db, setDb] = useState();
   const [status, setStatus] = useState("idle");
-  const [fullyLoaded, setFullyLoaded] = useState(false);
-  // const [pendingParts, setPendingParts] = useState(initialPendingParts);
-
-  // const progressPerc =
-  //   Math.floor(1 - pendingParts.length / initialPendingParts.length) * 100;
 
   useEffect(() => {
     const loadDatabase = async () => {
       try {
-        const db = createOrOpenDb();
+        const db = await createOrOpenDb();
 
         const dbDocsCount = await checkDb(db);
 
@@ -103,86 +96,10 @@ function DatabaseProvider({ children }) {
     loadDatabase();
 
     return () => {
-      const db = createOrOpenDb();
-
-      db.close();
+      // const db = createOrOpenDb();
+      // db.close();
     };
   }, []);
-
-  useEffect(() => {
-    const asyncWrapper = async () => {
-      const failedPendingParts = await loadPendingParts();
-      if (failedPendingParts.length > 0) {
-        await loadPendingParts(failedPendingParts);
-        setFullyLoaded(true);
-      }
-
-      setFullyLoaded(true);
-    };
-
-    if (!fullyLoaded) {
-      asyncWrapper();
-    }
-  }, [fullyLoaded]);
-
-  // useEffect(() => {
-  //   async function test() {
-  //     const db = new window.PouchDB("test");
-
-  //     const allDocs = await db.allDocs({
-  //       include_docs: true,
-  //     });
-
-  //     console.log(allDocs);
-
-  //     // const pendingParts = allDocs.rows.map((row) => {
-  //     //   return row?.doc?.name;
-  //     // });
-  //   }
-  //   test();
-
-  //   // asyncWrapper();
-  // }, []);
-
-  // useEffect(() => {
-  //   const loadPendingParts = async () => {
-  //     try {
-  //       const db = createOrOpenDb();
-
-  //       const dbDocsCount = await checkDb(db);
-  //       console.log("dbDocsCount");
-  //       console.log(dbDocsCount);
-
-  //       if (dbDocsCount < 3500 && pendingParts.length > 0) {
-  //         let failedParts = [];
-
-  //         pendingParts.forEach(async (part) => {
-  //           try {
-  //             const loadFromDiskResult = await import(
-  //               `../../utils/db/divided/${part}`
-  //             );
-
-  //             console.log("loadFromDiskResult");
-  //             console.log(loadFromDiskResult.wordDescriptors);
-
-  //             await populate(db, loadFromDiskResult.wordDescriptors);
-  //           } catch (error) {
-  //             failedParts.push(part);
-  //             console.error(
-  //               `Error loading all the data to database - ${error}`
-  //             );
-  //           }
-  //         });
-
-  //         setPendingParts(failedParts);
-  //       }
-  //     } catch (error) {
-  //       console.error(`Error loading all database - ${error}`);
-  //     }
-  //   };
-
-  //   loadPendingParts();
-  // }, [pendingParts]);
 
   const Frame = styled.div`
     height: 100vh;
@@ -210,11 +127,6 @@ function DatabaseProvider({ children }) {
 
   return (
     <DatabaseContext.Provider value={{ db }}>
-      {fullyLoaded ? (
-        <div>Database is fully updated</div>
-      ) : (
-        <div>database loading in progress</div>
-      )}
       {children}
     </DatabaseContext.Provider>
   );

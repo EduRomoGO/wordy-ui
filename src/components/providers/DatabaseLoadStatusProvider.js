@@ -1,11 +1,11 @@
 import React from "react";
 
-// import fileNamesJson from "utils/db/divided/file-names";
+import fileNamesJson from "utils/db/divided/file-names";
 
-// // first one is already loaded, hence we don't put it here as pending
-// const [, ...pendingPartsDefault] = fileNamesJson.fileNames.slice(0, 5);
+// first one is already loaded, hence we don't put it here as pending
+const [, ...jsonParts] = fileNamesJson.fileNames.slice(0, 5);
 
-// console.log(pendingPartsDefault);
+console.log(jsonParts);
 
 const DatabaseLoadStatusContext = React.createContext({
   loadStatus: "empty",
@@ -20,14 +20,36 @@ function useDatabaseLoadStatusContext() {
   return context;
 }
 
-function DatabaseLoadStatusProvider({ children }) {
-  const [loadStatus, updateLoadStatus] = React.useState(
-    () => localStorage.getItem("loadStatus") || "empty"
-  );
+const getLoadedParts = () => {
+  const loadedPartsStorage = localStorage.getItem("loadedParts");
 
-  const setLoadStatus = function (newStatus) {
-    localStorage.setItem("loadStatus", newStatus);
-    updateLoadStatus(newStatus);
+  return loadedPartsStorage ? JSON.parse(loadedPartsStorage) : [];
+};
+
+const getLoadStatus = () => {
+  const loadedParts = getLoadedParts();
+
+  const allPartsAreLoaded = jsonParts.every((part) => {
+    return loadedParts.includes(part);
+  });
+
+  return allPartsAreLoaded ? "fullyLoaded" : "empty";
+};
+
+function DatabaseLoadStatusProvider({ children }) {
+  const [loadStatus, updateLoadStatus] = React.useState(getLoadStatus);
+
+  // const setLoadStatus = function (newStatus) {
+  //   localStorage.setItem("loadStatus", newStatus);
+  //   updateLoadStatus(newStatus);
+  // };
+
+  const setLoadStatus = (part) => {
+    const loadedParts = getLoadedParts();
+
+    localStorage.setItem("loadedParts", JSON.stringify([...loadedParts, part]));
+
+    updateLoadStatus(getLoadStatus());
   };
 
   const value = {

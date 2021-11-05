@@ -5,7 +5,8 @@ import "./App.css";
 import NavMenu from "./components/NavMenu/NavMenu.js";
 import { Words } from "./components/pages/words/Words";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { loadPendingParts } from "utils/db/load-all";
+// import { loadPendingParts } from "utils/db/load-all";
+import useLoadPendingParts from "utils/db/load-all";
 // import useDatabaseLoadingStatus from "hooks/useDatabaseLoadStatus";
 import { useDatabaseLoadStatusContext } from "components/providers/DatabaseLoadStatusProvider";
 
@@ -20,7 +21,8 @@ const createOrOpenDb = () => {
 };
 
 const DatabaseLoadingStatus = () => {
-  const { loadStatus, setLoadStatus } = useDatabaseLoadStatusContext();
+  const { loadPendingParts } = useLoadPendingParts();
+  const { loadStatus } = useDatabaseLoadStatusContext();
 
   useEffect(() => {
     const db = createOrOpenDb();
@@ -29,17 +31,13 @@ const DatabaseLoadingStatus = () => {
       const failedPendingParts = await loadPendingParts(db);
       if (failedPendingParts.length > 0) {
         await loadPendingParts(db, failedPendingParts);
-
-        setLoadStatus("fullyLoaded");
-      } else {
-        setLoadStatus("fullyLoaded");
       }
     };
 
     if (loadStatus !== "fullyLoaded") {
       asyncWrapper();
     }
-  }, [loadStatus, setLoadStatus]);
+  }, [loadPendingParts, loadStatus]);
 
   return (
     <div>

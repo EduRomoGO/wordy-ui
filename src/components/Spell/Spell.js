@@ -51,8 +51,8 @@ const Spell = ({ onComponentLoad }) => {
         setLetterDescriptors(letterDescriptors);
         onComponentLoad();
       } catch (error) {
-        setStatus("rejected");
         console.error(`Error loading letter descriptors - ${error}`);
+        setStatus("rejected");
       }
     };
 

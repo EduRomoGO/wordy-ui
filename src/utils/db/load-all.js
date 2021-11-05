@@ -1,3 +1,5 @@
+import fileNamesJson from "utils/db/divided/file-names";
+
 const checkDb = async (db) => {
   try {
     const dbInfo = await db.info();
@@ -40,7 +42,8 @@ const writePendingPartWordsToDb = async (part, db) => {
 
 export async function loadPendingParts(
   db,
-  pendingParts = ["db-2.json", "db-3.json", "db-fail-4.json"]
+  pendingParts = fileNamesJson.fileNames.slice(0, 5)
+  // pendingParts = ["db-2.json", "db-3.json", "db-fail-4.json"]
 ) {
   try {
     const dbDocsCount = await checkDb(db);

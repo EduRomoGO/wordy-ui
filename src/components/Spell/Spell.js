@@ -5,7 +5,7 @@ import cuid from "cuid";
 import "./Spell.css";
 import { useDatabaseLoadStatusContext } from "components/providers/DatabaseLoadStatusProvider";
 
-const Spell = ({ onComponentLoad }) => {
+const Spell = () => {
   const { getDescriptorsForWords } = useDatabase();
   const [letterDescriptors, setLetterDescriptors] = useState([]);
   const [status, setStatus] = useState("idle");
@@ -51,7 +51,6 @@ const Spell = ({ onComponentLoad }) => {
         const letterDescriptors = await getDescriptorsForWords(letters);
         setStatus("resolved");
         setLetterDescriptors(letterDescriptors);
-        onComponentLoad();
       } catch (error) {
         console.error(`Error loading letter descriptors - ${error}`);
         setStatus("rejected");
@@ -59,7 +58,7 @@ const Spell = ({ onComponentLoad }) => {
     };
 
     loadLetterDescriptors();
-  }, [getDescriptorsForWords, letters, onComponentLoad]);
+  }, [getDescriptorsForWords, letters]);
 
   if (status === "idle" || status === "loading" || loadStatus === "empty") {
     return <div>loading...</div>;

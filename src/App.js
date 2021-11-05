@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx, css } from "@emotion/react";
-import { Suspense, lazy, useState, useCallback } from "react";
+import { Suspense, lazy } from "react";
 import "./App.css";
 import NavMenu from "./components/NavMenu/NavMenu.js";
 import { Words } from "./components/pages/words/Words";
@@ -12,10 +12,7 @@ import { useDatabaseLoadStatusContext } from "components/providers/DatabaseLoadS
 const Phonemes = lazy(() => import("./components/Phonemes/Phonemes.js"));
 const Spell = lazy(() => import("./components/Spell/Spell.js"));
 
-const DatabaseLoadingStatus = () => {
-  useLoadPendingParts();
-  const { loadStatus } = useDatabaseLoadStatusContext();
-
+const DatabaseLoadingStatus = ({ loadStatus }) => {
   return (
     <div>
       {loadStatus === "fullyLoaded" ? (
@@ -28,18 +25,14 @@ const DatabaseLoadingStatus = () => {
 };
 
 function App() {
-  const [componentLoaded, setComponentLoaded] = useState(false);
-
-  const handleComponentLoaded = useCallback(() => {
-    setComponentLoaded(true);
-  }, []);
+  useLoadPendingParts();
+  const { loadStatus } = useDatabaseLoadStatusContext();
 
   return (
     <Router>
       <div className="App fluid-type">
         <header>
-          {componentLoaded && <DatabaseLoadingStatus />}
-
+          <DatabaseLoadingStatus loadStatus={loadStatus} />
           <NavMenu />
         </header>
 
@@ -50,14 +43,14 @@ function App() {
         >
           <Switch>
             <Route path="/words">
-              <Words onComponentLoad={handleComponentLoaded} />
+              <Words />
             </Route>
             <Suspense fallback={<div>Loading...</div>}>
               <Route path="/phonemes">
-                <Phonemes onComponentLoad={handleComponentLoaded} />
+                <Phonemes />
               </Route>
               <Route path="/spell">
-                <Spell onComponentLoad={handleComponentLoaded} />
+                <Spell />
               </Route>
             </Suspense>
             <Route path="/">

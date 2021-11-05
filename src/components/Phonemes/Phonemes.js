@@ -3,11 +3,7 @@ import "./Phonemes.css";
 import { consonants, vowels, diphthongs } from "./PhonemesList.js";
 import cuid from "cuid";
 
-const Phonemes = ({ onComponentLoad }) => {
-  React.useEffect(() => {
-    onComponentLoad();
-  }, [onComponentLoad]);
-
+const Phonemes = () => {
   const handleOnClick = (e, file) => {
     document.querySelector(`#${file}`).play();
   };

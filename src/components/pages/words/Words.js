@@ -21,7 +21,7 @@ const WordInfo = ({ wordInfo: { word, definition } }) => {
   );
 };
 
-const Words = ({ onComponentLoad }) => {
+const Words = () => {
   const { getSomeWords, getDefinition } = useDatabase();
   const [searchInputWords, setSearchInputWords] = useState([]);
   const [selectedWord, setSelectedWord] = useState();
@@ -70,7 +70,6 @@ const Words = ({ onComponentLoad }) => {
         const words = await getSomeWords(20);
         setWords(words);
         setStatus("resolved");
-        onComponentLoad();
       } catch (error) {
         setStatus("rejected");
         console.error(`Error loading words -${error}`);
@@ -79,7 +78,7 @@ const Words = ({ onComponentLoad }) => {
 
     setStatus("loading");
     loadWords();
-  }, [getSomeWords, onComponentLoad]);
+  }, [getSomeWords]);
 
   const handleSearchInputChange = (inputWords) => {
     setSearchInputWords(inputWords);

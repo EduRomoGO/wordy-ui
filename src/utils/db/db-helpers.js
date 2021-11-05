@@ -26,7 +26,7 @@ const populate = (db, data) => {
       console.log(
         `${result.length} documents were added to ${db.name} database`
       );
-      console.log(result);
+      // console.log(result);
     })
     .catch(function (error) {
       console.log(`Error populating database - ${error}`);

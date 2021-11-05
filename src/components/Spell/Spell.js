@@ -3,11 +3,13 @@ import { useDatabase } from "hooks/useDatabase";
 import Word from "../Word/Word.js";
 import cuid from "cuid";
 import "./Spell.css";
+import { useDatabaseLoadStatusContext } from "components/providers/DatabaseLoadStatusProvider";
 
 const Spell = ({ onComponentLoad }) => {
   const { getDescriptorsForWords } = useDatabase();
   const [letterDescriptors, setLetterDescriptors] = useState([]);
   const [status, setStatus] = useState("idle");
+  const { loadStatus } = useDatabaseLoadStatusContext();
 
   const letters = React.useMemo(
     () => [
@@ -59,7 +61,7 @@ const Spell = ({ onComponentLoad }) => {
     loadLetterDescriptors();
   }, [getDescriptorsForWords, letters, onComponentLoad]);
 
-  if (status === "idle" || status === "loading") {
+  if (status === "idle" || status === "loading" || loadStatus === "empty") {
     return <div>loading...</div>;
   }
 

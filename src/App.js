@@ -6,6 +6,8 @@ import NavMenu from "./components/NavMenu/NavMenu.js";
 import { Words } from "./components/pages/words/Words";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { loadPendingParts } from "utils/db/load-all";
+// import useDatabaseLoadingStatus from "hooks/useDatabaseLoadStatus";
+import { useDatabaseLoadStatusContext } from "components/providers/DatabaseLoadStatusProvider";
 
 const Phonemes = lazy(() => import("./components/Phonemes/Phonemes.js"));
 const Spell = lazy(() => import("./components/Spell/Spell.js"));
@@ -19,6 +21,7 @@ const createOrOpenDb = () => {
 
 const DatabaseLoadingStatus = () => {
   const [fullyLoaded, setFullyLoaded] = useState(false);
+  const { setLoadStatus } = useDatabaseLoadStatusContext();
 
   useEffect(() => {
     const db = createOrOpenDb();
@@ -27,8 +30,11 @@ const DatabaseLoadingStatus = () => {
       const failedPendingParts = await loadPendingParts(db);
       if (failedPendingParts.length > 0) {
         await loadPendingParts(db, failedPendingParts);
+
+        setLoadStatus("fullyLoaded");
         setFullyLoaded(true);
       } else {
+        setLoadStatus("fullyLoaded");
         setFullyLoaded(true);
       }
     };
@@ -36,7 +42,7 @@ const DatabaseLoadingStatus = () => {
     if (!fullyLoaded) {
       asyncWrapper();
     }
-  }, [fullyLoaded]);
+  }, [fullyLoaded, setLoadStatus]);
 
   return (
     <div>

@@ -5,10 +5,13 @@ import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { DatabaseProvider } from "./components/providers/DatabaseProvider";
+import { DatabaseLoadStatusProvider } from "./components/providers/DatabaseLoadStatusProvider";
 
 ReactDOM.render(
   <DatabaseProvider>
-    <App />
+    <DatabaseLoadStatusProvider>
+      <App />
+    </DatabaseLoadStatusProvider>
   </DatabaseProvider>,
   document.getElementById("root")
 );

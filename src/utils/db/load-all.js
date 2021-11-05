@@ -1,6 +1,7 @@
 import fileNamesJson from "utils/db/divided/file-names";
 
-const [, ...pendingPartsDefault] = fileNamesJson.fileNames;
+// first one is already loaded, hence we don't put it here as pending
+const [, ...pendingPartsDefault] = fileNamesJson.fileNames.slice(0, 5);
 
 const checkDb = async (db) => {
   try {

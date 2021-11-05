@@ -3,6 +3,7 @@ import { jsx } from "@emotion/react";
 import styled from "@emotion/styled";
 import React, { useState, useEffect } from "react";
 import BounceLoader from "react-spinners/BounceLoader";
+import { createOrOpenDb, populate, checkDb } from "utils/db/db-helpers";
 
 const DatabaseContext = React.createContext();
 DatabaseContext.displayName = "DatabaseContext";
@@ -21,41 +22,6 @@ function useDatabaseContext() {
 
   return context;
 }
-
-// Database helper methods
-
-const createOrOpenDb = async () => {
-  let db = new window.PouchDB("wordsDB");
-  await db.destroy();
-  db = new window.PouchDB("wordsDB");
-  console.log(`Opened connection to db ${db.name} using adapter ${db.adapter}`);
-
-  return db;
-};
-
-const checkDb = async (db) => {
-  try {
-    const dbInfo = await db.info();
-
-    return dbInfo.doc_count;
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-const populate = (db, data) => {
-  return db
-    .bulkDocs(data)
-    .then(function (result) {
-      console.log(
-        `${result.length} documents were added to ${db.name} database`
-      );
-      console.log(result);
-    })
-    .catch(function (error) {
-      console.log(`Error populating database - ${error}`);
-    });
-};
 
 function DatabaseProvider({ children }) {
   const [db, setDb] = useState();

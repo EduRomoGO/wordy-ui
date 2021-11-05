@@ -1,33 +1,10 @@
 import React from "react";
 import { useDatabaseLoadStatusContext } from "components/providers/DatabaseLoadStatusProvider";
 import fileNamesJson from "utils/db/divided/file-names";
+import { populate, checkDb } from "utils/db/db-helpers";
 
 // first one is already loaded, hence we don't put it here as pending
 const [, ...pendingPartsDefault] = fileNamesJson.fileNames.slice(0, 5);
-
-const checkDb = async (db) => {
-  try {
-    const dbInfo = await db.info();
-
-    return dbInfo.doc_count;
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-const populate = (db, data) => {
-  return db
-    .bulkDocs(data)
-    .then(function (result) {
-      console.log(
-        `${result.length} documents were added to ${db.name} database`
-      );
-      // console.log(result);
-    })
-    .catch(function (error) {
-      console.log(`Error populating database - ${error}`);
-    });
-};
 
 export default function useLoadPendingParts() {
   const { loadStatus, setLoadStatus } = useDatabaseLoadStatusContext();

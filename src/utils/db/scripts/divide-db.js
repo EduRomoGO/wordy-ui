@@ -9,7 +9,7 @@ async function divideDatabase(fileUrl, GROUP_LENGTH, destinationFilesBasePath) {
     const { wordDescriptors } = JSON.parse(fileString);
 
     // create array groups
-    let dbGroups = [];
+    let dbGroups = [wordDescriptors.splice(0, 50)];
     while (wordDescriptors.length > 0) {
       dbGroups.push(wordDescriptors.splice(0, GROUP_LENGTH));
     }
@@ -24,6 +24,18 @@ async function divideDatabase(fileUrl, GROUP_LENGTH, destinationFilesBasePath) {
         4
       );
     });
+
+    // create a file with all the names of the files created
+    const content = {
+      fileNames: fileContents.map((content, index) => `db-${index + 1}.json`),
+    };
+    const contentString = JSON.stringify(content, null, 4);
+
+    await writeFile(
+      `${destinationFilesBasePath}/file-names.json`,
+      contentString,
+      "utf8"
+    );
 
     //create a file for each file content group
     const writeFileContentsPromises = fileContents.map((content, index) => {
@@ -48,7 +60,7 @@ async function divideDatabase(fileUrl, GROUP_LENGTH, destinationFilesBasePath) {
 const path = process.cwd();
 
 const dbPath = path + "/src/utils/db/db.json";
-const GROUP_LENGTH = 1000;
+const GROUP_LENGTH = 500;
 const destinationFilesBasePath = path + "/src/utils/db/divided";
 
 divideDatabase(dbPath, GROUP_LENGTH, destinationFilesBasePath);

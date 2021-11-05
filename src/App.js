@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx, css } from "@emotion/react";
-import { Suspense, lazy, useEffect, useState } from "react";
+import { Suspense, lazy, useEffect, useState, useCallback } from "react";
 import "./App.css";
 import NavMenu from "./components/NavMenu/NavMenu.js";
 import { Words } from "./components/pages/words/Words";
@@ -50,11 +50,18 @@ const DatabaseLoadingStatus = () => {
 };
 
 function App() {
+  const [componentLoaded, setComponentLoaded] = useState(false);
+
+  const handleComponentLoaded = useCallback(() => {
+    setComponentLoaded(true);
+  }, []);
+
   return (
     <Router>
       <div className="App fluid-type">
         <header>
-          <DatabaseLoadingStatus />
+          {componentLoaded && <DatabaseLoadingStatus />}
+
           <NavMenu />
         </header>
 
@@ -72,7 +79,7 @@ function App() {
                 <Phonemes />
               </Route>
               <Route path="/spell">
-                <Spell />
+                <Spell onComponentLoad={handleComponentLoaded} />
               </Route>
             </Suspense>
             <Route path="/">

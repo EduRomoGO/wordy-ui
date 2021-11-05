@@ -4,7 +4,7 @@ import Word from "../Word/Word.js";
 import cuid from "cuid";
 import "./Spell.css";
 
-const Spell = () => {
+const Spell = ({ onComponentLoad }) => {
   const { getDescriptorsForWords } = useDatabase();
   const [letterDescriptors, setLetterDescriptors] = useState([]);
   const [status, setStatus] = useState("idle");
@@ -49,6 +49,7 @@ const Spell = () => {
         const letterDescriptors = await getDescriptorsForWords(letters);
         setStatus("resolved");
         setLetterDescriptors(letterDescriptors);
+        onComponentLoad();
       } catch (error) {
         setStatus("rejected");
         console.error(`Error loading letter descriptors - ${error}`);
@@ -56,7 +57,7 @@ const Spell = () => {
     };
 
     loadLetterDescriptors();
-  }, [getDescriptorsForWords, letters]);
+  }, [getDescriptorsForWords, letters, onComponentLoad]);
 
   if (status === "idle" || status === "loading") {
     return <div>loading...</div>;

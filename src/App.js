@@ -6,7 +6,7 @@ import NavMenu from "./components/NavMenu/NavMenu.js";
 import { Words } from "./components/pages/words/Words";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 // import { loadPendingParts } from "utils/db/load-all";
-import useLoadPendingParts from "utils/db/load-all";
+import useLoadPendingParts from "hooks/useLoadAll";
 // import useDatabaseLoadingStatus from "hooks/useDatabaseLoadStatus";
 import { useDatabaseLoadStatusContext } from "components/providers/DatabaseLoadStatusProvider";
 

@@ -39,11 +39,6 @@ const getLoadStatus = () => {
 function DatabaseLoadStatusProvider({ children }) {
   const [loadStatus, updateLoadStatus] = React.useState(getLoadStatus);
 
-  // const setLoadStatus = function (newStatus) {
-  //   localStorage.setItem("loadStatus", newStatus);
-  //   updateLoadStatus(newStatus);
-  // };
-
   const setLoadStatus = (part) => {
     const loadedParts = getLoadedParts();
 
@@ -54,6 +49,7 @@ function DatabaseLoadStatusProvider({ children }) {
 
   const value = {
     loadStatus,
+    getLoadedParts,
     setLoadStatus,
   };
 

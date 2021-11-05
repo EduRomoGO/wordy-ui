@@ -1,43 +1,20 @@
 /** @jsx jsx */
 import { jsx, css } from "@emotion/react";
-import { Suspense, lazy, useEffect, useState, useCallback } from "react";
+import { Suspense, lazy, useState, useCallback } from "react";
 import "./App.css";
 import NavMenu from "./components/NavMenu/NavMenu.js";
 import { Words } from "./components/pages/words/Words";
+
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-// import { loadPendingParts } from "utils/db/load-all";
 import useLoadPendingParts from "hooks/useLoadAll";
-// import useDatabaseLoadingStatus from "hooks/useDatabaseLoadStatus";
 import { useDatabaseLoadStatusContext } from "components/providers/DatabaseLoadStatusProvider";
 
 const Phonemes = lazy(() => import("./components/Phonemes/Phonemes.js"));
 const Spell = lazy(() => import("./components/Spell/Spell.js"));
 
-const createOrOpenDb = () => {
-  const db = new window.PouchDB("wordsDB");
-  console.log(`Opened connection to db ${db.name} using adapter ${db.adapter}`);
-
-  return db;
-};
-
 const DatabaseLoadingStatus = () => {
-  const { loadPendingParts } = useLoadPendingParts();
+  useLoadPendingParts();
   const { loadStatus } = useDatabaseLoadStatusContext();
-
-  useEffect(() => {
-    const db = createOrOpenDb();
-
-    const asyncWrapper = async () => {
-      const failedPendingParts = await loadPendingParts(db);
-      if (failedPendingParts.length > 0) {
-        await loadPendingParts(db, failedPendingParts);
-      }
-    };
-
-    if (loadStatus !== "fullyLoaded") {
-      asyncWrapper();
-    }
-  }, [loadPendingParts, loadStatus]);
 
   return (
     <div>

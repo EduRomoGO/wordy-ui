@@ -7,7 +7,8 @@ import { populate, checkDb } from "utils/db/db-helpers";
 const [, ...pendingPartsDefault] = fileNamesJson.fileNames.slice(0, 5);
 
 export default function useLoadPendingParts() {
-  const { loadStatus, setLoadStatus } = useDatabaseLoadStatusContext();
+  const { loadStatus, getLoadedParts, setLoadStatus } =
+    useDatabaseLoadStatusContext();
 
   React.useEffect(() => {
     const writePendingPartWordsToDb = async (part, db) => {
@@ -65,14 +66,17 @@ export default function useLoadPendingParts() {
     const db = createOrOpenDb();
 
     const asyncWrapper = async () => {
-      const failedPendingParts = await loadPendingParts(db);
-      if (failedPendingParts.length > 0) {
-        await loadPendingParts(db, failedPendingParts);
+      let missingParts = pendingPartsDefault.filter(
+        (part) => !getLoadedParts().includes(part)
+      );
+
+      if (missingParts.length > 0) {
+        await loadPendingParts(db, missingParts);
       }
     };
 
     if (loadStatus !== "fullyLoaded") {
       asyncWrapper();
     }
-  }, [loadStatus, setLoadStatus]);
+  }, [getLoadedParts, loadStatus, setLoadStatus]);
 }

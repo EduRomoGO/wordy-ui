@@ -9,7 +9,7 @@ console.log(jsonParts);
 
 const DatabaseLoadStatusContext = React.createContext({
   loadStatus: "empty",
-  setLoadStatus: () => {},
+  updateLoadStatus: () => {},
 });
 
 DatabaseLoadStatusContext.displayName = "DatabaseLoadStatusContext";
@@ -36,21 +36,27 @@ const getLoadStatus = () => {
   return allPartsAreLoaded ? "fullyLoaded" : "empty";
 };
 
-function DatabaseLoadStatusProvider({ children }) {
-  const [loadStatus, updateLoadStatus] = React.useState(getLoadStatus);
+// const getMissingParts = () => {
+//   return jsonParts.filter(
+//     (part) => !getLoadedParts().includes(part)
+//   );
+// }
 
-  const setLoadStatus = (part) => {
+function DatabaseLoadStatusProvider({ children }) {
+  const [loadStatus, setLoadStatus] = React.useState(getLoadStatus);
+
+  const updateLoadStatus = (part) => {
     const loadedParts = getLoadedParts();
 
     localStorage.setItem("loadedParts", JSON.stringify([...loadedParts, part]));
 
-    updateLoadStatus(getLoadStatus());
+    setLoadStatus(getLoadStatus());
   };
 
   const value = {
     loadStatus,
     getLoadedParts,
-    setLoadStatus,
+    updateLoadStatus,
   };
 
   return (

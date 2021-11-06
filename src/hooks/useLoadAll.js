@@ -7,7 +7,7 @@ import { populate, checkDb } from "utils/db/db-helpers";
 const [, ...pendingPartsDefault] = fileNamesJson.fileNames.slice(0, 5);
 
 export default function useLoadPendingParts() {
-  const { loadStatus, getLoadedParts, setLoadStatus } =
+  const { loadStatus, getLoadedParts, updateLoadStatus } =
     useDatabaseLoadStatusContext();
 
   React.useEffect(() => {
@@ -17,7 +17,7 @@ export default function useLoadPendingParts() {
 
         await populate(db, loadFromDiskResult.wordDescriptors);
 
-        setLoadStatus(part);
+        updateLoadStatus(part);
         console.log(
           `${part} has been successfully populated into databaes ${db.name}`
         );
@@ -78,5 +78,5 @@ export default function useLoadPendingParts() {
     if (loadStatus !== "fullyLoaded") {
       asyncWrapper();
     }
-  }, [getLoadedParts, loadStatus, setLoadStatus]);
+  }, [getLoadedParts, loadStatus, updateLoadStatus]);
 }

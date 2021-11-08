@@ -5,7 +5,7 @@ import { populate } from "utils/db/db-helpers";
 export default function useLoadPendingParts() {
   const { loadStatus, missingParts, updateLoadedParts } =
     useDatabaseLoadStatusContext();
-  const loadedPartsRef = React.useRef([]);
+  const currentRenderLoadedPartsRef = React.useRef([]);
 
   React.useEffect(() => {
     const writePendingPartWordsToDb = async (part, db) => {
@@ -14,34 +14,23 @@ export default function useLoadPendingParts() {
 
         await populate(db, loadFromDiskResult.wordDescriptors);
 
-        loadedPartsRef.current.push(part);
+        currentRenderLoadedPartsRef.current.push(part);
         console.log(
           `${part} has been successfully populated into databaes ${db.name}`
         );
         return part;
       } catch (error) {
-        console.error(`Error loading all the data to database - ${error}`);
+        console.error(`Error loading database pending parts - ${error}`);
         return Promise.reject(part);
       }
     };
 
     async function loadPendingParts(db, pendingParts) {
-      try {
-        const promList = pendingParts.map(async (pendingPart) => {
-          return await writePendingPartWordsToDb(pendingPart, db);
-        });
+      const promiseList = pendingParts.map(async (pendingPart) => {
+        return await writePendingPartWordsToDb(pendingPart, db);
+      });
 
-        const promListResults = await Promise.allSettled(promList);
-
-        console.log("promListResults");
-        console.log(promListResults);
-
-        return promListResults
-          .filter((result) => result.status !== "fulfilled")
-          .map((result) => result.reason);
-      } catch (error) {
-        console.error(`Error loading all database - ${error}`);
-      }
+      return await Promise.allSettled(promiseList);
     }
 
     const createOrOpenDb = () => {
@@ -57,9 +46,7 @@ export default function useLoadPendingParts() {
 
     const asyncWrapper = async () => {
       await loadPendingParts(db, missingParts);
-      const loadedParts = [...loadedPartsRef.current];
-      loadedPartsRef.current = [];
-      updateLoadedParts(loadedParts);
+      updateLoadedParts(currentRenderLoadedPartsRef.current);
     };
 
     if (loadStatus !== "fullyLoaded") {
@@ -67,5 +54,9 @@ export default function useLoadPendingParts() {
     } else {
       console.info("Database is already populated");
     }
+
+    return () => {
+      currentRenderLoadedPartsRef.current = [];
+    };
   }, [missingParts, loadStatus, updateLoadedParts]);
 }

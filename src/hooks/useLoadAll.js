@@ -4,7 +4,7 @@ import { populate } from "utils/db/db-helpers";
 import { useDatabaseContext } from "components/providers/DatabaseProvider";
 
 export default function useLoadPendingParts() {
-  const { loadStatus, missingParts, updateLoadedParts } =
+  const { loadStatus, pendingParts, updateLoadedParts } =
     useDatabaseLoadStatusContext();
   const currentRenderLoadedPartsRef = React.useRef([]);
   const { db } = useDatabaseContext();
@@ -36,7 +36,7 @@ export default function useLoadPendingParts() {
     }
 
     const asyncWrapper = async () => {
-      await loadPendingParts(db, missingParts);
+      await loadPendingParts(db, pendingParts);
 
       updateLoadedParts(currentRenderLoadedPartsRef.current);
     };
@@ -54,5 +54,5 @@ export default function useLoadPendingParts() {
     return () => {
       currentRenderLoadedPartsRef.current = [];
     };
-  }, [missingParts, loadStatus, updateLoadedParts, db]);
+  }, [pendingParts, loadStatus, updateLoadedParts, db]);
 }

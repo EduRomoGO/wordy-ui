@@ -2,10 +2,9 @@ import React from "react";
 
 import fileNamesJson from "utils/db/divided/file-names";
 
-// first one is already loaded, hence we don't put it here as pending
-const [, ...jsonParts] = fileNamesJson.fileNames.slice(0, 5);
+const initialPendingParts = fileNamesJson.fileNames.slice(0, 10);
 
-console.log(jsonParts);
+// console.log(initialPendingParts);
 
 const DatabaseLoadStatusContext = React.createContext({
   loadStatus: "empty",
@@ -21,15 +20,15 @@ function useDatabaseLoadStatusContext() {
 }
 
 const getLoadStatus = (loadedParts) => {
-  const allPartsAreLoaded = jsonParts.every((part) => {
+  const allPartsAreLoaded = initialPendingParts.every((part) => {
     return loadedParts.includes(part);
   });
 
   return allPartsAreLoaded ? "fullyLoaded" : "empty";
 };
 
-const getMissingParts = (loadedParts) => {
-  return jsonParts.filter((part) => {
+const getPendingParts = (loadedParts) => {
+  return initialPendingParts.filter((part) => {
     return !loadedParts.includes(part);
   });
 };
@@ -40,7 +39,7 @@ function DatabaseLoadStatusProvider({ children }) {
   );
 
   const loadStatus = getLoadStatus(loadedParts);
-  const missingParts = getMissingParts(loadedParts);
+  const pendingParts = getPendingParts(loadedParts);
 
   React.useEffect(() => {
     localStorage.setItem("loadedParts", JSON.stringify(loadedParts));
@@ -52,7 +51,7 @@ function DatabaseLoadStatusProvider({ children }) {
 
   const value = {
     loadStatus,
-    missingParts,
+    pendingParts,
     updateLoadedParts,
   };
 

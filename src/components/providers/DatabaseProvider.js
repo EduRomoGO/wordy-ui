@@ -47,6 +47,7 @@ function DatabaseProvider({ children }) {
   useEffect(() => {
     const loadDatabase = async () => {
       try {
+        // const db = createOrOpenDb();
         const db = await createOrOpenDb();
         setDb(db);
         setStatus("resolved");

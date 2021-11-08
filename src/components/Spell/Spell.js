@@ -1,3 +1,7 @@
+/** @jsx jsx */
+import { jsx } from "@emotion/react";
+import styled from "@emotion/styled";
+import BounceLoader from "react-spinners/BounceLoader";
 import React, { useEffect, useState } from "react";
 import { useDatabase } from "hooks/useDatabase";
 import Word from "../Word/Word.js";
@@ -60,8 +64,20 @@ const Spell = () => {
     loadLetterDescriptors();
   }, [getDescriptorsForWords, letters]);
 
+  const Frame = styled.div`
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  `;
+
   if (status === "idle" || status === "loading" || loadStatus === "empty") {
-    return <div>loading...</div>;
+    return (
+      <Frame>
+        <BounceLoader color="#ff0000" loading={true} speedMultiplier={0.8} />
+      </Frame>
+    );
   }
 
   if (status === "rejected") {

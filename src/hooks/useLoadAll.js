@@ -1,11 +1,13 @@
 import React from "react";
 import { useDatabaseLoadStatusContext } from "components/providers/DatabaseLoadStatusProvider";
 import { populate } from "utils/db/db-helpers";
+import { useDatabaseContext } from "components/providers/DatabaseProvider";
 
 export default function useLoadPendingParts() {
   const { loadStatus, missingParts, updateLoadedParts } =
     useDatabaseLoadStatusContext();
   const currentRenderLoadedPartsRef = React.useRef([]);
+  const { db } = useDatabaseContext();
 
   React.useEffect(() => {
     const writePendingPartWordsToDb = async (part, db) => {
@@ -33,30 +35,24 @@ export default function useLoadPendingParts() {
       return await Promise.allSettled(promiseList);
     }
 
-    const createOrOpenDb = () => {
-      const db = new window.PouchDB("wordsDB");
-      console.log(
-        `Opened connection to db ${db.name} using adapter ${db.adapter}`
-      );
-
-      return db;
-    };
-
-    const db = createOrOpenDb();
-
     const asyncWrapper = async () => {
       await loadPendingParts(db, missingParts);
+
       updateLoadedParts(currentRenderLoadedPartsRef.current);
     };
 
-    if (loadStatus !== "fullyLoaded") {
-      asyncWrapper();
+    if (db) {
+      if (loadStatus !== "fullyLoaded") {
+        asyncWrapper();
+      } else {
+        console.info("Database is already populated");
+      }
     } else {
-      console.info("Database is already populated");
+      console.error(`db is not available`);
     }
 
     return () => {
       currentRenderLoadedPartsRef.current = [];
     };
-  }, [missingParts, loadStatus, updateLoadedParts]);
+  }, [missingParts, loadStatus, updateLoadedParts, db]);
 }

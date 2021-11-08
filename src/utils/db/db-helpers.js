@@ -1,14 +1,5 @@
 // Database helper methods
 
-const createOrOpenDb = async () => {
-  let db = new window.PouchDB("wordsDB");
-  await db.destroy();
-  db = new window.PouchDB("wordsDB");
-  console.log(`Opened connection to db ${db.name} using adapter ${db.adapter}`);
-
-  return db;
-};
-
 const checkDb = async (db) => {
   try {
     const dbInfo = await db.info();
@@ -33,4 +24,4 @@ const populate = (db, data) => {
     });
 };
 
-export { createOrOpenDb, checkDb, populate };
+export { checkDb, populate };

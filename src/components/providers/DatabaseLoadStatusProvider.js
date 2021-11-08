@@ -9,7 +9,7 @@ console.log(jsonParts);
 
 const DatabaseLoadStatusContext = React.createContext({
   loadStatus: "empty",
-  updateLoadStatus: () => {},
+  updateLoadedParts: () => {},
 });
 
 DatabaseLoadStatusContext.displayName = "DatabaseLoadStatusContext";
@@ -20,15 +20,7 @@ function useDatabaseLoadStatusContext() {
   return context;
 }
 
-const getLoadedParts = () => {
-  const loadedPartsStorage = localStorage.getItem("loadedParts");
-
-  return loadedPartsStorage ? JSON.parse(loadedPartsStorage) : [];
-};
-
-const getLoadStatus = () => {
-  const loadedParts = getLoadedParts();
-
+const getLoadStatus = (loadedParts) => {
   const allPartsAreLoaded = jsonParts.every((part) => {
     return loadedParts.includes(part);
   });
@@ -36,27 +28,33 @@ const getLoadStatus = () => {
   return allPartsAreLoaded ? "fullyLoaded" : "empty";
 };
 
-// const getMissingParts = () => {
-//   return jsonParts.filter(
-//     (part) => !getLoadedParts().includes(part)
-//   );
-// }
+const getMissingParts = (loadedParts) => {
+  return jsonParts.filter((part) => {
+    return !loadedParts.includes(part);
+  });
+};
 
 function DatabaseLoadStatusProvider({ children }) {
-  const [loadStatus, setLoadStatus] = React.useState(getLoadStatus);
+  const [loadedParts, setLoadedParts] = React.useState(
+    () => JSON.parse(localStorage.getItem("loadedParts")) || []
+  );
+  // const [scheduledParts, setScheduledParts] = React.useState([]);
 
-  const updateLoadStatus = (part) => {
-    const loadedParts = getLoadedParts();
+  const loadStatus = getLoadStatus(loadedParts);
+  const missingParts = getMissingParts(loadedParts);
 
-    localStorage.setItem("loadedParts", JSON.stringify([...loadedParts, part]));
+  React.useEffect(() => {
+    localStorage.setItem("loadedParts", JSON.stringify(loadedParts));
+  }, [loadedParts]);
 
-    setLoadStatus(getLoadStatus());
-  };
+  const updateLoadedParts = React.useCallback((parts) => {
+    setLoadedParts((loadedParts) => [...loadedParts, ...parts]);
+  }, []);
 
   const value = {
     loadStatus,
-    getLoadedParts,
-    updateLoadStatus,
+    missingParts,
+    updateLoadedParts,
   };
 
   return (

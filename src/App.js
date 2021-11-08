@@ -12,7 +12,9 @@ import { useDatabaseLoadStatusContext } from "components/providers/DatabaseLoadS
 const Phonemes = lazy(() => import("./components/Phonemes/Phonemes.js"));
 const Spell = lazy(() => import("./components/Spell/Spell.js"));
 
-const DatabaseLoadingStatus = ({ loadStatus }) => {
+const DatabaseLoadingStatus = () => {
+  const { loadStatus } = useDatabaseLoadStatusContext();
+
   return (
     <div>
       {loadStatus === "fullyLoaded" ? (
@@ -26,13 +28,12 @@ const DatabaseLoadingStatus = ({ loadStatus }) => {
 
 function App() {
   useLoadPendingParts();
-  const { loadStatus } = useDatabaseLoadStatusContext();
 
   return (
     <Router>
       <div className="App fluid-type">
         <header>
-          <DatabaseLoadingStatus loadStatus={loadStatus} />
+          <DatabaseLoadingStatus />
           <NavMenu />
         </header>
 

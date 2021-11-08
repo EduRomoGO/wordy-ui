@@ -1,14 +1,11 @@
 import React from "react";
 import { useDatabaseLoadStatusContext } from "components/providers/DatabaseLoadStatusProvider";
-import fileNamesJson from "utils/db/divided/file-names";
 import { populate, checkDb } from "utils/db/db-helpers";
 
-// first one is already loaded, hence we don't put it here as pending
-const [, ...pendingPartsDefault] = fileNamesJson.fileNames.slice(0, 5);
-
 export default function useLoadPendingParts() {
-  const { loadStatus, getLoadedParts, updateLoadStatus } =
+  const { loadStatus, missingParts, updateLoadedParts } =
     useDatabaseLoadStatusContext();
+  const loadedPartsRef = React.useRef([]);
 
   React.useEffect(() => {
     const writePendingPartWordsToDb = async (part, db) => {
@@ -17,7 +14,7 @@ export default function useLoadPendingParts() {
 
         await populate(db, loadFromDiskResult.wordDescriptors);
 
-        updateLoadStatus(part);
+        loadedPartsRef.current.push(part);
         console.log(
           `${part} has been successfully populated into databaes ${db.name}`
         );
@@ -28,7 +25,7 @@ export default function useLoadPendingParts() {
       }
     };
 
-    async function loadPendingParts(db, pendingParts = pendingPartsDefault) {
+    async function loadPendingParts(db, pendingParts) {
       try {
         const dbDocsCount = await checkDb(db);
 
@@ -66,17 +63,14 @@ export default function useLoadPendingParts() {
     const db = createOrOpenDb();
 
     const asyncWrapper = async () => {
-      let missingParts = pendingPartsDefault.filter(
-        (part) => !getLoadedParts().includes(part)
-      );
-
-      if (missingParts.length > 0) {
-        await loadPendingParts(db, missingParts);
-      }
+      await loadPendingParts(db, missingParts);
+      const loadedParts = [...loadedPartsRef.current];
+      loadedPartsRef.current = [];
+      updateLoadedParts(loadedParts);
     };
 
     if (loadStatus !== "fullyLoaded") {
       asyncWrapper();
     }
-  }, [getLoadedParts, loadStatus, updateLoadStatus]);
+  }, [missingParts, loadStatus, updateLoadedParts]);
 }

@@ -1,6 +1,6 @@
 import React from "react";
 import { useDatabaseLoadStatusContext } from "components/providers/DatabaseLoadStatusProvider";
-import { populate, checkDb } from "utils/db/db-helpers";
+import { populate } from "utils/db/db-helpers";
 
 export default function useLoadPendingParts() {
   const { loadStatus, missingParts, updateLoadedParts } =
@@ -27,25 +27,18 @@ export default function useLoadPendingParts() {
 
     async function loadPendingParts(db, pendingParts) {
       try {
-        const dbDocsCount = await checkDb(db);
+        const promList = pendingParts.map(async (pendingPart) => {
+          return await writePendingPartWordsToDb(pendingPart, db);
+        });
 
-        if (dbDocsCount < 3800) {
-          const promList = pendingParts.map(async (pendingPart) => {
-            return await writePendingPartWordsToDb(pendingPart, db);
-          });
+        const promListResults = await Promise.allSettled(promList);
 
-          const promListResults = await Promise.allSettled(promList);
+        console.log("promListResults");
+        console.log(promListResults);
 
-          console.log("promListResults");
-          console.log(promListResults);
-
-          return promListResults
-            .filter((result) => result.status !== "fulfilled")
-            .map((result) => result.reason);
-        } else {
-          console.info("database is already populated");
-          return [];
-        }
+        return promListResults
+          .filter((result) => result.status !== "fulfilled")
+          .map((result) => result.reason);
       } catch (error) {
         console.error(`Error loading all database - ${error}`);
       }
@@ -71,6 +64,8 @@ export default function useLoadPendingParts() {
 
     if (loadStatus !== "fullyLoaded") {
       asyncWrapper();
+    } else {
+      console.info("Database is already populated");
     }
   }, [missingParts, loadStatus, updateLoadedParts]);
 }

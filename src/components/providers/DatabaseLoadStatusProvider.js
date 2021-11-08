@@ -38,7 +38,6 @@ function DatabaseLoadStatusProvider({ children }) {
   const [loadedParts, setLoadedParts] = React.useState(
     () => JSON.parse(localStorage.getItem("loadedParts")) || []
   );
-  // const [scheduledParts, setScheduledParts] = React.useState([]);
 
   const loadStatus = getLoadStatus(loadedParts);
   const missingParts = getMissingParts(loadedParts);

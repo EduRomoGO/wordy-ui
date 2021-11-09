@@ -1,12 +1,11 @@
 /** @jsx jsx */
 import { jsx, css } from "@emotion/react";
-import styled from "@emotion/styled";
 import { useState, useEffect, useCallback } from "react";
 import WordsList from "../../WordsList/WordsList";
 import { useDatabaseContext } from "components/providers/DatabaseProvider";
 import SearchWordsForm from "../../search-words-form/SearchWordsForm";
 import Phrase from "../../phrase/Phrase";
-import BounceLoader from "react-spinners/BounceLoader";
+import { Spinner, Error } from "components/lib";
 
 const WordInfo = ({ wordInfo: { word, definition } }) => {
   return (
@@ -33,10 +32,9 @@ const Words = () => {
   });
   const [status, setStatus] = useState("idle");
 
-  const isSearchActive = useCallback(
-    () => searchInputWords.length > 0,
-    [searchInputWords.length]
-  );
+  const isSearchActive = useCallback(() => searchInputWords.length > 0, [
+    searchInputWords.length,
+  ]);
 
   const resetStatus = () => {
     setSearchInputWords([]);
@@ -105,29 +103,12 @@ const Words = () => {
     setSelectedWord(word);
   };
 
-  const Frame = styled.div`
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  `;
-
   if (status === "loading" || status === "idle") {
-    return (
-      <Frame>
-        <BounceLoader color="#ff0000" loading={true} speedMultiplier={0.8} />
-      </Frame>
-    );
+    return <Spinner />;
   }
 
   if (status === "rejected") {
-    return (
-      <Frame>
-        <div>There has been an error</div>
-        <button onClick={resetStatus}>try again</button>
-      </Frame>
-    );
+    return <Error resetStatus={resetStatus} />;
   }
 
   if (status === "resolved") {

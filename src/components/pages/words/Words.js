@@ -6,47 +6,16 @@ import { useDatabaseContext } from "components/providers/DatabaseProvider";
 import SearchWordsForm from "../../search-words-form/SearchWordsForm";
 import Phrase from "../../phrase/Phrase";
 import { Spinner, Error } from "components/lib";
+// import { useAsync } from "hooks/useAsync";
 
-const WordInfo = ({ wordInfo: { word, definition } }) => {
-  return (
-    <div
-      css={css`
-        background-color: blue;
-        padding: 2rem;
-      `}
-    >
-      {word} - {definition}
-    </div>
-  );
-};
-
-const Words = () => {
-  const { getSomeWords, getDefinition } = useDatabaseContext();
-  const [searchInputWords, setSearchInputWords] = useState([]);
-  const [selectedWord, setSelectedWord] = useState();
-  const [initialWordNumber, setInitialWordNumber] = useState(0);
-  const [words, setWords] = useState([]);
+const WordInfo = ({ searchInputWords, selectedWord, isSearchActive }) => {
+  const { getDefinition } = useDatabaseContext();
   const [wordInfo, setWordInfo] = useState({
     word: "",
     definition: "",
   });
-  const [status, setStatus] = useState("idle");
 
-  const isSearchActive = useCallback(() => searchInputWords.length > 0, [
-    searchInputWords.length,
-  ]);
-
-  const resetStatus = () => {
-    setSearchInputWords([]);
-    setSelectedWord();
-    setInitialWordNumber(0);
-    setWords([]);
-    setWordInfo({
-      word: "",
-      definition: "",
-    });
-    setStatus("idle");
-  };
+  const { word, definition } = wordInfo;
 
   useEffect(() => {
     const getWordInfo = async (inputWords, selectedWord) => {
@@ -74,11 +43,49 @@ const Words = () => {
     getWordInfo(searchInputWords, selectedWord);
   }, [getDefinition, isSearchActive, searchInputWords, selectedWord]);
 
+  if (word && definition) {
+    return (
+      <div
+        css={css`
+          background-color: blue;
+          padding: 2rem;
+        `}
+      >
+        {word} - {definition}
+      </div>
+    );
+  }
+
+  return null;
+};
+
+const Words = () => {
+  const { getSomeWords } = useDatabaseContext();
+  const [searchInputWords, setSearchInputWords] = useState([]);
+  const [selectedWord, setSelectedWord] = useState();
+  const [initialWordNumber, setInitialWordNumber] = useState(0);
+  const [words, setWords] = useState([]);
+  const [status, setStatus] = useState("idle");
+  // const { run, data, status, error } = useAsync();
+
+  const isSearchActive = useCallback(() => searchInputWords.length > 0, [
+    searchInputWords.length,
+  ]);
+
+  const resetStatus = () => {
+    setSearchInputWords([]);
+    setSelectedWord();
+    setInitialWordNumber(0);
+    setWords([]);
+    setStatus("idle");
+  };
+
   useEffect(() => {
     const loadWords = async () => {
       try {
         const words = await getSomeWords(20);
         setWords(words);
+        // throw new Error("fake");
         setStatus("resolved");
       } catch (error) {
         console.error(`Error loading words - ${error}`);
@@ -123,9 +130,11 @@ const Words = () => {
           <Phrase inputWords={searchInputWords} />
         )}
 
-        {wordInfo.word && wordInfo.definition && (
-          <WordInfo wordInfo={wordInfo} />
-        )}
+        <WordInfo
+          searchInputWords={searchInputWords}
+          selectedWord={selectedWord}
+          isSearchActive={isSearchActive}
+        />
 
         {words.length > 0 && !isSearchActive() && (
           <div>

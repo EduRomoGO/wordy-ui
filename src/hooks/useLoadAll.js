@@ -1,13 +1,12 @@
 import React from "react";
 import { useDatabaseLoadStatusContext } from "components/providers/DatabaseLoadStatusProvider";
-import { populate } from "utils/db/db-helpers";
 import { useDatabaseContext } from "components/providers/DatabaseProvider";
 
 export default function useLoadPendingParts() {
   const { loadStatus, pendingParts, updateLoadedParts } =
     useDatabaseLoadStatusContext();
   const currentRenderLoadedPartsRef = React.useRef([]);
-  const { db } = useDatabaseContext();
+  const { db, populate } = useDatabaseContext();
 
   React.useEffect(() => {
     const writePendingPartWordsToDb = async (part, db) => {
@@ -54,5 +53,5 @@ export default function useLoadPendingParts() {
     return () => {
       currentRenderLoadedPartsRef.current = [];
     };
-  }, [pendingParts, loadStatus, updateLoadedParts, db]);
+  }, [pendingParts, loadStatus, updateLoadedParts, db, populate]);
 }

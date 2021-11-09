@@ -135,6 +135,20 @@ function DatabaseProvider({ children }) {
     [db]
   );
 
+  const populate = (db, data) => {
+    return db
+      .bulkDocs(data)
+      .then(function (result) {
+        console.log(
+          `${result.length} documents were added to ${db.name} database`
+        );
+        // console.log(result);
+      })
+      .catch(function (error) {
+        console.log(`Error populating database - ${error}`);
+      });
+  };
+
   const Frame = styled.div`
     height: 100vh;
     display: flex;
@@ -155,6 +169,7 @@ function DatabaseProvider({ children }) {
     getSomeWords,
     getDefinition,
     getDescriptorsForWords,
+    populate,
     db,
   };
 

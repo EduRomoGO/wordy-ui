@@ -38,6 +38,18 @@ const Words = () => {
     [searchInputWords.length]
   );
 
+  const resetStatus = () => {
+    setSearchInputWords([]);
+    setSelectedWord();
+    setInitialWordNumber(0);
+    setWords([]);
+    setWordInfo({
+      word: "",
+      definition: "",
+    });
+    setStatus("idle");
+  };
+
   useEffect(() => {
     const getWordInfo = async (inputWords, selectedWord) => {
       if (inputWords.length === 1) {
@@ -71,14 +83,16 @@ const Words = () => {
         setWords(words);
         setStatus("resolved");
       } catch (error) {
+        console.error(`Error loading words - ${error}`);
         setStatus("rejected");
-        console.error(`Error loading words -${error}`);
       }
     };
 
-    setStatus("loading");
-    loadWords();
-  }, [getSomeWords]);
+    if (status === "idle") {
+      setStatus("loading");
+      loadWords();
+    }
+  }, [getSomeWords, status]);
 
   const handleSearchInputChange = (inputWords) => {
     setSearchInputWords(inputWords);
@@ -110,7 +124,8 @@ const Words = () => {
   if (status === "rejected") {
     return (
       <Frame>
-        <div>There has been an error. Please try again later</div>
+        <div>There has been an error</div>
+        <button onClick={resetStatus}>try again</button>
       </Frame>
     );
   }

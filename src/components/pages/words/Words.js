@@ -6,7 +6,7 @@ import { useDatabaseContext } from "components/providers/DatabaseProvider";
 import SearchWordsForm from "../../search-words-form/SearchWordsForm";
 import Phrase from "../../phrase/Phrase";
 import { Spinner, Error } from "components/lib";
-// import { useAsync } from "hooks/useAsync";
+import { useAsync } from "hooks/useAsync";
 
 const WordInfo = ({ searchInputWords, selectedWord, isSearchActive }) => {
   const { getDefinition } = useDatabaseContext();
@@ -64,9 +64,15 @@ const Words = () => {
   const [searchInputWords, setSearchInputWords] = useState([]);
   const [selectedWord, setSelectedWord] = useState();
   const [initialWordNumber, setInitialWordNumber] = useState(0);
-  const [words, setWords] = useState([]);
-  const [status, setStatus] = useState("idle");
-  // const { run, data, status, error } = useAsync();
+  // const [words, setWords] = useState([]);
+  // const [status, setStatus] = useState("idle");
+  const {
+    run,
+    data: words,
+    status,
+    error,
+    resetStatus: resetWordsStatus,
+  } = useAsync();
 
   const isSearchActive = useCallback(() => searchInputWords.length > 0, [
     searchInputWords.length,
@@ -76,28 +82,15 @@ const Words = () => {
     setSearchInputWords([]);
     setSelectedWord();
     setInitialWordNumber(0);
-    setWords([]);
-    setStatus("idle");
+    resetWordsStatus();
   };
 
   useEffect(() => {
-    const loadWords = async () => {
-      try {
-        const words = await getSomeWords(20);
-        setWords(words);
-        // throw new Error("fake");
-        setStatus("resolved");
-      } catch (error) {
-        console.error(`Error loading words - ${error}`);
-        setStatus("rejected");
-      }
-    };
-
+    // throw new Error("💥 CABOOM 💥");
     if (status === "idle") {
-      setStatus("loading");
-      loadWords();
+      run(getSomeWords(20));
     }
-  }, [getSomeWords, status]);
+  }, [getSomeWords, run, status]);
 
   const handleSearchInputChange = (inputWords) => {
     setSearchInputWords(inputWords);
@@ -110,12 +103,12 @@ const Words = () => {
     setSelectedWord(word);
   };
 
-  if (status === "loading" || status === "idle") {
+  if (status === "pending" || status === "idle") {
     return <Spinner />;
   }
 
   if (status === "rejected") {
-    return <Error resetStatus={resetStatus} />;
+    return <Error resetStatus={resetStatus} error={error} />;
   }
 
   if (status === "resolved") {

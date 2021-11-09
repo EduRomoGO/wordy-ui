@@ -16,7 +16,7 @@ export default function useLoadPendingParts() {
         await populate(db, loadFromDiskResult.wordDescriptors);
 
         currentRenderLoadedPartsRef.current.push(part);
-        console.log(
+        console.info(
           `${part} has been successfully populated into databaes ${db.name}`
         );
         return part;

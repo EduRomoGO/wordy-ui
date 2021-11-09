@@ -26,7 +26,7 @@ function useDatabaseContext() {
 //   let db = new window.PouchDB("wordsDB");
 //   await db.destroy();
 //   db = new window.PouchDB("wordsDB");
-//   console.log(`Opened connection to db ${db.name} using adapter ${db.adapter}`);
+//   console.info(`Opened connection to db ${db.name} using adapter ${db.adapter}`);
 
 //   return db;
 // };
@@ -34,7 +34,9 @@ function useDatabaseContext() {
 // TODO: Replace previous definition with this one
 const createOrOpenDb = () => {
   const db = new window.PouchDB("wordsDB");
-  console.log(`Opened connection to db ${db.name} using adapter ${db.adapter}`);
+  console.info(
+    `Opened connection to db ${db.name} using adapter ${db.adapter}`
+  );
 
   return db;
 };
@@ -86,7 +88,7 @@ function DatabaseProvider({ children }) {
           return [];
         }
       } catch (error) {
-        console.log(`Error reading docs: ${error}`);
+        console.error(`Error reading docs: ${error}`);
         return Promise.reject(error);
       }
     },
@@ -103,7 +105,7 @@ function DatabaseProvider({ children }) {
 
         return wordDescriptor.docs[0].definitions[0].defs[0].def;
       } catch (error) {
-        console.log(`Error finding descriptor for word ${word}`);
+        console.error(`Error finding descriptor for word ${word}`);
       }
     },
     [db]
@@ -139,13 +141,13 @@ function DatabaseProvider({ children }) {
     return db
       .bulkDocs(data)
       .then(function (result) {
-        console.log(
+        console.info(
           `${result.length} documents were added to ${db.name} database`
         );
-        // console.log(result);
+        // console.info(result);
       })
       .catch(function (error) {
-        console.log(`Error populating database - ${error}`);
+        console.error(`Error populating database - ${error}`);
       });
   };
 

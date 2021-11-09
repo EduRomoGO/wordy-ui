@@ -48,12 +48,12 @@ async function divideDatabase(fileUrl, GROUP_LENGTH, destinationFilesBasePath) {
 
     try {
       await Promise.all(writeFileContentsPromises);
-      console.log("All files have been created successfully");
+      console.info("All files have been created successfully");
     } catch (error) {
-      console.log(`Error writting files - ${error}`);
+      console.error(`Error writting files - ${error}`);
     }
   } catch (error) {
-    console.log(`Error divididing db file ${fileUrl} - ${error.message}`);
+    console.error(`Error divididing db file ${fileUrl} - ${error.message}`);
   }
 }
 

@@ -4,8 +4,6 @@ import fileNamesJson from "utils/db/divided/file-names";
 
 const initialPendingParts = fileNamesJson.fileNames.slice(0, 5);
 
-// console.log(initialPendingParts);
-
 const DatabaseLoadStatusContext = React.createContext({
   loadStatus: "empty",
   updateLoadedParts: () => {},

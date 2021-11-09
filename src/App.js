@@ -6,7 +6,7 @@ import NavMenu from "./components/NavMenu/NavMenu.js";
 import { Words } from "./components/pages/words/Words";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import useLoadPendingParts from "hooks/useLoadAll";
+import useLoadPendingParts from "hooks/useLoadPendingParts";
 import { useDatabaseLoadStatusContext } from "components/providers/DatabaseLoadStatusProvider";
 
 const Phonemes = lazy(() => import("./components/Phonemes/Phonemes.js"));

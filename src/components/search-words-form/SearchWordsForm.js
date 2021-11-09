@@ -2,10 +2,10 @@ import React, { useState, useRef } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 import { DebounceInput } from "react-debounce-input";
 import { ReactComponent as CancelIcon } from "../../SVG/cancel.svg";
-import { useDatabase } from "../../hooks/useDatabase";
+import { useDatabaseContext } from "components/providers/DatabaseProvider";
 
 function SearchWordsForm({ onChange }) {
-  const { getDescriptorsForWords } = useDatabase();
+  const { getDescriptorsForWords } = useDatabaseContext();
 
   const [search, setSearch] = useState({
     input: "",

@@ -3,14 +3,14 @@ import { jsx } from "@emotion/react";
 import styled from "@emotion/styled";
 import BounceLoader from "react-spinners/BounceLoader";
 import React, { useEffect, useState } from "react";
-import { useDatabase } from "hooks/useDatabase";
 import Word from "../Word/Word.js";
 import cuid from "cuid";
 import "./Spell.css";
 import { useDatabaseLoadStatusContext } from "components/providers/DatabaseLoadStatusProvider";
+import { useDatabaseContext } from "components/providers/DatabaseProvider";
 
 const Spell = () => {
-  const { getDescriptorsForWords } = useDatabase();
+  const { getDescriptorsForWords } = useDatabaseContext();
   const [letterDescriptors, setLetterDescriptors] = useState([]);
   const [status, setStatus] = useState("idle");
   const { loadStatus } = useDatabaseLoadStatusContext();

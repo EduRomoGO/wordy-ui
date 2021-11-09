@@ -3,7 +3,7 @@ import { jsx, css } from "@emotion/react";
 import styled from "@emotion/styled";
 import { useState, useEffect, useCallback } from "react";
 import WordsList from "../../WordsList/WordsList";
-import { useDatabase } from "hooks/useDatabase";
+import { useDatabaseContext } from "components/providers/DatabaseProvider";
 import SearchWordsForm from "../../search-words-form/SearchWordsForm";
 import Phrase from "../../phrase/Phrase";
 import BounceLoader from "react-spinners/BounceLoader";
@@ -22,7 +22,7 @@ const WordInfo = ({ wordInfo: { word, definition } }) => {
 };
 
 const Words = () => {
-  const { getSomeWords, getDefinition } = useDatabase();
+  const { getSomeWords, getDefinition } = useDatabaseContext();
   const [searchInputWords, setSearchInputWords] = useState([]);
   const [selectedWord, setSelectedWord] = useState();
   const [initialWordNumber, setInitialWordNumber] = useState(0);

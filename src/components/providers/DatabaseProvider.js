@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/react";
 import styled from "@emotion/styled";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import BounceLoader from "react-spinners/BounceLoader";
 
 const DatabaseContext = React.createContext();
@@ -66,6 +66,75 @@ function DatabaseProvider({ children }) {
     };
   }, []);
 
+  const getSomeWords = useCallback(
+    async (numberOfWords) => {
+      try {
+        if (db) {
+          const allDocs = await db.allDocs({
+            include_docs: true,
+            limit: numberOfWords,
+          });
+          const parsedWords = allDocs.rows.map((n) => {
+            return {
+              word: n.doc.word,
+              phonemics: n.doc.phonemics,
+            };
+          });
+
+          return parsedWords;
+        } else {
+          return [];
+        }
+      } catch (error) {
+        console.log(`Error reading docs: ${error}`);
+        return Promise.reject(error);
+      }
+    },
+    [db]
+  );
+
+  const getDefinition = useCallback(
+    async (word) => {
+      try {
+        const wordDescriptor = await db.find({
+          selector: { word },
+          fields: ["definitions"],
+        });
+
+        return wordDescriptor.docs[0].definitions[0].defs[0].def;
+      } catch (error) {
+        console.log(`Error finding descriptor for word ${word}`);
+      }
+    },
+    [db]
+  );
+
+  const getDescriptorsForWords = useCallback(
+    async (words) => {
+      const queries = words.map((word) => {
+        return db.find({
+          selector: { word },
+          fields: ["phonemics", "word"],
+        });
+      });
+
+      const queriesResults = await Promise.allSettled(queries);
+
+      const inputWordsDescriptors = queriesResults.reduce(
+        (acc, queryResult) => {
+          return queryResult.status === "fulfilled" &&
+            queryResult.value.docs.length > 0
+            ? [...acc, queryResult.value.docs[0]]
+            : acc;
+        },
+        []
+      );
+
+      return inputWordsDescriptors;
+    },
+    [db]
+  );
+
   const Frame = styled.div`
     height: 100vh;
     display: flex;
@@ -82,8 +151,15 @@ function DatabaseProvider({ children }) {
     );
   }
 
+  const value = {
+    getSomeWords,
+    getDefinition,
+    getDescriptorsForWords,
+    db,
+  };
+
   return (
-    <DatabaseContext.Provider value={{ db }}>
+    <DatabaseContext.Provider value={value}>
       {children}
     </DatabaseContext.Provider>
   );

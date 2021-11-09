@@ -6,13 +6,16 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { DatabaseProvider } from "./components/providers/DatabaseProvider";
 import { DatabaseLoadStatusProvider } from "./components/providers/DatabaseLoadStatusProvider";
+import AppErrorBoundary from "./AppErrorBoundary";
 
 ReactDOM.render(
-  <DatabaseProvider>
-    <DatabaseLoadStatusProvider>
-      <App />
-    </DatabaseLoadStatusProvider>
-  </DatabaseProvider>,
+  <AppErrorBoundary>
+    <DatabaseProvider>
+      <DatabaseLoadStatusProvider>
+        <App />
+      </DatabaseLoadStatusProvider>
+    </DatabaseProvider>
+  </AppErrorBoundary>,
   document.getElementById("root")
 );
 

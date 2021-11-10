@@ -1,17 +1,9 @@
 import React from "react";
 import { ErrorBoundary } from "react-error-boundary";
-import { Button } from "reactstrap";
+import { Error } from "components/lib";
 
 function ErrorFallback({ error, resetErrorBoundary }) {
-  return (
-    <div role="alert">
-      <p>Something went wrong:</p>
-      <pre>{error.message}</pre>
-      <Button color="primary" onClick={resetErrorBoundary}>
-        Try again
-      </Button>
-    </div>
-  );
+  return <Error resetHandler={resetErrorBoundary} error={error} />;
 }
 
 export default function AppErrorBoundary({ children }) {

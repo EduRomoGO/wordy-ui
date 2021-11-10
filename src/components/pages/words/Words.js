@@ -84,6 +84,8 @@ const Words = () => {
   };
 
   useEffect(() => {
+    // throw new Error("💥 CABOOM 💥");
+
     if (status === "idle") {
       run(getSomeWords(20));
     }
@@ -105,7 +107,7 @@ const Words = () => {
   }
 
   if (status === "rejected") {
-    return <Error resetStatus={resetStatus} error={error} />;
+    return <Error resetHandler={resetStatus} error={error} />;
   }
 
   if (status === "resolved") {

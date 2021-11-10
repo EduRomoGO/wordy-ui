@@ -36,8 +36,6 @@
   }
 }
 
-
-
 /* Search */
 
 .b-search {
@@ -59,13 +57,13 @@
 }
 
 .b-search__cancel {
+  display: flex;
+  align-items: center;
   width: 29px;
   stroke: white;
   stroke-width: 4px;
   cursor: pointer;
 }
-
-
 
 .starting-word {
   width: 80px;

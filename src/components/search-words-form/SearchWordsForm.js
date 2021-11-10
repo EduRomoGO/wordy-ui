@@ -60,12 +60,15 @@ function SearchWordsForm({ onChange }) {
           onChange={handleSearchInputChange}
           placeholder="Command+j to focus"
         />
-        <CancelIcon
+
+        <div
           className="b-search__cancel"
           tabIndex="0"
           onKeyPress={handleClearClick}
           onClick={handleClearClick}
-        />
+        >
+          <CancelIcon />
+        </div>
       </div>
     </article>
   );

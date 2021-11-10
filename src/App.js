@@ -96,7 +96,7 @@ function App() {
             <Route path="/words">
               <Words />
             </Route>
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<Spinner />}>
               <Route path="/phonemes">
                 <Phonemes />
               </Route>

@@ -64,8 +64,6 @@ const Words = () => {
   const [searchInputWords, setSearchInputWords] = useState([]);
   const [selectedWord, setSelectedWord] = useState();
   const [initialWordNumber, setInitialWordNumber] = useState(0);
-  // const [words, setWords] = useState([]);
-  // const [status, setStatus] = useState("idle");
   const {
     run,
     data: words,
@@ -86,7 +84,6 @@ const Words = () => {
   };
 
   useEffect(() => {
-    // throw new Error("💥 CABOOM 💥");
     if (status === "idle") {
       run(getSomeWords(20));
     }

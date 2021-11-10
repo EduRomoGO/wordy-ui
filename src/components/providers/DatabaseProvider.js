@@ -71,6 +71,7 @@ function DatabaseProvider({ children }) {
   const getSomeWords = useCallback(
     async (numberOfWords) => {
       try {
+        // throw new Error("💥 CABOOM 💥");
         if (db) {
           const allDocs = await db.allDocs({
             include_docs: true,

@@ -5,17 +5,14 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
-import { DatabaseProvider } from "./components/providers/DatabaseProvider";
-import { DatabaseLoadStatusProvider } from "./components/providers/DatabaseLoadStatusProvider";
+import AppProviders from "components/providers/AppProviders";
 import AppErrorBoundary from "./AppErrorBoundary";
 
 ReactDOM.render(
   <AppErrorBoundary>
-    <DatabaseProvider>
-      <DatabaseLoadStatusProvider>
-        <App />
-      </DatabaseLoadStatusProvider>
-    </DatabaseProvider>
+    <AppProviders>
+      <App />
+    </AppProviders>
   </AppErrorBoundary>,
   document.getElementById("root")
 );

@@ -3,6 +3,19 @@ import "./Phonemes.css";
 import { consonants, vowels, diphthongs } from "./PhonemesList.js";
 import { Storage } from 'aws-amplify';
 
+const PhonemList = ({items, type, handleOnClick}) => {
+  // console.log('************')
+  console.log('PHONEMLIST')
+  return (<article className="phonemes-article">
+    <p className="title">{type}</p>
+    <div className={`phonemList ${type}`}>
+      {items.map(({ phonem, word }) => {
+        return <Phoneme key={`${phonem}-${word}`} phonem={phonem} handleOnClick={handleOnClick} word={word} />
+      })}
+    </div>
+  </article>
+)};
+
 
 const Phonemes = () => {
   console.log('PHONEMES')
@@ -10,24 +23,12 @@ const Phonemes = () => {
     document.querySelector(`#${file}`).play();
   };
 
-  const getPhonemList = (items, type) => {
-    // console.log('************')
-    return (<article className="phonemes-article">
-      <p className="title">{type}</p>
-      <div className={`phonemList ${type}`}>
-        {items.map(({ phonem, word }) => {
-          return Phoneme(phonem, handleOnClick, word);
-        })}
-      </div>
-    </article>
-  )};
-
   return (
     <section className="phonemes-component-wrapper">
       <section className="phonemes-lists-wrapper">
-        {getPhonemList(consonants, "consonants")}
-        {getPhonemList(vowels, "vowels")}
-        {getPhonemList(diphthongs, "diphthongs")}
+        <PhonemList items={consonants} type='consonants' handleOnClick={handleOnClick} />
+        <PhonemList items={vowels} type='vowels' handleOnClick={handleOnClick}  />
+        <PhonemList items={diphthongs} type='diphthongs' handleOnClick={handleOnClick}  />
       </section>
     </section>
   );
@@ -36,7 +37,8 @@ const Phonemes = () => {
 export default Phonemes;
 
 
-function Phoneme(phonem, handleOnClick, word) {
+function Phoneme({phonem, handleOnClick, word}) {
+  console.log('phoneme-');
   const newPhonem = phonem.includes(":")
     ? phonem.replace(":", "\\:")
     : phonem;
@@ -50,7 +52,7 @@ function Phoneme(phonem, handleOnClick, word) {
     const getWord = async () => {
       // if(word==='arrow'){
         const file = await Storage.get(`${word}.mp3`)
-        // console.log('file', file)
+        console.log('file', file)
         setWordFile(file)
       // }
     }
@@ -60,7 +62,7 @@ function Phoneme(phonem, handleOnClick, word) {
   },[word])  
 
   return (
-    <div key={`${phonem}-${word}`} className="pair">
+    <div className="pair">
       <span
         className="phonem"
         onClick={(e) => handleOnClick(e, newPhonem)}

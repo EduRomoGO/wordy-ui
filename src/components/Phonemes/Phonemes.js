@@ -31,14 +31,10 @@ export default Phonemes;
 
 
 function Phoneme({phonem, word}) {
-  const newPhonem = phonem.includes(":")
-    ? phonem.replace(":", "\\:")
-    : phonem;
-
   const [wordFile, setWordFile] = useState('')
   const phonemeRef = useRef()
   const wordRef = useRef()
-  
+
   const handlePhonemeClick = () => {
     phonemeRef.current.play()
   }
@@ -51,13 +47,15 @@ function Phoneme({phonem, word}) {
     console.log('word', word);
     const getWord = async () => {
         const file = await Storage.get(`${word}.mp3`)
-        console.log('file', file)
+        // console.log('file', file)
         setWordFile(file)
     }
 
-    getWord()
+    if (word) {
+      getWord()
+    }
 
-  },[word])  
+  },[word])
 
   return (
     <div className="pair">
@@ -74,20 +72,21 @@ function Phoneme({phonem, word}) {
         ></source>
         Your browser does not support the audio element.
       </audio>
-      <span
+      {wordFile && (<>      <span
         className="phonem-word"
         onClick={handleWordClick}
       >
         {word}
       </span>
       <audio ref={wordRef} hidden={true} controls>
+      {console.log(wordFile)}
         <source
           src={wordFile}
           type="audio/mpeg"
         ></source>
         Your browser does not support the audio element.
-      </audio>
+      </audio></>)}
+
     </div>
   );
 }
-

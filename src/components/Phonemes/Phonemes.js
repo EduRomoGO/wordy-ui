@@ -44,16 +44,12 @@ function Phoneme({phonem, word}) {
   }
 
   useEffect(() => {
-    console.log('word', word);
     const getWord = async () => {
         const file = await Storage.get(`${word}.mp3`)
-        // console.log('file', file)
         setWordFile(file)
     }
 
-    if (word) {
-      getWord()
-    }
+    getWord()
 
   },[word])
 
@@ -72,6 +68,7 @@ function Phoneme({phonem, word}) {
         ></source>
         Your browser does not support the audio element.
       </audio>
+
       {wordFile && (<>      <span
         className="phonem-word"
         onClick={handleWordClick}
@@ -79,7 +76,6 @@ function Phoneme({phonem, word}) {
         {word}
       </span>
       <audio ref={wordRef} hidden={true} controls>
-      {console.log(wordFile)}
         <source
           src={wordFile}
           type="audio/mpeg"

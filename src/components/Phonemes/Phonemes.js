@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Phonemes.css";
 import { consonants, vowels, diphthongs } from "./PhonemesList.js";
 import cuid from "cuid";
+import { Storage } from 'aws-amplify';
+
 
 const Phonemes = () => {
   const handleOnClick = (e, file) => {
@@ -13,39 +15,7 @@ const Phonemes = () => {
       <p className="title">{type}</p>
       <div className={`phonemList ${type}`}>
         {items.map(({ phonem, word }) => {
-          const newPhonem = phonem.includes(":")
-            ? phonem.replace(":", "\\:")
-            : phonem;
-          return (
-            <div key={cuid()} className="pair">
-              <span
-                className="phonem"
-                onClick={(e) => handleOnClick(e, newPhonem)}
-              >
-                {phonem}
-              </span>
-              <audio hidden={true} id={phonem} controls>
-                <source
-                  src={`./phonemesFiles/${phonem}.mp3`}
-                  type="audio/mpeg"
-                ></source>
-                Your browser does not support the audio element.
-              </audio>
-              <span
-                className="phonem-word"
-                onClick={(e) => handleOnClick(e, word)}
-              >
-                {word}
-              </span>
-              <audio hidden={true} id={word} controls>
-                <source
-                  src={`./phonemesFiles/${word}.mp3`}
-                  type="audio/mpeg"
-                ></source>
-                Your browser does not support the audio element.
-              </audio>
-            </div>
-          );
+          return Phoneme(phonem, handleOnClick, word);
         })}
       </div>
     </article>
@@ -63,3 +33,57 @@ const Phonemes = () => {
 };
 
 export default Phonemes;
+
+
+function Phoneme(phonem, handleOnClick, word) {
+  const newPhonem = phonem.includes(":")
+    ? phonem.replace(":", "\\:")
+    : phonem;
+
+  const [wordFile, setWordFile] = useState()
+
+  useEffect(() => {
+    const getWord = async () => {
+      if(word==='arrow'){
+        const file = await Storage.get(`${word}.mp3`)
+        console.log('file', file)
+        setWordFile(file)
+      }
+    }
+
+    getWord()
+
+  },[word])  
+
+  return (
+    <div key={cuid()} className="pair">
+      <span
+        className="phonem"
+        onClick={(e) => handleOnClick(e, newPhonem)}
+      >
+        {phonem}
+      </span>
+      <audio hidden={true} id={phonem} controls>
+        <source
+          src={`./phonemesFiles/${phonem}.mp3`}
+          type="audio/mpeg"
+        ></source>
+        Your browser does not support the audio element.
+      </audio>
+      <span
+        className="phonem-word"
+        onClick={(e) => handleOnClick(e, word)}
+      >
+        {word}
+      </span>
+      <audio hidden={true} id={word} controls>
+        <source
+          src={wordFile}
+          type="audio/mpeg"
+        ></source>
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+  );
+}
+

@@ -11,7 +11,7 @@ import useLoadPendingParts from "hooks/useLoadPendingParts";
 import { useDatabaseLoadStatusContext } from "components/providers/DatabaseLoadStatusProvider";
 import { Spinner } from "components/lib";
 
-import Amplify, { Storage } from 'aws-amplify';
+import Amplify from 'aws-amplify';
 import awsconfig from './aws-exports';
 Amplify.configure(awsconfig);
 

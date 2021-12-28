@@ -10,6 +10,12 @@
       "StackName": "amplify-wordyui-dev-183848",
       "StackId": "arn:aws:cloudformation:eu-west-1:428295838656:stack/amplify-wordyui-dev-183848/04e95b10-6805-11ec-bd86-067c56c6b949",
       "AmplifyAppId": "d21ulx5lhonnil"
+    },
+    "categories": {
+      "auth": {
+        "wordyuid3781483": {},
+        "true": {}
+      }
     }
   }
 }

@@ -19,9 +19,9 @@ const Phonemes = () => {
   return (
     <section className="phonemes-component-wrapper">
       <section className="phonemes-lists-wrapper">
-        {/* <PhonemList items={consonants} type='consonants' /> */}
+        <PhonemList items={consonants} type='consonants' />
         <PhonemList items={vowels} type='vowels'  />
-        {/* <PhonemList items={diphthongs} type='diphthongs'  /> */}
+        <PhonemList items={diphthongs} type='diphthongs'  />
       </section>
     </section>
   );

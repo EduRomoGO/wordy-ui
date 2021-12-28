@@ -4,8 +4,6 @@ import { consonants, vowels, diphthongs } from "./PhonemesList.js";
 import { Storage } from 'aws-amplify';
 
 const PhonemList = ({items, type, handleOnClick}) => {
-  // console.log('************')
-  console.log('PHONEMLIST')
   return (<article className="phonemes-article">
     <p className="title">{type}</p>
     <div className={`phonemList ${type}`}>
@@ -18,7 +16,6 @@ const PhonemList = ({items, type, handleOnClick}) => {
 
 
 const Phonemes = () => {
-  console.log('PHONEMES')
   const handleOnClick = (e, file) => {
     document.querySelector(`#${file}`).play();
   };
@@ -26,9 +23,9 @@ const Phonemes = () => {
   return (
     <section className="phonemes-component-wrapper">
       <section className="phonemes-lists-wrapper">
-        <PhonemList items={consonants} type='consonants' handleOnClick={handleOnClick} />
+        {/* <PhonemList items={consonants} type='consonants' handleOnClick={handleOnClick} /> */}
         <PhonemList items={vowels} type='vowels' handleOnClick={handleOnClick}  />
-        <PhonemList items={diphthongs} type='diphthongs' handleOnClick={handleOnClick}  />
+        {/* <PhonemList items={diphthongs} type='diphthongs' handleOnClick={handleOnClick}  /> */}
       </section>
     </section>
   );
@@ -38,23 +35,18 @@ export default Phonemes;
 
 
 function Phoneme({phonem, handleOnClick, word}) {
-  console.log('phoneme-');
   const newPhonem = phonem.includes(":")
     ? phonem.replace(":", "\\:")
     : phonem;
 
-    // console.log('word', word)
-
   const [wordFile, setWordFile] = useState('')
 
   useEffect(() => {
-    // console.log('word', word);
+    console.log('word', word);
     const getWord = async () => {
-      // if(word==='arrow'){
         const file = await Storage.get(`${word}.mp3`)
         console.log('file', file)
         setWordFile(file)
-      // }
     }
 
     getWord()

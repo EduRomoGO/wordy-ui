@@ -1,5 +1,6 @@
 /** @jsx jsx */
 import { jsx, css } from "@emotion/react";
+// eslint-disable-next-line
 import React, { Suspense, lazy, useState } from "react";
 import "./App.css";
 import NavMenu from "./components/NavMenu/NavMenu.js";

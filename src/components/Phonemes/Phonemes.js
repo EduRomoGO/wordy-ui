@@ -63,13 +63,13 @@ function Phoneme({phonem, word}) {
 
   return (
     <div className="pair">
+      {phonemFile && (<>
       <span
         className="phonem"
         onClick={handlePhonemeClick}
       >
         {phonem}
       </span>
-      {phonemFile && (
       <audio ref={phonemeRef} hidden={true} controls>
         <source
           src={phonemFile}
@@ -77,7 +77,7 @@ function Phoneme({phonem, word}) {
         ></source>
         Your browser does not support the audio element.
       </audio>
-      )}
+      </>)}
       {wordFile && (<>      <span
         className="phonem-word"
         onClick={handleWordClick}

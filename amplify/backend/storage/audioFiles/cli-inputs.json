@@ -1,0 +1,12 @@
+{
+  "resourceName": "audioFiles",
+  "policyUUID": "aa1527ce",
+  "bucketName": "audiofiles",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "READ"
+  ],
+  "triggerFunction": "NONE",
+  "groupAccess": {}
+}

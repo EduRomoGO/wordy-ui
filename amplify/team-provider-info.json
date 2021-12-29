@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-wordybe-dev-163614-authRole",
+      "UnauthRoleArn": "arn:aws:iam::428295838656:role/amplify-wordybe-dev-163614-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::428295838656:role/amplify-wordybe-dev-163614-authRole",
+      "Region": "eu-west-1",
+      "DeploymentBucketName": "amplify-wordybe-dev-163614-deployment",
+      "UnauthRoleName": "amplify-wordybe-dev-163614-unauthRole",
+      "StackName": "amplify-wordybe-dev-163614",
+      "StackId": "arn:aws:cloudformation:eu-west-1:428295838656:stack/amplify-wordybe-dev-163614/0fe84270-68bd-11ec-b9a6-028274437075",
+      "AmplifyAppId": "d8emjjv3vrb5r"
+    },
+    "categories": {
+      "auth": {
+        "wordybe48aa8555": {}
+      }
+    }
+  }
+}

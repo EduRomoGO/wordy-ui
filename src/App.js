@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx, css } from "@emotion/react";
-import { Suspense, lazy, useState } from "react";
+import React, { Suspense, lazy, useState } from "react";
 import "./App.css";
 import NavMenu from "./components/NavMenu/NavMenu.js";
 import { Words } from "./components/pages/words/Words";
@@ -11,8 +11,10 @@ import useLoadPendingParts from "hooks/useLoadPendingParts";
 import { useDatabaseLoadStatusContext } from "components/providers/DatabaseLoadStatusProvider";
 import { Spinner } from "components/lib";
 
-import Amplify from 'aws-amplify';
-import awsconfig from './aws-exports';
+import Amplify from "aws-amplify";
+import { withAuthenticator } from "@aws-amplify/ui-react";
+
+import awsconfig from "./aws-exports";
 Amplify.configure(awsconfig);
 
 const Phonemes = lazy(() => import("./components/Phonemes/Phonemes.js"));
@@ -80,11 +82,15 @@ const DatabaseLoadingStatus = () => {
   return null;
 };
 
-function App() {
+function App({ signOut, user }) {
   useLoadPendingParts();
 
   return (
     <Router>
+      <>
+        <h1>Hello {user.username}</h1>
+        <button onClick={signOut}>Sign out</button>
+      </>
       <div className="App fluid-type">
         <header>
           <DatabaseLoadingStatus />
@@ -118,4 +124,4 @@ function App() {
   );
 }
 
-export default App;
+export default withAuthenticator(App);

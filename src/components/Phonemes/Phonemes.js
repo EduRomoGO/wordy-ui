@@ -32,6 +32,7 @@ export default Phonemes;
 
 function Phoneme({phonem, word}) {
   const [wordFile, setWordFile] = useState('')
+  const [phonemFile, setPhonemFile] = useState('')
   const phonemeRef = useRef()
   const wordRef = useRef()
 
@@ -45,16 +46,25 @@ function Phoneme({phonem, word}) {
 
   useEffect(() => {
     const getWord = async () => {
-        const file = await Storage.get(`${word}.mp3`)
+        const file = await Storage.get(`phonemes/${word}.mp3`)
         setWordFile(file)
     }
 
     getWord()
 
-  },[word])
+    const getPhonem = async () => {
+        const file = await Storage.get(`phonemes/${phonem}.mp3`)
+        setPhonemFile(file)
+    }
+
+    getPhonem()
+
+  },[word, phonem])
 
   return (
     <div className="pair">
+      {phonemFile && (
+        <>
       <span
         className="phonem"
         onClick={handlePhonemeClick}
@@ -63,12 +73,13 @@ function Phoneme({phonem, word}) {
       </span>
       <audio ref={phonemeRef} hidden={true} controls>
         <source
-          src={`./phonemesFiles/${phonem}.mp3`}
+          src={phonemFile}
           type="audio/mpeg"
         ></source>
         Your browser does not support the audio element.
       </audio>
-
+      </>
+      )}
       {wordFile && (<>      <span
         className="phonem-word"
         onClick={handleWordClick}

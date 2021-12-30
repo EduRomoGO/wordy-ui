@@ -98,9 +98,12 @@ const Words = () => {
   const handleInitialWordNumberChange = (e) =>
     setInitialWordNumber(e.target.value);
 
-  const handleWordClick = (word) => {
-    setSelectedWord(word);
-  };
+  const handleWordClick = useCallback(
+    (word) => {
+      setSelectedWord(word);
+    },
+    [setSelectedWord]
+  );
 
   if (status === "pending" || status === "idle") {
     return <Spinner />;

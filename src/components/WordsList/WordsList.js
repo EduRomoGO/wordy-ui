@@ -1,4 +1,5 @@
 /** @jsx jsx */
+import React from "react";
 import { jsx, css } from "@emotion/react";
 import Word from "../Word/Word.js";
 import cuid from "cuid";
@@ -45,4 +46,4 @@ const WordsList = ({ words, display, onClick }, wordsRef) => {
   );
 };
 
-export default forwardRef(WordsList);
+export default React.memo(forwardRef(WordsList));

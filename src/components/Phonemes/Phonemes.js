@@ -47,19 +47,19 @@ function Phoneme({ phonem, word }) {
   };
 
   useEffect(() => {
-    const getWord = async () => {
+    const getWordAudio = async () => {
       const file = await Storage.get(`phonemes/${word}.mp3`);
       setWordFile(file);
     };
 
-    getWord();
+    getWordAudio();
 
-    const getPhonem = async () => {
+    const getPhonemeAudio = async () => {
       const file = await Storage.get(`phonemes/${phonem}.mp3`);
       setPhonemFile(file);
     };
 
-    getPhonem();
+    getPhonemeAudio();
   }, [word, phonem]);
 
   return (

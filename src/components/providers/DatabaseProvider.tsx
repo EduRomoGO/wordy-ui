@@ -1,10 +1,15 @@
 /** @jsx jsx */
+
 import { jsx } from "@emotion/react";
 import styled from "@emotion/styled";
 import React, { useState, useEffect, useCallback } from "react";
 import BounceLoader from "react-spinners/BounceLoader";
+import PouchDB from "pouchdb";
+import Find from "pouchdb-find";
 
-const DatabaseContext = React.createContext();
+PouchDB.plugin(Find);
+
+const DatabaseContext = React.createContext({});
 DatabaseContext.displayName = "DatabaseContext";
 
 function useDatabaseContext() {
@@ -33,19 +38,18 @@ function useDatabaseContext() {
 
 // TODO: Replace previous definition with this one
 const createOrOpenDb = () => {
-  const db = new window.PouchDB("wordsDB");
-  console.info(
-    `Opened connection to db ${db.name} using adapter ${db.adapter}`
-  );
+  const db = new PouchDB("wordsDB");
+  // db.createIndex;
+  console.info(`Opened connection to db ${db.name}`);
 
   return db;
 };
 
-function DatabaseProvider({ children }) {
+function DatabaseProvider({ children }: { children: any }) {
   const [db, setDb] = useState();
 
   useEffect(() => {
-    let db;
+    let db: any;
     const createAndConfigurateDb = async () => {
       try {
         db = createOrOpenDb();
@@ -72,12 +76,12 @@ function DatabaseProvider({ children }) {
     async (numberOfWords) => {
       try {
         // throw new Error("💥 CABOOM 💥");
-        if (db) {
-          const allDocs = await db.allDocs({
+        if (db !== undefined) {
+          const allDocs = await (db as any).allDocs({
             include_docs: true,
             limit: numberOfWords,
           });
-          const parsedWords = allDocs.rows.map((n) => {
+          const parsedWords = allDocs.rows.map((n: any) => {
             return {
               word: n.doc.word,
               phonemics: n.doc.phonemics,
@@ -98,15 +102,17 @@ function DatabaseProvider({ children }) {
 
   const getDefinition = useCallback(
     async (word) => {
-      try {
-        const wordDescriptor = await db.find({
-          selector: { word },
-          fields: ["definitions"],
-        });
+      if (db) {
+        try {
+          const wordDescriptor = await (db as any).find({
+            selector: { word },
+            fields: ["definitions"],
+          });
 
-        return wordDescriptor.docs[0].definitions[0].defs[0].def;
-      } catch (error) {
-        console.error(`Error finding descriptor for word ${word}`);
+          return wordDescriptor.docs[0].definitions[0].defs[0].def;
+        } catch (error) {
+          console.error(`Error finding descriptor for word ${word}`);
+        }
       }
     },
     [db]
@@ -114,40 +120,43 @@ function DatabaseProvider({ children }) {
 
   const getDescriptorsForWords = useCallback(
     async (words) => {
-      const queries = words.map((word) => {
-        return db.find({
-          selector: { word },
-          fields: ["phonemics", "word"],
+      if (db) {
+        const queries = words.map((word: any) => {
+          return (db as any).find({
+            selector: { word },
+            fields: ["phonemics", "word"],
+          });
         });
-      });
 
-      const queriesResults = await Promise.allSettled(queries);
+        const queriesResults = await Promise.allSettled(queries);
 
-      const inputWordsDescriptors = queriesResults.reduce(
-        (acc, queryResult) => {
-          return queryResult.status === "fulfilled" &&
-            queryResult.value.docs.length > 0
-            ? [...acc, queryResult.value.docs[0]]
-            : acc;
-        },
-        []
-      );
+        const inputWordsDescriptors = queriesResults.reduce(
+          // @ts-ignore
+          (acc, queryResult) => {
+            return queryResult.status === "fulfilled" &&
+              queryResult.value.docs.length > 0
+              ? [...acc, queryResult.value.docs[0]]
+              : acc;
+          },
+          []
+        );
 
-      return inputWordsDescriptors;
+        return inputWordsDescriptors;
+      }
     },
     [db]
   );
 
-  const populate = (db, data) => {
+  const populate = (db: any, data: any) => {
     return db
       .bulkDocs(data)
-      .then(function (result) {
+      .then(function (result: any) {
         console.info(
           `${result.length} documents were added to ${db.name} database`
         );
         // console.info(result);
       })
-      .catch(function (error) {
+      .catch(function (error: any) {
         console.error(`Error populating database - ${error}`);
       });
   };
@@ -168,19 +177,21 @@ function DatabaseProvider({ children }) {
     );
   }
 
-  const value = {
-    getSomeWords,
-    getDefinition,
-    getDescriptorsForWords,
-    populate,
-    db,
-  };
+  if (db) {
+    const value = {
+      getSomeWords,
+      getDefinition,
+      getDescriptorsForWords,
+      populate,
+      db,
+    };
 
-  return (
-    <DatabaseContext.Provider value={value}>
-      {children}
-    </DatabaseContext.Provider>
-  );
+    return (
+      <DatabaseContext.Provider value={value}>
+        {children}
+      </DatabaseContext.Provider>
+    );
+  }
 }
 
 export { DatabaseProvider, useDatabaseContext };

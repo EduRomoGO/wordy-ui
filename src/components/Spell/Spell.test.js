@@ -17,12 +17,17 @@ const allDocs = jest.fn().mockImplementation(() => {
   };
 });
 
+const bulkDocs = jest.fn().mockImplementation(() => {
+  return Promise.resolve([]);
+});
+
 const mockDb = {
   name: "mockDBName",
   allDocs,
   createIndex: jest.fn(),
   find,
   plugin: jest.fn(),
+  bulkDocs,
 };
 
 PouchDB.mockImplementation(() => mockDb);

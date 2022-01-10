@@ -4,7 +4,7 @@ import { jsx } from "@emotion/react";
 import styled from "@emotion/styled";
 import React, { useState, useEffect, useCallback } from "react";
 import BounceLoader from "react-spinners/BounceLoader";
-import PouchDB from "pouchdb";
+import PouchDB from "pouchdb-browser";
 import Find from "pouchdb-find";
 
 PouchDB.plugin(Find);

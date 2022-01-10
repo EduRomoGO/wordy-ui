@@ -39,7 +39,6 @@ function useDatabaseContext() {
 // TODO: Replace previous definition with this one
 const createOrOpenDb = () => {
   const db = new PouchDB("wordsDB");
-  // db.createIndex;
   console.info(`Opened connection to db ${db.name}`);
 
   return db;

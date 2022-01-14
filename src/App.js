@@ -89,8 +89,8 @@ function App({ signOut, user }) {
   return (
     <Router>
       <>
-        {/* <h1>Hello {user.username}</h1>
-        <button onClick={signOut}>Sign out</button> */}
+        {/* <h1>Hello {user.username}</h1> */}
+        <button onClick={signOut}>Sign out</button>
       </>
       <div className="App fluid-type">
         <header>

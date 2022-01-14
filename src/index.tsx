@@ -7,11 +7,14 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import AppProviders from "components/providers/AppProviders";
 import AppErrorBoundary from "./AppErrorBoundary";
+import { withAuthenticator } from "@aws-amplify/ui-react";
+
+const AppWithLogin = withAuthenticator(App);
 
 ReactDOM.render(
   <AppErrorBoundary>
     <AppProviders>
-      <App />
+      <AppWithLogin />
     </AppProviders>
   </AppErrorBoundary>,
   document.getElementById("root")

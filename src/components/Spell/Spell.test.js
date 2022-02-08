@@ -71,9 +71,59 @@ test("component Spell render", async () => {
   await waitForElementToBeRemoved(() => screen.getByText(/loading.../i));
   expect(screen.queryByText(/loading.../i)).not.toBeInTheDocument();
 
-  screen.debug();
-
   expect(
     container.querySelector(".spell-component-wrapper")
   ).toBeInTheDocument();
+});
+
+test("component Phonemes render", async () => {
+  const { container } = render(
+    <AppProviders>
+      <App />
+    </AppProviders>
+  );
+
+  await waitFor(() => {
+    expect(
+      screen.getByText(/database is fully loaded! 🎉🎉/i)
+    ).toBeInTheDocument();
+  });
+
+  const phonemesButton = screen.getByRole("link", {
+    name: /phonemes/i,
+  });
+  expect(phonemesButton).toBeInTheDocument();
+  userEvent.click(phonemesButton);
+
+  await waitForElementToBeRemoved(() => screen.getByText(/loading.../i));
+  expect(screen.queryByText(/loading.../i)).not.toBeInTheDocument();
+
+  expect(
+    container.querySelector(".phonemes-component-wrapper")
+  ).toBeInTheDocument();
+});
+
+test("component Words render", async () => {
+  const { container } = render(
+    <AppProviders>
+      <App />
+    </AppProviders>
+  );
+
+  await waitFor(() => {
+    expect(
+      screen.getByText(/database is fully loaded! 🎉🎉/i)
+    ).toBeInTheDocument();
+  });
+
+  const wordsButton = screen.getByRole("link", {
+    name: /words/i,
+  });
+  expect(wordsButton).toBeInTheDocument();
+  userEvent.click(wordsButton);
+
+  await waitForElementToBeRemoved(() => screen.getByText(/loading.../i));
+  expect(screen.queryByText(/loading.../i)).not.toBeInTheDocument();
+
+  expect(container.querySelector(".css-10zpvm2-Words")).toBeInTheDocument();
 });

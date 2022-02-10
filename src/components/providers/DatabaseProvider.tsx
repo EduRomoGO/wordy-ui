@@ -72,13 +72,14 @@ function DatabaseProvider({ children }: { children: any }) {
   }, []);
 
   const getSomeWords = useCallback(
-    async (numberOfWords) => {
+    async (numberOfWords, initialWordNumber) => {
       try {
         // throw new Error("💥 CABOOM 💥");
         if (db !== undefined) {
           const allDocs = await (db as any).allDocs({
             include_docs: true,
             limit: numberOfWords,
+            skip: initialWordNumber,
           });
           const parsedWords = allDocs.rows.map((n: any) => {
             return {

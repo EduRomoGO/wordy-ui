@@ -41,6 +41,7 @@
     "build": "react-scripts build",
     "build-local": "PUBLIC_URL=/ react-scripts build",
     "test": "react-scripts test --env=jest-environment-jsdom-sixteen",
+    "pull": "AWS_PROFILE=edu-amplify-personal amplify pull",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",

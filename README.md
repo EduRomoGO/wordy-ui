@@ -2,10 +2,10 @@ Tiene buscador que puedas introducir cualquier texto, y ordene esas palabras en 
 
 # Pre-requisites
 
-> npm install -g @aws-amplify/cli
+> npm install -g @aws-amplify/cli  
 > amplify configure
 
 # Setup
 
-> npm i
-> amplify pull
+  > npm i  
+  > npm run pull

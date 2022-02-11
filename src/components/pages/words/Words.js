@@ -87,7 +87,7 @@ const Words = () => {
     // throw new Error("💥 CABOOM 💥");
 
     if (status === "idle") {
-      run(getSomeWords(20, initialWordNumber));
+      run(getSomeWords(50, initialWordNumber));
     }
   }, [getSomeWords, run, status, initialWordNumber]);
 
@@ -97,7 +97,7 @@ const Words = () => {
 
   const handleInitialWordNumberChange = (e) => {
     setInitialWordNumber(e.target.value);
-    run(getSomeWords(20, e.target.value));
+    run(getSomeWords(50, e.target.value));
   };
 
   const handleWordClick = useCallback(

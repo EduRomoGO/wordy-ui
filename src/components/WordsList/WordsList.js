@@ -13,7 +13,7 @@ const getStyle = (display) => {
   `;
   const grid = css`
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
     grid-gap: 1.5rem;
     align-items: center;
     max-width: 960px;

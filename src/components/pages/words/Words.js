@@ -87,16 +87,18 @@ const Words = () => {
     // throw new Error("💥 CABOOM 💥");
 
     if (status === "idle") {
-      run(getSomeWords(20));
+      run(getSomeWords(20, initialWordNumber));
     }
-  }, [getSomeWords, run, status]);
+  }, [getSomeWords, run, status, initialWordNumber]);
 
   const handleSearchInputChange = (inputWords) => {
     setSearchInputWords(inputWords);
   };
 
-  const handleInitialWordNumberChange = (e) =>
+  const handleInitialWordNumberChange = (e) => {
     setInitialWordNumber(e.target.value);
+    run(getSomeWords(20, e.target.value));
+  };
 
   const handleWordClick = useCallback(
     (word) => {

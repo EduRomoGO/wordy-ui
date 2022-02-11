@@ -2,7 +2,7 @@ import React from "react";
 
 import fileNamesJson from "utils/db/divided/file-names";
 
-const initialPendingParts = fileNamesJson.fileNames.slice(0, 5);
+const initialPendingParts = fileNamesJson.fileNames.slice(0, 30);
 
 const DatabaseLoadStatusContext = React.createContext({
   loadStatus: "empty",

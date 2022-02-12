@@ -47,7 +47,7 @@ const WordInfo = ({ searchInputWords, selectedWord, isSearchActive }) => {
     return (
       <div
         css={css`
-          background-color: blue;
+          background-color: lightblue;
           padding: 2rem;
         `}
       >
